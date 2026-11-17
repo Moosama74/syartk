@@ -1,0 +1,1975 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>
+  موتورا | صالة استيراد السيارات الفاخرة إلى مصر
+ | MOTORA</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            gold: '#C5A880',
+            'gold-light': '#E0CAAA',
+            'gold-dark': '#9A7D56',
+            charcoal: '#0F1117',
+            deep: '#07080A',
+            card: '#14161F'
+          },
+          fontFamily: {
+            sans: ['Cairo', 'Outfit', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- Custom Styles -->
+  <style>
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&family=Outfit:wght@300;400;500;600;700;800&display=swap');
+
+:root {
+  --bg-deep: #07080a;
+  --bg-card: #0f1117;
+  --bg-card-hover: #161922;
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --border-focus: #c5a880;
+  --accent-gold: #c5a880;
+  --accent-gold-light: #e0caaa;
+  --accent-gold-dark: #9a7d56;
+  --text-main: #f3f4f6;
+  --text-muted: #9ca3af;
+  --text-dim: #6b7280;
+  --success: #10b981;
+  --warning: #f59e0b;
+  --danger: #ef4444;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Cairo', 'Outfit', sans-serif;
+  background-color: var(--bg-deep);
+  color: var(--text-main);
+  overflow-x: hidden;
+}
+
+/* Glassmorphism surfaces */
+.glass-panel {
+  background: rgba(15, 17, 23, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--border-subtle);
+}
+
+.glass-card {
+  background: linear-gradient(180deg, rgba(22, 25, 34, 0.7) 0%, rgba(13, 14, 18, 0.9) 100%);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--border-subtle);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-card:hover {
+  border-color: rgba(197, 168, 128, 0.35);
+  transform: translateY(-4px);
+  box-shadow: 0 20px 35px -10px rgba(0, 0, 0, 0.6), 0 0 25px -5px rgba(197, 168, 128, 0.12);
+}
+
+/* Gold Metallic Highlights */
+.text-gold {
+  color: var(--accent-gold);
+}
+
+.border-gold {
+  border-color: var(--accent-gold);
+}
+
+.bg-gold {
+  background-color: var(--accent-gold);
+  color: #000;
+}
+
+.gold-gradient-text {
+  background: linear-gradient(135deg, #ffffff 0%, #e0caaa 50%, #c5a880 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.gold-btn {
+  background: linear-gradient(135deg, #d8bc93 0%, #c5a880 50%, #ad8c5e 100%);
+  color: #0b0c10;
+  font-weight: 700;
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 18px rgba(197, 168, 128, 0.25);
+}
+
+.gold-btn:hover {
+  background: linear-gradient(135deg, #e5cda7 0%, #d1b48b 50%, #b89769 100%);
+  box-shadow: 0 6px 24px rgba(197, 168, 128, 0.4);
+  transform: translateY(-1px);
+}
+
+.outline-gold-btn {
+  border: 1px solid var(--accent-gold);
+  color: var(--accent-gold);
+  background: transparent;
+  transition: all 0.25s ease;
+}
+
+.outline-gold-btn:hover {
+  background: var(--accent-gold);
+  color: #000;
+  box-shadow: 0 4px 20px rgba(197, 168, 128, 0.3);
+}
+
+/* Luxury Card image zoom */
+.car-card-img-container {
+  overflow: hidden;
+  position: relative;
+}
+
+.car-card-img-container img {
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.car-card-img-container:hover img {
+  transform: scale(1.06);
+}
+
+/* Badges */
+.badge-available {
+  background: rgba(16, 185, 129, 0.15);
+  color: #34d399;
+  border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.badge-reserved {
+  background: rgba(245, 158, 11, 0.15);
+  color: #fbbf24;
+  border: 1px solid rgba(245, 158, 11, 0.3);
+}
+
+.badge-sold {
+  background: rgba(239, 68, 68, 0.15);
+  color: #f87171;
+  border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+.badge-origin {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #e5e7eb;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #090a0d;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1f232e;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #c5a880;
+}
+
+/* Timeline Stages */
+.timeline-step {
+  position: relative;
+}
+
+.timeline-step::before {
+  content: '';
+  position: absolute;
+  top: 36px;
+  bottom: -24px;
+  width: 2px;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+[dir="rtl"] .timeline-step::before {
+  right: 23px;
+}
+
+[dir="ltr"] .timeline-step::before {
+  left: 23px;
+}
+
+.timeline-step:last-child::before {
+  display: none;
+}
+
+.timeline-step.completed::before {
+  background: #10b981;
+}
+
+.timeline-step.in-progress::before {
+  background: linear-gradient(to bottom, #f59e0b, rgba(255, 255, 255, 0.1));
+}
+
+/* Lightbox Modal */
+.lightbox-modal {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.95);
+  backdrop-filter: blur(10px);
+}
+
+.lightbox-modal.active {
+  display: flex;
+}
+
+</style>
+  
+</head>
+<body class="bg-deep text-gray-100 min-h-screen flex flex-col antialiased selection:bg-gold selection:text-black">
+
+  <!-- TOP ANNOUNCEMENT & CONTACT BAR -->
+  <div class="bg-black/60 border-b border-white/5 py-2 px-4 text-xs text-gray-400">
+    <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-3">
+      <div class="flex items-center gap-4">
+        <span class="flex items-center gap-1.5 text-gold">
+          <i class="fas fa-shield-alt"></i>
+          فحص معتمد 100% وشحن مباشر لمصر
+        </span>
+        <span class="hidden md:inline-block text-white/20">|</span>
+        <span class="hidden md:flex items-center gap-1.5 text-gray-300">
+          <i class="fas fa-map-marker-alt text-gold"></i>
+          القاهرة الجديدة - التجمع الخامس - قطاع الصالات الفاخرة، شارع التسعين الشمالي، مبنى موتورا
+        </span>
+      </div>
+      
+      <div class="flex items-center gap-4">
+        <a href="tel:+20 100 889 4521" class="hover:text-gold transition flex items-center gap-1.5">
+          <i class="fas fa-phone-alt text-gold"></i>
+          <span dir="ltr">+20 100 889 4521</span>
+        </a>
+        <span class="text-white/20">|</span>
+        <!-- Language Switcher -->
+        
+          <a href="/set-lang/en" class="flex items-center gap-1 hover:text-white transition font-bold text-xs bg-white/5 px-2 py-0.5 rounded border border-white/10">
+            <span>English</span>
+            <i class="fas fa-globe text-gold"></i>
+          </a>
+        
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN NAVIGATION HEADER -->
+  <header class="sticky top-0 z-50 glass-panel border-b border-white/10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      
+      <!-- LOGO -->
+      <a href="/" class="flex items-center gap-3 group">
+        <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-gold-light via-gold to-gold-dark flex items-center justify-center text-black font-black text-xl shadow-lg shadow-gold/20 group-hover:scale-105 transition-transform">
+          M
+        </div>
+        <div class="flex flex-col">
+          <span class="text-2xl font-black tracking-widest text-white group-hover:text-gold transition font-mono">MOTORA</span>
+          <span class="text-[9px] uppercase tracking-wider text-gold font-bold -mt-1">
+            صالة الاستيراد الحصري
+          </span>
+        </div>
+      </a>
+
+      <!-- DESKTOP NAV -->
+      <nav class="hidden md:flex items-center gap-8 text-sm font-semibold text-gray-300">
+        <a href="/" class="hover:text-gold transition flex items-center gap-1.5 text-gold font-bold">
+          <i class="fas fa-home text-xs"></i>
+          الرئيسية
+        </a>
+        <a href="/vehicles" class="hover:text-gold transition flex items-center gap-1.5 ">
+          <i class="fas fa-car-side text-xs"></i>
+          معرض السيارات
+        </a>
+        <a href="/how-it-works" class="hover:text-gold transition flex items-center gap-1.5 ">
+          <i class="fas fa-route text-xs"></i>
+          خطوات الاستيراد
+        </a>
+        <a href="/tracking" class="hover:text-gold transition flex items-center gap-1.5 ">
+          <span class="relative flex h-2 w-2 mr-1">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+          </span>
+          تتبع شحنتك
+        </a>
+        <a href="/contact" class="hover:text-gold transition flex items-center gap-1.5 ">
+          <i class="fas fa-building text-xs"></i>
+          صالة العرض
+        </a>
+      </nav>
+
+      <!-- RIGHT ACTIONS -->
+      <div class="hidden lg:flex items-center gap-4">
+        <!-- WhatsApp CTA -->
+        <a href="https://wa.me/201008894521?text=مرحباً موتورا، أرغب في الاستفسار عن حجز سيارة مستوردة." target="_blank" class="flex items-center gap-2 bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs px-4 py-2.5 rounded-lg shadow-lg shadow-emerald-900/30 transition">
+          <i class="fab fa-whatsapp text-base"></i>
+          <span>محادثة واتساب مباشرة</span>
+        </a>
+
+        <!-- Admin Portal Icon -->
+        <a href="/admin/login" title="Admin Portal" class="text-gray-500 hover:text-gold p-2 transition text-sm">
+          <i class="fas fa-user-shield"></i>
+        </a>
+      </div>
+
+      <!-- MOBILE MENU BUTTON -->
+      <button id="mobile-menu-btn" class="md:hidden text-gray-300 hover:text-white focus:outline-none p-2">
+        <i class="fas fa-bars text-xl"></i>
+      </button>
+
+    </div>
+
+    <!-- MOBILE DROPDOWN -->
+    <div id="mobile-menu" class="hidden md:hidden glass-panel border-t border-white/10 px-4 pt-3 pb-6 flex flex-col gap-3 text-sm">
+      <a href="/" class="py-2 hover:text-gold border-b border-white/5">الرئيسية</a>
+      <a href="/vehicles" class="py-2 hover:text-gold border-b border-white/5">معرض السيارات</a>
+      <a href="/how-it-works" class="py-2 hover:text-gold border-b border-white/5">خطوات الاستيراد</a>
+      <a href="/tracking" class="py-2 hover:text-gold border-b border-white/5 text-emerald-400 font-bold">تتبع شحنتك (مباشر)</a>
+      <a href="/contact" class="py-2 hover:text-gold border-b border-white/5">صالة العرض والتواصل</a>
+      <a href="/admin/login" class="py-2 text-gray-500 hover:text-gold flex items-center gap-2">
+        <i class="fas fa-lock"></i>
+        لوحة تحكم المالك
+      </a>
+      <a href="https://wa.me/201008894521" target="_blank" class="mt-2 w-full text-center bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-2.5 rounded-lg flex items-center justify-center gap-2">
+        <i class="fab fa-whatsapp"></i>
+        <span>تواصل فوري عبر واتساب</span>
+      </a>
+    </div>
+  </header>
+
+  <!-- MAIN BODY CONTENT -->
+  <main class="flex-grow">
+    
+
+<!-- CINEMATIC HERO SECTION -->
+<section class="relative min-h-[90vh] flex items-center justify-center overflow-hidden border-b border-white/10">
+  <!-- Dark cinematic background with subtle gradient overlay -->
+  <div class="absolute inset-0 z-0 bg-cover bg-center filter brightness-[0.38] contrast-[1.1] scale-105 transform animate-pulse duration-1000" style="background-image: url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=2000&q=85');"></div>
+  <div class="absolute inset-0 bg-gradient-to-t from-deep via-deep/70 to-transparent z-10"></div>
+  <div class="absolute inset-0 bg-gradient-to-r from-deep via-transparent to-deep z-10"></div>
+
+  <!-- Hero Content Container -->
+  <div class="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 flex flex-col items-center text-center">
+    
+    <!-- Premium Badge -->
+    <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 border border-gold/30 backdrop-blur-md text-xs font-semibold text-gold mb-6 shadow-xl">
+      <span class="w-2 h-2 rounded-full bg-gold animate-ping"></span>
+      
+        صالة العرض الحصرية لاستيراد السيارات من ألمانيا، كوريا، والإمارات
+      
+    </div>
+
+    <!-- Main Headline -->
+    <h1 class="text-4xl sm:text-6xl lg:text-7xl font-black text-white tracking-tight leading-tight max-w-5xl mb-6">
+      
+        امتلك سيارة أحلامك العالمية <br>
+        <span class="gold-gradient-text">بفحص الفابريكة وضمان التخليص الجمركي</span>
+      
+    </h1>
+
+    <!-- Subtitle -->
+    <p class="text-base sm:text-lg text-gray-300 max-w-3xl mb-10 leading-relaxed font-normal">
+      
+        منصة MOTORA الخاصة تقدم لك أرقى السيارات الألمانية والكورية والخليجية بحالة الزيرو، مع تقارير فحص دقيقة وتتبع مباشر لخطوات الشحن والتخليص حتى باب منزلك في مصر.
+      
+    </p>
+
+    <!-- SEARCH & FILTER CONSOLE -->
+    <div class="w-full max-w-5xl glass-panel p-4 sm:p-6 rounded-2xl shadow-2xl border border-white/15">
+      <form action="/vehicles" method="GET" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-start">
+        
+        <!-- Brand Selector -->
+        <div>
+          <label class="block text-xs font-bold text-gray-300 mb-1.5">
+            <i class="fas fa-car text-gold mr-1"></i>
+            الماركة العالمية
+          </label>
+          <select name="brand" class="w-full bg-black/60 border border-white/15 rounded-lg px-3 py-2.5 text-xs text-white focus:border-gold outline-none">
+            <option value="">كل الماركات (All Brands)</option>
+            <option value="Mercedes-Benz">Mercedes-Benz (مرسيدس)</option>
+            <option value="BMW">BMW (بي إم دابليو)</option>
+            <option value="Porsche">Porsche (بورشه)</option>
+            <option value="Hyundai">Hyundai (هيونداي)</option>
+            <option value="Kia">Kia (كيا)</option>
+            <option value="Land Rover">Land Rover (لاند روفر)</option>
+            <option value="Genesis">Genesis (جينيسيس)</option>
+            <option value="Audi">Audi (أودي)</option>
+          </select>
+        </div>
+
+        <!-- Origin Country -->
+        <div>
+          <label class="block text-xs font-bold text-gray-300 mb-1.5">
+            <i class="fas fa-globe-americas text-gold mr-1"></i>
+            بلد الاستيراد
+          </label>
+          <select name="origin" class="w-full bg-black/60 border border-white/15 rounded-lg px-3 py-2.5 text-xs text-white focus:border-gold outline-none">
+            <option value="">جميع دول الاستيراد</option>
+            <option value="Germany">🇩🇪 ألمانيا (Germany)</option>
+            <option value="Korea">🇰🇷 كوريا الجنوبية (South Korea)</option>
+            <option value="UAE">🇦🇪 الإمارات (Gulf Specs)</option>
+            <option value="USA">🇺🇸 أمريكا (USA)</option>
+          </select>
+        </div>
+
+        <!-- Budget Range -->
+        <div>
+          <label class="block text-xs font-bold text-gray-300 mb-1.5">
+            <i class="fas fa-coins text-gold mr-1"></i>
+            الميزانية التقديرية (ج.م)
+          </label>
+          <select name="budget" class="w-full bg-black/60 border border-white/15 rounded-lg px-3 py-2.5 text-xs text-white focus:border-gold outline-none">
+            <option value="">جميع الأسعار</option>
+            <option value="under_3m">أقل من 3 مليون ج.م</option>
+            <option value="3m_6m">3 - 6 مليون ج.م</option>
+            <option value="6m_10m">6 - 10 مليون ج.م</option>
+            <option value="above_10m">فوق 10 مليون ج.م (Luxury & Supercars)</option>
+          </select>
+        </div>
+
+        <!-- Search Action Button -->
+        <div class="flex items-end">
+          <button type="submit" class="w-full gold-btn py-2.5 px-4 rounded-lg text-xs font-bold flex items-center justify-center gap-2 h-[38px]">
+            <i class="fas fa-search"></i>
+            <span>استعراض السيارات المتاحة</span>
+          </button>
+        </div>
+
+      </form>
+    </div>
+
+    <!-- Quick Tracking Jump Bar -->
+    <div class="mt-6 flex flex-wrap items-center justify-center gap-3 text-xs text-gray-400">
+      <span>لديك حجز سابق بالفعل؟</span>
+      <form action="/tracking" method="GET" class="inline-flex items-center gap-1.5 bg-black/40 border border-white/15 rounded-full px-3 py-1">
+        <input type="text" name="code" placeholder="أدخل كود الحجز مثل MTR-2026-7842" class="bg-transparent border-none text-xs text-white focus:outline-none w-48 font-mono">
+        <button type="submit" class="text-gold hover:text-white font-bold text-xs"><i class="fas fa-arrow-left "></i></button>
+      </form>
+    </div>
+
+  </div>
+</section>
+
+<!-- TRUST & VALUE PROPOSITIONS STRIP -->
+<section class="py-8 bg-black/40 border-b border-white/5">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+    <div class="flex flex-col items-center">
+      <div class="w-12 h-12 rounded-xl bg-gold/10 border border-gold/30 flex items-center justify-center text-gold text-xl mb-2">
+        <i class="fas fa-award"></i>
+      </div>
+      <h4 class="text-white font-bold text-sm">فحص شامل معتمد 100%</h4>
+      <p class="text-gray-400 text-xs mt-1">تقارير Dekra و K-Car بفيديو فحص كامل</p>
+    </div>
+
+    <div class="flex flex-col items-center">
+      <div class="w-12 h-12 rounded-xl bg-gold/10 border border-gold/30 flex items-center justify-center text-gold text-xl mb-2">
+        <i class="fas fa-file-invoice-dollar"></i>
+      </div>
+      <h4 class="text-white font-bold text-sm">تخليص جمركي رسمي كامل</h4>
+      <p class="text-gray-400 text-xs mt-1">إجراءات قانونية موثقة واستخراج الإفراج</p>
+    </div>
+
+    <div class="flex flex-col items-center">
+      <div class="w-12 h-12 rounded-xl bg-gold/10 border border-gold/30 flex items-center justify-center text-gold text-xl mb-2">
+        <i class="fas fa-satellite-dish"></i>
+      </div>
+      <h4 class="text-white font-bold text-sm">تتبع رحلة السيارة لحظياً</h4>
+      <p class="text-gray-400 text-xs mt-1">9 مراحل واضحة بالصور من الميناء لبابك</p>
+    </div>
+
+    <div class="flex flex-col items-center">
+      <div class="w-12 h-12 rounded-xl bg-gold/10 border border-gold/30 flex items-center justify-center text-gold text-xl mb-2">
+        <i class="fas fa-handshake"></i>
+      </div>
+      <h4 class="text-white font-bold text-sm">تعامل مباشر مع المالك فقط</h4>
+      <p class="text-gray-400 text-xs mt-1">لا وسطاء ولا عمولات خفية</p>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURED VEHICLES SECTION -->
+<section class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+  <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
+    <div>
+      <span class="text-xs uppercase font-bold text-gold tracking-widest">
+        المجموعة المختارة الفاخرة
+      </span>
+      <h2 class="text-3xl sm:text-4xl font-extrabold text-white mt-1">
+        السيارات المميزة المتاحة للشحن الفوري
+      </h2>
+    </div>
+    <a href="/vehicles" class="outline-gold-btn px-5 py-2.5 rounded-lg text-xs font-bold inline-flex items-center gap-2 self-start md:self-auto">
+      <span>مشاهدة المعرض بالكامل</span>
+      <i class="fas fa-arrow-left "></i>
+    </a>
+  </div>
+
+  <!-- Vehicles Grid -->
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+    
+    <div class="glass-card rounded-2xl overflow-hidden flex flex-col group">
+      
+      <!-- Image & Badges Container -->
+      <div class="car-card-img-container aspect-[16/10] bg-black relative">
+        <img src="https://images.unsplash.com/photo-1549399542-7e3f8b79c341" alt="Maserati Levante Trofeo V8" class="w-full h-full object-cover">
+        <div class="absolute inset-0 bg-gradient-to-t from-deep via-transparent to-black/30"></div>
+
+        <!-- Status & Origin Badges -->
+        <div class="absolute top-3 right-3 flex flex-col gap-1.5 items-end">
+          <span class="badge-origin px-2.5 py-1 rounded-md text-[11px] font-bold">
+            🇩🇪 ألمانيا (Germany)
+          </span>
+          
+            <span class="badge-available px-2.5 py-0.5 rounded text-[10px] font-bold">
+              متاح للحجز
+            </span>
+          
+        </div>
+
+        
+
+        <!-- Expected Delivery Tag -->
+        <div class="absolute bottom-3 right-3 text-white/90 text-[11px] bg-black/60 backdrop-blur-md px-2.5 py-1 rounded flex items-center gap-1.5">
+          <i class="fas fa-clock text-gold"></i>
+          <span>14 - 18 يوم عمل</span>
+        </div>
+      </div>
+
+      <!-- Card Details -->
+      <div class="p-6 flex-1 flex flex-col justify-between">
+        <div>
+          <div class="flex items-center justify-between text-xs text-gray-400 mb-1">
+            <span class="font-bold text-gold uppercase tracking-wider">Maserati</span>
+            <span class="font-mono">2024</span>
+          </div>
+
+          <h3 class="text-xl font-bold text-white group-hover:text-gold transition">
+            <a href="/vehicle/maserati-levante-trofeo-v8-2024-991823-3231">Maserati Levante Trofeo V8</a>
+          </h3>
+          <p class="text-xs text-gray-400 mt-1 mb-4">Fuoriserie Edition</p>
+
+          <!-- Key Specs Grid -->
+          <div class="grid grid-cols-2 gap-2 py-3 border-y border-white/10 text-xs text-gray-300 mb-4">
+            <div class="flex items-center gap-1.5">
+              <i class="fas fa-tachometer-alt text-gold text-xs"></i>
+              <span>3,500 كم</span>
+            </div>
+            <div class="flex items-center gap-1.5">
+              <i class="fas fa-cogs text-gold text-xs"></i>
+              <span class="truncate">أوتوماتيك 8 سرعات ZF</span>
+            </div>
+            <div class="flex items-center gap-1.5">
+              <i class="fas fa-gas-pump text-gold text-xs"></i>
+              <span class="truncate">بنزين (Petrol)</span>
+            </div>
+            <div class="flex items-center gap-1.5">
+              <i class="fas fa-shield-check text-emerald-400 text-xs"></i>
+              <span class="truncate">فابريكة بالكامل</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pricing & CTAs -->
+        <div>
+          <div class="flex items-baseline justify-between mb-4">
+            <div>
+              <span class="text-[10px] text-gray-400 block uppercase">السعر الإجمالي في مصر</span>
+              <span class="text-2xl font-black text-white font-mono">7,950,000 ج.م</span>
+            </div>
+            
+            <div class="text-end">
+              <span class="text-[10px] text-gray-400 block">عربون الجدية</span>
+              <span class="text-xs font-bold text-gold font-mono">250,000 ج.م</span>
+            </div>
+            
+          </div>
+
+          <!-- Buttons -->
+          <div class="flex items-center gap-2">
+            <a href="/vehicle/maserati-levante-trofeo-v8-2024-991823-3231" class="flex-1 text-center bg-white/10 hover:bg-white/20 text-white font-bold py-2.5 px-3 rounded-lg text-xs transition">
+              التفاصيل والفحص
+            </a>
+
+            
+            <button type="button" class="btn-open-reserve flex-1 gold-btn py-2.5 px-3 rounded-lg text-xs font-bold text-center"
+                    data-vehicle-id="12"
+                    data-vehicle-title="Maserati Levante Trofeo V8 2024"
+                    data-vehicle-price="7,950,000 ج.م"
+                    data-vehicle-deposit="250,000 ج.م">
+              احجز الآن
+            </button>
+            
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+    
+    <div class="glass-card rounded-2xl overflow-hidden flex flex-col group">
+      
+      <!-- Image & Badges Container -->
+      <div class="car-card-img-container aspect-[16/10] bg-black relative">
+        <img src="https://images.unsplash.com/photo-1549399542-7e3f8b79c341" alt="Maserati Levante Trofeo V8" class="w-full h-full object-cover">
+        <div class="absolute inset-0 bg-gradient-to-t from-deep via-transparent to-black/30"></div>
+
+        <!-- Status & Origin Badges -->
+        <div class="absolute top-3 right-3 flex flex-col gap-1.5 items-end">
+          <span class="badge-origin px-2.5 py-1 rounded-md text-[11px] font-bold">
+            🇩🇪 ألمانيا (Germany)
+          </span>
+          
+            <span class="badge-available px-2.5 py-0.5 rounded text-[10px] font-bold">
+              متاح للحجز
+            </span>
+          
+        </div>
+
+        
+
+        <!-- Expected Delivery Tag -->
+        <div class="absolute bottom-3 right-3 text-white/90 text-[11px] bg-black/60 backdrop-blur-md px-2.5 py-1 rounded flex items-center gap-1.5">
+          <i class="fas fa-clock text-gold"></i>
+          <span>14 - 18 يوم عمل</span>
+        </div>
+      </div>
+
+      <!-- Card Details -->
+      <div class="p-6 flex-1 flex flex-col justify-between">
+        <div>
+          <div class="flex items-center justify-between text-xs text-gray-400 mb-1">
+            <span class="font-bold text-gold uppercase tracking-wider">Maserati</span>
+            <span class="font-mono">2024</span>
+          </div>
+
+          <h3 class="text-xl font-bold text-white group-hover:text-gold transition">
+            <a href="/vehicle/maserati-levante-trofeo-v8-2024-991823-3117">Maserati Levante Trofeo V8</a>
+          </h3>
+          <p class="text-xs text-gray-400 mt-1 mb-4">Fuoriserie Edition</p>
+
+          <!-- Key Specs Grid -->
+          <div class="grid grid-cols-2 gap-2 py-3 border-y border-white/10 text-xs text-gray-300 mb-4">
+            <div class="flex items-center gap-1.5">
+              <i class="fas fa-tachometer-alt text-gold text-xs"></i>
+              <span>3,500 كم</span>
+            </div>
+            <div class="flex items-center gap-1.5">
+              <i class="fas fa-cogs text-gold text-xs"></i>
+              <span class="truncate">أوتوماتيك 8 سرعات ZF</span>
+            </div>
+            <div class="flex items-center gap-1.5">
+              <i class="fas fa-gas-pump text-gold text-xs"></i>
+              <span class="truncate">بنزين (Petrol)</span>
+            </div>
+            <div class="flex items-center gap-1.5">
+              <i class="fas fa-shield-check text-emerald-400 text-xs"></i>
+              <span class="truncate">فابريكة بالكامل</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pricing & CTAs -->
+        <div>
+          <div class="flex items-baseline justify-between mb-4">
+            <div>
+              <span class="text-[10px] text-gray-400 block uppercase">السعر الإجمالي في مصر</span>
+              <span class="text-2xl font-black text-white font-mono">7,950,000 ج.م</span>
+            </div>
+            
+            <div class="text-end">
+              <span class="text-[10px] text-gray-400 block">عربون الجدية</span>
+              <span class="text-xs font-bold text-gold font-mono">250,000 ج.م</span>
+            </div>
+            
+          </div>
+
+          <!-- Buttons -->
+          <div class="flex items-center gap-2">
+            <a href="/vehicle/maserati-levante-trofeo-v8-2024-991823-3117" class="flex-1 text-center bg-white/10 hover:bg-white/20 text-white font-bold py-2.5 px-3 rounded-lg text-xs transition">
+              التفاصيل والفحص
+            </a>
+
+            
+            <button type="button" class="btn-open-reserve flex-1 gold-btn py-2.5 px-3 rounded-lg text-xs font-bold text-center"
+                    data-vehicle-id="10"
+                    data-vehicle-title="Maserati Levante Trofeo V8 2024"
+                    data-vehicle-price="7,950,000 ج.م"
+                    data-vehicle-deposit="250,000 ج.م">
+              احجز الآن
+            </button>
+            
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+    
+    <div class="glass-card rounded-2xl overflow-hidden flex flex-col group">
+      
+      <!-- Image & Badges Container -->
+      <div class="car-card-img-container aspect-[16/10] bg-black relative">
+        <img src="https://images.unsplash.com/photo-1549399542-7e3f8b79c341" alt="Maserati Levante Trofeo V8" class="w-full h-full object-cover">
+        <div class="absolute inset-0 bg-gradient-to-t from-deep via-transparent to-black/30"></div>
+
+        <!-- Status & Origin Badges -->
+        <div class="absolute top-3 right-3 flex flex-col gap-1.5 items-end">
+          <span class="badge-origin px-2.5 py-1 rounded-md text-[11px] font-bold">
+            🇩🇪 ألمانيا (Germany)
+          </span>
+          
+            <span class="badge-available px-2.5 py-0.5 rounded text-[10px] font-bold">
+              متاح للحجز
+            </span>
+          
+        </div>
+
+        
+
+        <!-- Expected Delivery Tag -->
+        <div class="absolute bottom-3 right-3 text-white/90 text-[11px] bg-black/60 backdrop-blur-md px-2.5 py-1 rounded flex items-center gap-1.5">
+          <i class="fas fa-clock text-gold"></i>
+          <span>14 - 18 يوم عمل</span>
+        </div>
+      </div>
+
+      <!-- Card Details -->
+      <div class="p-6 flex-1 flex flex-col justify-between">
+        <div>
+          <div class="flex items-center justify-between text-xs text-gray-400 mb-1">
+            <span class="font-bold text-gold uppercase tracking-wider">Maserati</span>
+            <span class="font-mono">2024</span>
+          </div>
+
+          <h3 class="text-xl font-bold text-white group-hover:text-gold transition">
+            <a href="/vehicle/maserati-levante-trofeo-v8-2024-991823">Maserati Levante Trofeo V8</a>
+          </h3>
+          <p class="text-xs text-gray-400 mt-1 mb-4">Fuoriserie Edition</p>
+
+          <!-- Key Specs Grid -->
+          <div class="grid grid-cols-2 gap-2 py-3 border-y border-white/10 text-xs text-gray-300 mb-4">
+            <div class="flex items-center gap-1.5">
+              <i class="fas fa-tachometer-alt text-gold text-xs"></i>
+              <span>3,500 كم</span>
+            </div>
+            <div class="flex items-center gap-1.5">
+              <i class="fas fa-cogs text-gold text-xs"></i>
+              <span class="truncate">أوتوماتيك 8 سرعات ZF</span>
+            </div>
+            <div class="flex items-center gap-1.5">
+              <i class="fas fa-gas-pump text-gold text-xs"></i>
+              <span class="truncate">بنزين (Petrol)</span>
+            </div>
+            <div class="flex items-center gap-1.5">
+              <i class="fas fa-shield-check text-emerald-400 text-xs"></i>
+              <span class="truncate">فابريكة بالكامل</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pricing & CTAs -->
+        <div>
+          <div class="flex items-baseline justify-between mb-4">
+            <div>
+              <span class="text-[10px] text-gray-400 block uppercase">السعر الإجمالي في مصر</span>
+              <span class="text-2xl font-black text-white font-mono">7,950,000 ج.م</span>
+            </div>
+            
+            <div class="text-end">
+              <span class="text-[10px] text-gray-400 block">عربون الجدية</span>
+              <span class="text-xs font-bold text-gold font-mono">250,000 ج.م</span>
+            </div>
+            
+          </div>
+
+          <!-- Buttons -->
+          <div class="flex items-center gap-2">
+            <a href="/vehicle/maserati-levante-trofeo-v8-2024-991823" class="flex-1 text-center bg-white/10 hover:bg-white/20 text-white font-bold py-2.5 px-3 rounded-lg text-xs transition">
+              التفاصيل والفحص
+            </a>
+
+            
+            <button type="button" class="btn-open-reserve flex-1 gold-btn py-2.5 px-3 rounded-lg text-xs font-bold text-center"
+                    data-vehicle-id="9"
+                    data-vehicle-title="Maserati Levante Trofeo V8 2024"
+                    data-vehicle-price="7,950,000 ج.م"
+                    data-vehicle-deposit="250,000 ج.م">
+              احجز الآن
+            </button>
+            
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+    
+    <div class="glass-card rounded-2xl overflow-hidden flex flex-col group">
+      
+      <!-- Image & Badges Container -->
+      <div class="car-card-img-container aspect-[16/10] bg-black relative">
+        <img src="https://images.unsplash.com/photo-1542282088-72c9c27ed0cd?auto=format&amp;fit=crop&amp;w=1200&amp;q=80" alt="Land Rover Range Rover Sport" class="w-full h-full object-cover">
+        <div class="absolute inset-0 bg-gradient-to-t from-deep via-transparent to-black/30"></div>
+
+        <!-- Status & Origin Badges -->
+        <div class="absolute top-3 right-3 flex flex-col gap-1.5 items-end">
+          <span class="badge-origin px-2.5 py-1 rounded-md text-[11px] font-bold">
+            🇦🇪 الإمارات (Gulf Specs)
+          </span>
+          
+            <span class="badge-available px-2.5 py-0.5 rounded text-[10px] font-bold">
+              متاح للحجز
+            </span>
+          
+        </div>
+
+        
+
+        <!-- Expected Delivery Tag -->
+        <div class="absolute bottom-3 right-3 text-white/90 text-[11px] bg-black/60 backdrop-blur-md px-2.5 py-1 rounded flex items-center gap-1.5">
+          <i class="fas fa-clock text-gold"></i>
+          <span>10 - 15 يوم عمل (شحن سريع من الإمارات)</span>
+        </div>
+      </div>
+
+      <!-- Card Details -->
+      <div class="p-6 flex-1 flex flex-col justify-between">
+        <div>
+          <div class="flex items-center justify-between text-xs text-gray-400 mb-1">
+            <span class="font-bold text-gold uppercase tracking-wider">Land Rover</span>
+            <span class="font-mono">2024</span>
+          </div>
+
+          <h3 class="text-xl font-bold text-white group-hover:text-gold transition">
+            <a href="/vehicle/range-rover-sport-dynamic-se-2024">Land Rover Range Rover Sport</a>
+          </h3>
+          <p class="text-xs text-gray-400 mt-1 mb-4">Dynamic SE (Gulf Specs)</p>
+
+          <!-- Key Specs Grid -->
+          <div class="grid grid-cols-2 gap-2 py-3 border-y border-white/10 text-xs text-gray-300 mb-4">
+            <div class="flex items-center gap-1.5">
+              <i class="fas fa-tachometer-alt text-gold text-xs"></i>
+              <span>5,400 كم</span>
+            </div>
+            <div class="flex items-center gap-1.5">
+              <i class="fas fa-cogs text-gold text-xs"></i>
+              <span class="truncate">أوتوماتيك ZF 8-Speed مع وضعيات Terrain Response 2</span>
+            </div>
+            <div class="flex items-center gap-1.5">
+              <i class="fas fa-gas-pump text-gold text-xs"></i>
+              <span class="truncate">بنزين (Petrol Mild Hybrid)</span>
+            </div>
+            <div class="flex items-center gap-1.5">
+              <i class="fas fa-shield-check text-emerald-400 text-xs"></i>
+              <span class="truncate">فابريكة بالكامل</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pricing & CTAs -->
+        <div>
+          <div class="flex items-baseline justify-between mb-4">
+            <div>
+              <span class="text-[10px] text-gray-400 block uppercase">السعر الإجمالي في مصر</span>
+              <span class="text-2xl font-black text-white font-mono">10,200,000 ج.م</span>
+            </div>
+            
+            <div class="text-end">
+              <span class="text-[10px] text-gray-400 block">عربون الجدية</span>
+              <span class="text-xs font-bold text-gold font-mono">350,000 ج.م</span>
+            </div>
+            
+          </div>
+
+          <!-- Buttons -->
+          <div class="flex items-center gap-2">
+            <a href="/vehicle/range-rover-sport-dynamic-se-2024" class="flex-1 text-center bg-white/10 hover:bg-white/20 text-white font-bold py-2.5 px-3 rounded-lg text-xs transition">
+              التفاصيل والفحص
+            </a>
+
+            
+            <button type="button" class="btn-open-reserve flex-1 gold-btn py-2.5 px-3 rounded-lg text-xs font-bold text-center"
+                    data-vehicle-id="6"
+                    data-vehicle-title="Land Rover Range Rover Sport 2024"
+                    data-vehicle-price="10,200,000 ج.م"
+                    data-vehicle-deposit="350,000 ج.م">
+              احجز الآن
+            </button>
+            
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+    
+    <div class="glass-card rounded-2xl overflow-hidden flex flex-col group">
+      
+      <!-- Image & Badges Container -->
+      <div class="car-card-img-container aspect-[16/10] bg-black relative">
+        <img src="https://images.unsplash.com/photo-1541899481282-d53bffe3c35d?auto=format&amp;fit=crop&amp;w=1200&amp;q=80" alt="Hyundai Tucson 1.6T" class="w-full h-full object-cover">
+        <div class="absolute inset-0 bg-gradient-to-t from-deep via-transparent to-black/30"></div>
+
+        <!-- Status & Origin Badges -->
+        <div class="absolute top-3 right-3 flex flex-col gap-1.5 items-end">
+          <span class="badge-origin px-2.5 py-1 rounded-md text-[11px] font-bold">
+            🇰🇷 كوريا الجنوبية (South Korea)
+          </span>
+          
+            <span class="badge-available px-2.5 py-0.5 rounded text-[10px] font-bold">
+              متاح للحجز
+            </span>
+          
+        </div>
+
+        
+        <div class="absolute top-3 left-3 bg-red-600/90 text-white font-bold text-[10px] px-2.5 py-1 rounded uppercase tracking-wider shadow">
+          عرض خاص
+        </div>
+        
+
+        <!-- Expected Delivery Tag -->
+        <div class="absolute bottom-3 right-3 text-white/90 text-[11px] bg-black/60 backdrop-blur-md px-2.5 py-1 rounded flex items-center gap-1.5">
+          <i class="fas fa-clock text-gold"></i>
+          <span>20 - 28 يوم عمل</span>
+        </div>
+      </div>
+
+      <!-- Card Details -->
+      <div class="p-6 flex-1 flex flex-col justify-between">
+        <div>
+          <div class="flex items-center justify-between text-xs text-gray-400 mb-1">
+            <span class="font-bold text-gold uppercase tracking-wider">Hyundai</span>
+            <span class="font-mono">2024</span>
+          </div>
+
+          <h3 class="text-xl font-bold text-white group-hover:text-gold transition">
+            <a href="/vehicle/hyundai-tucson-16t-nline-2024">Hyundai Tucson 1.6T</a>
+          </h3>
+          <p class="text-xs text-gray-400 mt-1 mb-4">N-Line Edition (Full Spec)</p>
+
+          <!-- Key Specs Grid -->
+          <div class="grid grid-cols-2 gap-2 py-3 border-y border-white/10 text-xs text-gray-300 mb-4">
+            <div class="flex items-center gap-1.5">
+              <i class="fas fa-tachometer-alt text-gold text-xs"></i>
+              <span>6,800 كم</span>
+            </div>
+            <div class="flex items-center gap-1.5">
+              <i class="fas fa-cogs text-gold text-xs"></i>
+              <span class="truncate">أوتوماتيك 7-Speed Dual Clutch (DCT)</span>
+            </div>
+            <div class="flex items-center gap-1.5">
+              <i class="fas fa-gas-pump text-gold text-xs"></i>
+              <span class="truncate">بنزين (Petrol)</span>
+            </div>
+            <div class="flex items-center gap-1.5">
+              <i class="fas fa-shield-check text-emerald-400 text-xs"></i>
+              <span class="truncate">فابريكة بالكامل</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pricing & CTAs -->
+        <div>
+          <div class="flex items-baseline justify-between mb-4">
+            <div>
+              <span class="text-[10px] text-gray-400 block uppercase">السعر الإجمالي في مصر</span>
+              <span class="text-2xl font-black text-white font-mono">2,150,000 ج.م</span>
+            </div>
+            
+            <div class="text-end">
+              <span class="text-[10px] text-gray-400 block">عربون الجدية</span>
+              <span class="text-xs font-bold text-gold font-mono">80,000 ج.م</span>
+            </div>
+            
+          </div>
+
+          <!-- Buttons -->
+          <div class="flex items-center gap-2">
+            <a href="/vehicle/hyundai-tucson-16t-nline-2024" class="flex-1 text-center bg-white/10 hover:bg-white/20 text-white font-bold py-2.5 px-3 rounded-lg text-xs transition">
+              التفاصيل والفحص
+            </a>
+
+            
+            <button type="button" class="btn-open-reserve flex-1 gold-btn py-2.5 px-3 rounded-lg text-xs font-bold text-center"
+                    data-vehicle-id="4"
+                    data-vehicle-title="Hyundai Tucson 1.6T 2024"
+                    data-vehicle-price="2,150,000 ج.م"
+                    data-vehicle-deposit="80,000 ج.م">
+              احجز الآن
+            </button>
+            
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+    
+    <div class="glass-card rounded-2xl overflow-hidden flex flex-col group">
+      
+      <!-- Image & Badges Container -->
+      <div class="car-card-img-container aspect-[16/10] bg-black relative">
+        <img src="https://images.unsplash.com/photo-1555215695-3004980ad54e?auto=format&amp;fit=crop&amp;w=1200&amp;q=80" alt="BMW X7 M60i xDrive" class="w-full h-full object-cover">
+        <div class="absolute inset-0 bg-gradient-to-t from-deep via-transparent to-black/30"></div>
+
+        <!-- Status & Origin Badges -->
+        <div class="absolute top-3 right-3 flex flex-col gap-1.5 items-end">
+          <span class="badge-origin px-2.5 py-1 rounded-md text-[11px] font-bold">
+            🇩🇪 ألمانيا (Germany)
+          </span>
+          
+            <span class="badge-available px-2.5 py-0.5 rounded text-[10px] font-bold">
+              متاح للحجز
+            </span>
+          
+        </div>
+
+        
+
+        <!-- Expected Delivery Tag -->
+        <div class="absolute bottom-3 right-3 text-white/90 text-[11px] bg-black/60 backdrop-blur-md px-2.5 py-1 rounded flex items-center gap-1.5">
+          <i class="fas fa-clock text-gold"></i>
+          <span>14 - 20 يوم عمل</span>
+        </div>
+      </div>
+
+      <!-- Card Details -->
+      <div class="p-6 flex-1 flex flex-col justify-between">
+        <div>
+          <div class="flex items-center justify-between text-xs text-gray-400 mb-1">
+            <span class="font-bold text-gold uppercase tracking-wider">BMW</span>
+            <span class="font-mono">2024</span>
+          </div>
+
+          <h3 class="text-xl font-bold text-white group-hover:text-gold transition">
+            <a href="/vehicle/bmw-x7-m60i-xdrive-2024">BMW X7 M60i xDrive</a>
+          </h3>
+          <p class="text-xs text-gray-400 mt-1 mb-4">M Sport Pro Package</p>
+
+          <!-- Key Specs Grid -->
+          <div class="grid grid-cols-2 gap-2 py-3 border-y border-white/10 text-xs text-gray-300 mb-4">
+            <div class="flex items-center gap-1.5">
+              <i class="fas fa-tachometer-alt text-gold text-xs"></i>
+              <span>8,500 كم</span>
+            </div>
+            <div class="flex items-center gap-1.5">
+              <i class="fas fa-cogs text-gold text-xs"></i>
+              <span class="truncate">أوتوماتيك 8-Speed Steptronic Sport</span>
+            </div>
+            <div class="flex items-center gap-1.5">
+              <i class="fas fa-gas-pump text-gold text-xs"></i>
+              <span class="truncate">بنزين (Mild Hybrid 48V)</span>
+            </div>
+            <div class="flex items-center gap-1.5">
+              <i class="fas fa-shield-check text-emerald-400 text-xs"></i>
+              <span class="truncate">فابريكة بالكامل</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pricing & CTAs -->
+        <div>
+          <div class="flex items-baseline justify-between mb-4">
+            <div>
+              <span class="text-[10px] text-gray-400 block uppercase">السعر الإجمالي في مصر</span>
+              <span class="text-2xl font-black text-white font-mono">8,900,000 ج.م</span>
+            </div>
+            
+            <div class="text-end">
+              <span class="text-[10px] text-gray-400 block">عربون الجدية</span>
+              <span class="text-xs font-bold text-gold font-mono">250,000 ج.م</span>
+            </div>
+            
+          </div>
+
+          <!-- Buttons -->
+          <div class="flex items-center gap-2">
+            <a href="/vehicle/bmw-x7-m60i-xdrive-2024" class="flex-1 text-center bg-white/10 hover:bg-white/20 text-white font-bold py-2.5 px-3 rounded-lg text-xs transition">
+              التفاصيل والفحص
+            </a>
+
+            
+            <button type="button" class="btn-open-reserve flex-1 gold-btn py-2.5 px-3 rounded-lg text-xs font-bold text-center"
+                    data-vehicle-id="3"
+                    data-vehicle-title="BMW X7 M60i xDrive 2024"
+                    data-vehicle-price="8,900,000 ج.م"
+                    data-vehicle-deposit="250,000 ج.م">
+              احجز الآن
+            </button>
+            
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+    
+  </div>
+</section>
+
+<!-- BROWSE BY BRAND & BROWSE BY ORIGIN -->
+<section class="py-16 bg-charcoal/60 border-y border-white/5">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center max-w-2xl mx-auto mb-12">
+      <span class="text-xs uppercase font-bold text-gold tracking-widest">
+        الوكالات والماركات المعتمدة
+      </span>
+      <h2 class="text-2xl sm:text-3xl font-extrabold text-white mt-1">
+        تصفح سياراتك المفضلة حسب الماركة أو بلد المنشأ
+      </h2>
+    </div>
+
+    <!-- Country of Origin Cards -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+      
+      <!-- Germany -->
+      <a href="/vehicles?origin=Germany" class="glass-card p-6 rounded-2xl flex flex-col items-center text-center group hover:border-gold">
+        <span class="text-4xl mb-3">🇩🇪</span>
+        <h3 class="text-lg font-bold text-white group-hover:text-gold transition">وارد ألمانيا</h3>
+        <p class="text-xs text-gray-400 mt-1">مرسيدس، بورشه، بي إم دابليو، أودي مع شهادة يورو 1</p>
+        <span class="mt-4 text-xs font-bold text-gold flex items-center gap-1">
+          استكشف السيارات <i class="fas fa-arrow-left text-[10px] "></i>
+        </span>
+      </a>
+
+      <!-- South Korea -->
+      <a href="/vehicles?origin=Korea" class="glass-card p-6 rounded-2xl flex flex-col items-center text-center group hover:border-gold">
+        <span class="text-4xl mb-3">🇰🇷</span>
+        <h3 class="text-lg font-bold text-white group-hover:text-gold transition">وارد كوريا الجنوبية</h3>
+        <p class="text-xs text-gray-400 mt-1">هيونداي، كيا، جينيسيس بأعلى الفئات وأقل استهلاك وقود</p>
+        <span class="mt-4 text-xs font-bold text-gold flex items-center gap-1">
+          استكشف السيارات <i class="fas fa-arrow-left text-[10px] "></i>
+        </span>
+      </a>
+
+      <!-- UAE / Gulf Specs -->
+      <a href="/vehicles?origin=UAE" class="glass-card p-6 rounded-2xl flex flex-col items-center text-center group hover:border-gold">
+        <span class="text-4xl mb-3">🇦🇪</span>
+        <h3 class="text-lg font-bold text-white group-hover:text-gold transition">مواصفات خليجية (الإمارات)</h3>
+        <p class="text-xs text-gray-400 mt-1">رينج روفر، تويوتا، لاند كروزر شحن سريع 10 أيام فقط</p>
+        <span class="mt-4 text-xs font-bold text-gold flex items-center gap-1">
+          استكشف السيارات <i class="fas fa-arrow-left text-[10px] "></i>
+        </span>
+      </a>
+
+      <!-- USA Specs -->
+      <a href="/vehicles?origin=USA" class="glass-card p-6 rounded-2xl flex flex-col items-center text-center group hover:border-gold">
+        <span class="text-4xl mb-3">🇺🇸</span>
+        <h3 class="text-lg font-bold text-white group-hover:text-gold transition">وارد أمريكا</h3>
+        <p class="text-xs text-gray-400 mt-1">سيارات كلين تايتل Clean CarFax وفحص شامل</p>
+        <span class="mt-4 text-xs font-bold text-gold flex items-center gap-1">
+          استكشف السيارات <i class="fas fa-arrow-left text-[10px] "></i>
+        </span>
+      </a>
+
+    </div>
+
+    <!-- Brands Grid Bar -->
+    <div class="flex flex-wrap items-center justify-center gap-3">
+      
+      <a href="/vehicles?brand=Maserati" class="px-5 py-2.5 rounded-xl bg-white/5 hover:bg-gold/15 border border-white/10 hover:border-gold transition flex items-center gap-2 text-sm text-gray-200">
+        <i class="fas fa-car text-gold text-xs"></i>
+        <span class="font-bold">Maserati</span>
+        <span class="text-xs text-gray-400 font-mono">(3)</span>
+      </a>
+      
+      <a href="/vehicles?brand=Porsche" class="px-5 py-2.5 rounded-xl bg-white/5 hover:bg-gold/15 border border-white/10 hover:border-gold transition flex items-center gap-2 text-sm text-gray-200">
+        <i class="fas fa-car text-gold text-xs"></i>
+        <span class="font-bold">Porsche</span>
+        <span class="text-xs text-gray-400 font-mono">(1)</span>
+      </a>
+      
+      <a href="/vehicles?brand=Mercedes-Benz" class="px-5 py-2.5 rounded-xl bg-white/5 hover:bg-gold/15 border border-white/10 hover:border-gold transition flex items-center gap-2 text-sm text-gray-200">
+        <i class="fas fa-car text-gold text-xs"></i>
+        <span class="font-bold">Mercedes-Benz</span>
+        <span class="text-xs text-gray-400 font-mono">(1)</span>
+      </a>
+      
+      <a href="/vehicles?brand=Land Rover" class="px-5 py-2.5 rounded-xl bg-white/5 hover:bg-gold/15 border border-white/10 hover:border-gold transition flex items-center gap-2 text-sm text-gray-200">
+        <i class="fas fa-car text-gold text-xs"></i>
+        <span class="font-bold">Land Rover</span>
+        <span class="text-xs text-gray-400 font-mono">(1)</span>
+      </a>
+      
+      <a href="/vehicles?brand=Kia" class="px-5 py-2.5 rounded-xl bg-white/5 hover:bg-gold/15 border border-white/10 hover:border-gold transition flex items-center gap-2 text-sm text-gray-200">
+        <i class="fas fa-car text-gold text-xs"></i>
+        <span class="font-bold">Kia</span>
+        <span class="text-xs text-gray-400 font-mono">(1)</span>
+      </a>
+      
+      <a href="/vehicles?brand=Hyundai" class="px-5 py-2.5 rounded-xl bg-white/5 hover:bg-gold/15 border border-white/10 hover:border-gold transition flex items-center gap-2 text-sm text-gray-200">
+        <i class="fas fa-car text-gold text-xs"></i>
+        <span class="font-bold">Hyundai</span>
+        <span class="text-xs text-gray-400 font-mono">(1)</span>
+      </a>
+      
+      <a href="/vehicles?brand=Genesis" class="px-5 py-2.5 rounded-xl bg-white/5 hover:bg-gold/15 border border-white/10 hover:border-gold transition flex items-center gap-2 text-sm text-gray-200">
+        <i class="fas fa-car text-gold text-xs"></i>
+        <span class="font-bold">Genesis</span>
+        <span class="text-xs text-gray-400 font-mono">(1)</span>
+      </a>
+      
+      <a href="/vehicles?brand=BMW" class="px-5 py-2.5 rounded-xl bg-white/5 hover:bg-gold/15 border border-white/10 hover:border-gold transition flex items-center gap-2 text-sm text-gray-200">
+        <i class="fas fa-car text-gold text-xs"></i>
+        <span class="font-bold">BMW</span>
+        <span class="text-xs text-gray-400 font-mono">(1)</span>
+      </a>
+      
+      <a href="/vehicles?brand=Audi" class="px-5 py-2.5 rounded-xl bg-white/5 hover:bg-gold/15 border border-white/10 hover:border-gold transition flex items-center gap-2 text-sm text-gray-200">
+        <i class="fas fa-car text-gold text-xs"></i>
+        <span class="font-bold">Audi</span>
+        <span class="text-xs text-gray-400 font-mono">(1)</span>
+      </a>
+      
+    </div>
+
+  </div>
+</section>
+
+<!-- BROWSE BY BUDGET SECTION -->
+<section class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+  <div class="text-center max-w-2xl mx-auto mb-10">
+    <span class="text-xs uppercase font-bold text-gold tracking-widest">
+      تصفح ذكي حسب الميزانية
+    </span>
+    <h2 class="text-2xl sm:text-3xl font-extrabold text-white mt-1">
+      اختر الفئة السعرية المناسبة لاستثمارك
+    </h2>
+  </div>
+
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+    <a href="/vehicles?budget=under_3m" class="glass-card p-6 rounded-2xl border border-white/10 hover:border-gold transition text-center group">
+      <div class="text-xs uppercase text-gray-400 mb-1">الفئة الاقتصادية والكروس أوفر</div>
+      <div class="text-xl font-black text-white font-mono group-hover:text-gold transition">
+        أقل من 3 مليون ج.م
+      </div>
+      <p class="text-xs text-gray-400 mt-2">توسان N-Line، سبورتاج، سورينتو هايبرد</p>
+    </a>
+
+    <a href="/vehicles?budget=3m_6m" class="glass-card p-6 rounded-2xl border border-white/10 hover:border-gold transition text-center group">
+      <div class="text-xs uppercase text-gray-400 mb-1">الفئة التنفيذية الفاخرة</div>
+      <div class="text-xl font-black text-white font-mono group-hover:text-gold transition">
+        3 - 6 مليون ج.م
+      </div>
+      <p class="text-xs text-gray-400 mt-2">جينيسيس GV80، مرسيدس E-Class، BMW 5 Series</p>
+    </a>
+
+    <a href="/vehicles?budget=6m_10m" class="glass-card p-6 rounded-2xl border border-white/10 hover:border-gold transition text-center group">
+      <div class="text-xs uppercase text-gray-400 mb-1">الفئة البريميوم العليا</div>
+      <div class="text-xl font-black text-white font-mono group-hover:text-gold transition">
+        6 - 10 مليون ج.م
+      </div>
+      <p class="text-xs text-gray-400 mt-2">BMW X7 M60i، بورشه 911 كاريرا، كايين كوبر</p>
+    </a>
+
+    <a href="/vehicles?budget=above_10m" class="glass-card p-6 rounded-2xl border border-white/10 hover:border-gold transition text-center group">
+      <div class="text-xs uppercase text-gray-400 mb-1">سوبر كار وأيقونات الطرق</div>
+      <div class="text-xl font-black text-gold font-mono group-hover:scale-105 transition transform">
+        10+ مليون ج.م
+      </div>
+      <p class="text-xs text-gray-400 mt-2">مرسيدس G63 AMG، أودي RS Q8، رينج روفر فوج</p>
+    </a>
+  </div>
+</section>
+
+<!-- HOW THE IMPORTING PROCESS WORKS (STEP BY STEP) -->
+<section class="py-20 bg-charcoal/40 border-t border-white/5 relative">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center max-w-3xl mx-auto mb-16">
+      <span class="text-xs uppercase font-bold text-gold tracking-widest">
+        رحلة استيراد موثوقة ومضمونة
+      </span>
+      <h2 class="text-3xl sm:text-4xl font-extrabold text-white mt-1">
+        كيف تتم عملية الاستيراد من الخارج إلى مصر مع موتورا؟
+      </h2>
+      <p class="text-gray-400 text-sm mt-3">
+        
+          نتولى عنك كافة التفاصيل الدقيقة: من فحص الصالة في أوروبا وكوريا، وحتى الشحن البحري المؤمن والإفراج الجمركي والترخيص في مصر.
+        
+      </p>
+    </div>
+
+    <!-- 5 Process Steps -->
+    <div class="grid grid-cols-1 md:grid-cols-5 gap-6 relative">
+      
+      <!-- Step 1 -->
+      <div class="glass-card p-6 rounded-2xl flex flex-col items-center text-center relative group">
+        <div class="w-12 h-12 rounded-full bg-gold text-black font-black flex items-center justify-center text-lg mb-4 shadow-lg shadow-gold/20">
+          1
+        </div>
+        <h4 class="text-white font-bold text-sm mb-2">الاختيار وحجز السيارة</h4>
+        <p class="text-gray-400 text-xs leading-relaxed">
+          
+            اختيار السيارة المناسبة من المعرض وتقديم طلب الحجز مع تحديد متطلباتك بدقة.
+          
+        </p>
+      </div>
+
+      <!-- Step 2 -->
+      <div class="glass-card p-6 rounded-2xl flex flex-col items-center text-center relative group">
+        <div class="w-12 h-12 rounded-full bg-gold text-black font-black flex items-center justify-center text-lg mb-4 shadow-lg shadow-gold/20">
+          2
+        </div>
+        <h4 class="text-white font-bold text-sm mb-2">الفحص الفني الدقيق بالخارج</h4>
+        <p class="text-gray-400 text-xs leading-relaxed">
+          
+            إجراء فحص Dekra أو K-Car الشامل (111 نقطة فحص) وتوثيق فيديو عالي الدقة للشاسيه والطلاء.
+          
+        </p>
+      </div>
+
+      <!-- Step 3 -->
+      <div class="glass-card p-6 rounded-2xl flex flex-col items-center text-center relative group">
+        <div class="w-12 h-12 rounded-full bg-gold text-black font-black flex items-center justify-center text-lg mb-4 shadow-lg shadow-gold/20">
+          3
+        </div>
+        <h4 class="text-white font-bold text-sm mb-2">الشحن الدولي البحري</h4>
+        <p class="text-gray-400 text-xs leading-relaxed">
+          
+            تثبيت السيارة في حاوية بحرية مخصصة ومؤمنة بالكامل وانطلاق الشحنة إلى ميناء الإسكندرية.
+          
+        </p>
+      </div>
+
+      <!-- Step 4 -->
+      <div class="glass-card p-6 rounded-2xl flex flex-col items-center text-center relative group">
+        <div class="w-12 h-12 rounded-full bg-gold text-black font-black flex items-center justify-center text-lg mb-4 shadow-lg shadow-gold/20">
+          4
+        </div>
+        <h4 class="text-white font-bold text-sm mb-2">التخليص الجمركي في مصر</h4>
+        <p class="text-gray-400 text-xs leading-relaxed">
+          
+            إنهاء الفحص الجمركي والتثمين وسداد الرسوم واستخراج إذن الإفراج الرسمي باسم العميل.
+          
+        </p>
+      </div>
+
+      <!-- Step 5 -->
+      <div class="glass-card p-6 rounded-2xl flex flex-col items-center text-center relative group">
+        <div class="w-12 h-12 rounded-full bg-emerald-500 text-black font-black flex items-center justify-center text-lg mb-4 shadow-lg shadow-emerald-500/20">
+          5
+        </div>
+        <h4 class="text-white font-bold text-sm mb-2">التسليم والترخيص</h4>
+        <p class="text-gray-400 text-xs leading-relaxed">
+          
+            استلام السيارة في صالة عرض موتورا بالقاهرة أو توصيلها حتى باب منزلك مع كافة المستندات الأصلية.
+          
+        </p>
+      </div>
+
+    </div>
+
+    <!-- Live Tracking Callout -->
+    <div class="mt-12 p-6 glass-panel rounded-2xl border border-gold/30 flex flex-col md:flex-row items-center justify-between gap-6">
+      <div class="flex items-center gap-4">
+        <div class="w-14 h-14 rounded-full bg-gold/15 border border-gold flex items-center justify-center text-gold text-2xl flex-shrink-0">
+          <i class="fas fa-map-marked-alt"></i>
+        </div>
+        <div>
+          <h4 class="text-lg font-bold text-white">نظام التتبع المباشر لجميع مراحل الرحلة التسع (9 Stages)</h4>
+          <p class="text-xs text-gray-400 mt-1">يمكنك متابعة موقع سيارتك وصور الحاوية وتقارير الموانئ لحظة بلحظة عبر كود التتبع الخاص بك.</p>
+        </div>
+      </div>
+      <a href="/tracking" class="gold-btn px-6 py-3 rounded-lg text-xs font-bold whitespace-nowrap">
+        <i class="fas fa-search-location mr-1"></i>
+        الدخول لصفحة التتبع
+      </a>
+    </div>
+
+  </div>
+</section>
+
+<!-- WHY CHOOSE MOTORA -->
+<section class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+    <div>
+      <span class="text-xs uppercase font-bold text-gold tracking-widest">
+        لماذا صالة موتورا؟
+      </span>
+      <h2 class="text-3xl sm:text-4xl font-extrabold text-white mt-1 mb-6 leading-tight">
+        
+          معايير فخامة وأمان استثنائية لا تضاهى في سوق الاستيراد المصري
+        
+      </h2>
+      
+      <div class="space-y-6">
+        <div class="flex items-start gap-4">
+          <div class="w-10 h-10 rounded-lg bg-gold/15 border border-gold/40 flex items-center justify-center text-gold flex-shrink-0 mt-1">
+            <i class="fas fa-check-double"></i>
+          </div>
+          <div>
+            <h4 class="text-white font-bold text-base mb-1">فابريكة بالكامل دون دهانات أو حوادث</h4>
+            <p class="text-gray-400 text-xs leading-relaxed">لا نستورد سوى السيارات الخالية تماماً من الحوادث وذات السجل النظيف الموثق في دول المنشأ الأوروبية والكورية.</p>
+          </div>
+        </div>
+
+        <div class="flex items-start gap-4">
+          <div class="w-10 h-10 rounded-lg bg-gold/15 border border-gold/40 flex items-center justify-center text-gold flex-shrink-0 mt-1">
+            <i class="fas fa-shield-alt"></i>
+          </div>
+          <div>
+            <h4 class="text-white font-bold text-base mb-1">شفافية مطلقة وعقود قانونية ملزمة</h4>
+            <p class="text-gray-400 text-xs leading-relaxed">الأسعار بالجنيه المصري شاملة الشحن والتأمين البحري وكافة بنود التخليص الجمركي دون أي مفاجآت.</p>
+          </div>
+        </div>
+
+        <div class="flex items-start gap-4">
+          <div class="w-10 h-10 rounded-lg bg-gold/15 border border-gold/40 flex items-center justify-center text-gold flex-shrink-0 mt-1">
+            <i class="fas fa-camera"></i>
+          </div>
+          <div>
+            <h4 class="text-white font-bold text-base mb-1">أدلة مصورة حقيقية لكل خطوة</h4>
+            <p class="text-gray-400 text-xs leading-relaxed">صور فحص الموتور، صور تحميل الحاوية، صور وصول الميناء المصري ترفع لك لحظياً على صفحة تتبعك.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Luxury Imagery Showcase -->
+    <div class="relative">
+      <div class="aspect-[4/3] rounded-3xl overflow-hidden border border-white/15 shadow-2xl relative">
+        <img src="https://images.unsplash.com/photo-1617814076367-b759c7d7e738?auto=format&fit=crop&w=1200&q=80" alt="Luxury showroom" class="w-full h-full object-cover">
+        <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"></div>
+        <div class="absolute bottom-6 right-6 left-6 p-4 glass-panel rounded-xl border border-white/15">
+          <div class="flex items-center justify-between">
+            <div>
+              <span class="text-gold text-xs font-bold uppercase">صالة عرض موتورا - القاهرة</span>
+              <p class="text-white text-xs mt-0.5">القاهرة الجديدة - التجمع الخامس - قطاع الصالات الفاخرة، شارع التسعين الشمالي، مبنى موتورا</p>
+            </div>
+            <a href="/contact" class="gold-btn px-3 py-1.5 rounded text-xs font-bold">زيارة الصالة</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CUSTOMER TESTIMONIALS -->
+<section class="py-20 bg-charcoal/60 border-t border-white/5">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center max-w-2xl mx-auto mb-16">
+      <span class="text-xs uppercase font-bold text-gold tracking-widest">
+        آراء عملاء موتورا في مصر
+      </span>
+      <h2 class="text-3xl font-extrabold text-white mt-1">
+        تجارب استيراد حقيقية لسيارات تم تسليمها بنجاح
+      </h2>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      
+      <div class="glass-card p-6 rounded-2xl flex flex-col justify-between">
+        <div>
+          <!-- Stars -->
+          <div class="flex items-center gap-1 text-gold text-xs mb-4">
+            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+          </div>
+          <!-- Quote -->
+          <p class="text-gray-300 text-xs leading-relaxed italic mb-6">
+            "استوردت توسان N-Line من كوريا الجنوبية بأعلى فئة مواصفات غير متوفرة في السوق المحلي وبسعر منافس جداً مقارنة بالوكيل. المتابعة اليومية عبر كود التتبع أراحتني تماماً."
+          </p>
+        </div>
+
+        <!-- Author -->
+        <div class="flex items-center gap-3 pt-4 border-t border-white/10">
+          <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&amp;fit=crop&amp;w=150&amp;q=80" alt="أ/ ياسين عبد العزيز" class="w-10 h-10 rounded-full object-cover border border-gold/40">
+          <div>
+            <h4 class="text-white font-bold text-xs">أ/ ياسين عبد العزيز</h4>
+            <p class="text-[11px] text-gray-400">القاهرة الجديدة - التجمع الخامس</p>
+            <span class="text-[10px] text-gold font-mono">Hyundai Tucson 1.6T N-Line 2024</span>
+          </div>
+        </div>
+      </div>
+      
+      <div class="glass-card p-6 rounded-2xl flex flex-col justify-between">
+        <div>
+          <!-- Stars -->
+          <div class="flex items-center gap-1 text-gold text-xs mb-4">
+            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+          </div>
+          <!-- Quote -->
+          <p class="text-gray-300 text-xs leading-relaxed italic mb-6">
+            "كنت متخوفاً من إجراءات الجمارك والشحن، لكن فريق موتورا تولى كل شيء بالكامل باحترافية وأوراق رسمية معتمدة. استلمت البورش بأوراقها وفحصها المروري في وقت قياسي."
+          </p>
+        </div>
+
+        <!-- Author -->
+        <div class="flex items-center gap-3 pt-4 border-t border-white/10">
+          <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&amp;fit=crop&amp;w=150&amp;q=80" alt="د. كريم الشرقاوي" class="w-10 h-10 rounded-full object-cover border border-gold/40">
+          <div>
+            <h4 class="text-white font-bold text-xs">د. كريم الشرقاوي</h4>
+            <p class="text-[11px] text-gray-400">الإسكندرية - سموحة</p>
+            <span class="text-[10px] text-gold font-mono">Porsche 911 Carrera 4S 2023</span>
+          </div>
+        </div>
+      </div>
+      
+      <div class="glass-card p-6 rounded-2xl flex flex-col justify-between">
+        <div>
+          <!-- Stars -->
+          <div class="flex items-center gap-1 text-gold text-xs mb-4">
+            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+          </div>
+          <!-- Quote -->
+          <p class="text-gray-300 text-xs leading-relaxed italic mb-6">
+            "تجربة استيراد استثنائية لم أعش مثلها في مصر. الدقة في المواعيد، وفحص الفابريكة في ألمانيا بالفيديو عالي الدقة، ونظام التتبع لحظة بلحظة كان مذهلاً. السيارة وصلت كما وُعدت تماماً."
+          </p>
+        </div>
+
+        <!-- Author -->
+        <div class="flex items-center gap-3 pt-4 border-t border-white/10">
+          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&amp;fit=crop&amp;w=150&amp;q=80" alt="المهندس طارق السلاب" class="w-10 h-10 rounded-full object-cover border border-gold/40">
+          <div>
+            <h4 class="text-white font-bold text-xs">المهندس طارق السلاب</h4>
+            <p class="text-[11px] text-gray-400">القاهرة - الشيخ زايد</p>
+            <span class="text-[10px] text-gold font-mono">Mercedes-Benz G63 AMG 2024</span>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+</section>
+
+<!-- CALL TO ACTION BANNER -->
+<section class="py-20 relative overflow-hidden border-t border-white/10">
+  <div class="max-w-5xl mx-auto px-4 text-center">
+    <div class="w-16 h-16 rounded-2xl bg-gold/15 border border-gold flex items-center justify-center text-gold text-2xl mx-auto mb-6">
+      <i class="fas fa-car"></i>
+    </div>
+    <h2 class="text-3xl sm:text-5xl font-extrabold text-white tracking-tight mb-4">
+      هل تبحث عن مواصفات محددة أو سيارة نادرة؟
+    </h2>
+    <p class="text-gray-300 text-sm max-w-2xl mx-auto mb-8 leading-relaxed">
+      
+        تواصل مباشرة مع مالك صالة موتورا عبر واتساب لطلب استيراد أي سيارة ترغب بها بالمواصفات واللون وسنة الصنع المطلوبة من ألمانيا أو كوريا أو الإمارات.
+      
+    </p>
+    <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+      <a href="https://wa.me/201008894521?text=مرحباً، أود استشارة المالك حول استيراد سيارة بمواصفات خاصة." target="_blank" class="w-full sm:w-auto bg-emerald-600 hover:bg-emerald-500 text-white font-bold px-8 py-3.5 rounded-xl shadow-xl flex items-center justify-center gap-2 text-sm transition">
+        <i class="fab fa-whatsapp text-lg"></i>
+        <span>استشارة المالك مباشرة عبر واتساب</span>
+      </a>
+      <a href="/vehicles" class="w-full sm:w-auto outline-gold-btn font-bold px-8 py-3.5 rounded-xl text-sm transition">
+        تصفح المعرض الكامل
+      </a>
+    </div>
+  </div>
+</section>
+
+
+  </main>
+
+  <!-- RESERVATION MODAL (DYNAMIC FOR ANY VEHICLE) -->
+  <div id="reserveModal" class="hidden fixed inset-0 z-50 items-center justify-center p-4 bg-black/80 backdrop-blur-md">
+    <div class="relative bg-card border border-white/15 rounded-2xl w-full max-w-lg overflow-hidden shadow-2xl">
+      <!-- Modal Header -->
+      <div class="p-6 border-b border-white/10 flex items-center justify-between bg-black/40">
+        <div>
+          <span class="text-xs uppercase font-bold text-gold tracking-wider">
+            طلب حجز مبدئي رسمي
+          </span>
+          <h3 id="modal_vehicle_title" class="text-lg font-bold text-white mt-1">اسم السيارة</h3>
+        </div>
+        <button id="closeReserveModal" class="text-gray-400 hover:text-white p-2 text-xl">&times;</button>
+      </div>
+
+      <!-- Pricing Strip in Modal -->
+      <div class="bg-white/5 px-6 py-3 flex items-center justify-between text-xs border-b border-white/10">
+        <div>
+          <span class="text-gray-400">السعر الإجمالي:</span>
+          <span id="modal_vehicle_price" class="font-bold text-white mr-1 text-sm">--</span>
+        </div>
+        <div>
+          <span class="text-gray-400">عربون الجدية المطلوب:</span>
+          <span id="modal_vehicle_deposit" class="font-bold text-gold mr-1 text-sm">--</span>
+        </div>
+      </div>
+
+      <!-- Form Body -->
+      <div class="p-6">
+        <form id="reserveForm" class="flex flex-col gap-4">
+          <input type="hidden" id="modal_vehicle_id" name="vehicle_id" value="">
+          
+          <div>
+            <label class="block text-xs font-semibold text-gray-300 mb-1">
+              الاسم بالكامل (ثلاثي أو رباعي) *
+            </label>
+            <input type="text" name="customer_name" required placeholder="مثال: أحمد محمد محمود" class="w-full bg-deep border border-white/15 rounded-lg px-4 py-2.5 text-sm text-white focus:border-gold outline-none">
+          </div>
+
+          <div>
+            <label class="block text-xs font-semibold text-gray-300 mb-1">
+              رقم الهاتف المحمول (واتساب) *
+            </label>
+            <input type="tel" name="customer_phone" required placeholder="010XXXXXXXX" class="w-full bg-deep border border-white/15 rounded-lg px-4 py-2.5 text-sm text-white focus:border-gold outline-none" dir="ltr">
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs font-semibold text-gray-300 mb-1">
+                البريد الإلكتروني (اختياري)
+              </label>
+              <input type="email" name="customer_email" placeholder="name@domain.com" class="w-full bg-deep border border-white/15 rounded-lg px-4 py-2.5 text-sm text-white focus:border-gold outline-none" dir="ltr">
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-gray-300 mb-1">
+                المحافظة / المدينة
+              </label>
+              <input type="text" name="customer_city" placeholder="القاهرة، الإسكندرية، ..." class="w-full bg-deep border border-white/15 rounded-lg px-4 py-2.5 text-sm text-white focus:border-gold outline-none">
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-xs font-semibold text-gray-300 mb-1">
+              ملاحظات إضافية أو استفسارات
+            </label>
+            <textarea name="customer_notes" rows="2" placeholder="أي طلبات خاصة بالفحص، مواعيد التسليم، أو طريقة السداد..." class="w-full bg-deep border border-white/15 rounded-lg px-4 py-2 text-sm text-white focus:border-gold outline-none"></textarea>
+          </div>
+
+          <div class="p-3 bg-amber-500/10 border border-amber-500/20 rounded-lg text-xs text-amber-200">
+            <i class="fas fa-info-circle mr-1"></i>
+            
+              إرسال هذا الطلب ينشئ كود حجز رسمي ومسار تتبع خاص بك. سيتواصل معك مالك صالة موتورا شخصياً لتأكيد التفاصيل.
+            
+          </div>
+
+          <button id="reserveSubmitBtn" type="submit" class="w-full gold-btn py-3 rounded-lg text-sm font-bold flex items-center justify-center gap-2">
+            <i class="fas fa-check-circle"></i>
+            <span>تأكيد وإرسال طلب الحجز</span>
+          </button>
+        </form>
+
+        <!-- Success Message Box -->
+        <div id="modalStatusMsg" class="hidden text-center py-6 flex flex-col items-center">
+          <div class="w-16 h-16 rounded-full bg-emerald-500/20 border border-emerald-500 text-emerald-400 flex items-center justify-center text-3xl mb-4">
+            <i class="fas fa-check"></i>
+          </div>
+          <h4 class="text-xl font-bold text-white mb-2">
+            تم تسجيل طلب الحجز بنجاح!
+          </h4>
+          <p class="text-xs text-gray-400 max-w-sm mb-4">
+            
+              احتفظ بكود الحجز الخاص بك لتتبع مراحل شحن السيارة والتخليص الجمركي خطوة بخطوة:
+            
+          </p>
+          <div class="bg-black/60 border border-gold/40 px-6 py-3 rounded-lg text-gold font-mono font-bold text-lg mb-6">
+            <span id="confirmedBookingCode">MTR-2026-XXXX</span>
+          </div>
+          <div class="flex flex-col sm:flex-row gap-3 w-full">
+            <a id="modalTrackingLink" href="/tracking" class="flex-1 gold-btn py-2.5 rounded-lg text-xs font-bold text-center">
+              <i class="fas fa-shipping-fast mr-1"></i>
+              فتح صفحة تتبع الشحنة
+            </a>
+            <a href="https://wa.me/201008894521" target="_blank" class="flex-1 bg-emerald-600 hover:bg-emerald-500 text-white py-2.5 rounded-lg text-xs font-bold text-center">
+              <i class="fab fa-whatsapp mr-1"></i>
+              متابعة عبر واتساب
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LIGHTBOX MODAL FOR FULL-SIZE PHOTOS -->
+  <div id="lightboxModal" class="lightbox-modal flex items-center justify-center p-4">
+    <button id="lightboxClose" class="absolute top-6 right-6 text-white text-3xl hover:text-gold p-2">&times;</button>
+    <div class="max-w-5xl max-h-[90vh] flex flex-col items-center">
+      <img id="lightboxImage" src="" alt="Vehicle inspection" class="max-h-[80vh] w-auto object-contain rounded-lg shadow-2xl">
+      <p id="lightboxCaption" class="text-gray-300 text-sm mt-3 text-center"></p>
+    </div>
+  </div>
+
+  <!-- FLOATING WHATSAPP CTA -->
+  <aside aria-label="WhatsApp Contact" class="fixed bottom-6 right-6 z-40 flex items-center gap-3">
+    <div class="hidden md:block bg-black/80 backdrop-blur-md border border-white/10 px-3 py-1.5 rounded-full text-xs text-gray-200 shadow-xl">
+      استفسار سريع مع المالك؟
+    </div>
+    <a href="https://wa.me/201008894521?text=مرحباً صالة موتورا، أود الاستفسار عن تفاصيل استيراد سيارة." target="_blank" class="relative group w-14 h-14 bg-emerald-600 hover:bg-emerald-500 text-white rounded-full flex items-center justify-center shadow-2xl shadow-emerald-900/50 hover:scale-110 transition duration-300">
+      <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-20"></span>
+      <i class="fab fa-whatsapp text-2xl"></i>
+    </a>
+  </aside>
+
+  <!-- LUXURY FOOTER -->
+  <footer class="bg-black border-t border-white/10 pt-16 pb-10 text-gray-400 text-xs">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
+      
+      <!-- Brand & Mission -->
+      <div class="space-y-4">
+        <div class="flex items-center gap-3">
+          <div class="w-8 h-8 rounded bg-gold flex items-center justify-center text-black font-black font-mono">M</div>
+          <span class="text-xl font-black text-white tracking-widest font-mono">MOTORA</span>
+        </div>
+        <p class="leading-relaxed text-gray-400">
+          بوابتك الحصرية لاستيراد أرقى السيارات العالمية بأمان وضمان في مصر
+        </p>
+        <div class="flex items-center gap-3 text-gray-400 text-sm">
+          <span class="text-gold"><i class="fas fa-certificate"></i></span>
+          <span>سجل تجاري وبطاقة ضريبية معتمدة</span>
+        </div>
+      </div>
+
+      <!-- Quick Links -->
+      <div>
+        <h4 class="text-white font-bold text-sm mb-4 uppercase tracking-wider">
+          روابط المعرض
+        </h4>
+        <ul class="space-y-2.5">
+          <li><a href="/vehicles" class="hover:text-gold transition">جميع السيارات المتاحة</a></li>
+          <li><a href="/vehicles?origin=Germany" class="hover:text-gold transition">سيارات وارد ألمانيا</a></li>
+          <li><a href="/vehicles?origin=Korea" class="hover:text-gold transition">سيارات وارد كوريا الجنوبية</a></li>
+          <li><a href="/vehicles?origin=UAE" class="hover:text-gold transition">سيارات مواصفات خليجية</a></li>
+          <li><a href="/tracking" class="hover:text-gold transition">نظام تتبع الشحنات المباشر</a></li>
+        </ul>
+      </div>
+
+      <!-- Import Process & Security -->
+      <div>
+        <h4 class="text-white font-bold text-sm mb-4 uppercase tracking-wider">
+          الضمان وسياسة الحجز
+        </h4>
+        <p class="leading-relaxed text-gray-400 mb-3">
+          يتم دفع عربون تأكيد الجدية في الحساب البنكي الرسمي لموتورا أو عبر إنستاباي، ويخصم بالكامل من سعر السيارة عند التعاقد.
+        </p>
+        <div class="p-3 bg-white/5 border border-white/10 rounded text-[11px] text-gray-300">
+          <i class="fas fa-lock text-gold mr-1"></i>
+          
+            كل سيارة تخضع لفحص فني إلكتروني كامل Dekra أو K-Car مع تصوير فيديو 4K للمحرك والشاسيه قبل الشحن.
+          
+        </div>
+      </div>
+
+      <!-- Showroom Contact -->
+      <div>
+        <h4 class="text-white font-bold text-sm mb-4 uppercase tracking-wider">
+          المقر والتواصل
+        </h4>
+        <ul class="space-y-3">
+          <li class="flex items-start gap-2">
+            <i class="fas fa-map-marker-alt text-gold mt-1"></i>
+            <span>القاهرة الجديدة - التجمع الخامس - قطاع الصالات الفاخرة، شارع التسعين الشمالي، مبنى موتورا</span>
+          </li>
+          <li class="flex items-center gap-2">
+            <i class="fas fa-phone-alt text-gold"></i>
+            <span dir="ltr">+20 100 889 4521</span>
+          </li>
+          <li class="flex items-center gap-2">
+            <i class="fab fa-whatsapp text-emerald-400"></i>
+            <span dir="ltr">+201008894521</span>
+          </li>
+          <li class="flex items-center gap-2">
+            <i class="fas fa-envelope text-gold"></i>
+            <span>concierge@motora.eg</span>
+          </li>
+          <li class="flex items-center gap-2 text-gray-400 text-[11px]">
+            <i class="fas fa-clock text-gold"></i>
+            <span>السبت إلى الخميس: 10:00 ص - 10:00 م | الجمعة: 2:00 م - 10:00 م</span>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+
+    <!-- Bottom Copyright -->
+    <div class="max-w-7xl mx-auto px-4 border-t border-white/5 pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-gray-400 text-[11px]">
+      <div>
+        © 2026 MOTORA Automotive Marketplace. جميع الحقوق محفوظة. المنصة الحصرية لاستيراد السيارات لمصر.
+      </div>
+      <div class="flex items-center gap-4">
+        <span>صالة عرض مرخصة ومملوكة للمالك فقط</span>
+        <span>•</span>
+        <a href="/admin/login" class="hover:text-gold transition">دخول الإدارة</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script>
+// MOTORA Client-side Javascript
+
+document.addEventListener("DOMContentLoaded", function () {
+  // Mobile Menu Toggle
+  const mobileMenuBtn = document.getElementById("mobile-menu-btn");
+  const mobileMenu = document.getElementById("mobile-menu");
+  if (mobileMenuBtn && mobileMenu) {
+    mobileMenuBtn.addEventListener("click", function () {
+      mobileMenu.classList.toggle("hidden");
+    });
+  }
+
+  // Reservation Modal Logic
+  const reserveModal = document.getElementById("reserveModal");
+  const openModalBtns = document.querySelectorAll(".btn-open-reserve");
+  const closeModalBtn = document.getElementById("closeReserveModal");
+  const reserveForm = document.getElementById("reserveForm");
+
+  if (reserveModal) {
+    openModalBtns.forEach((btn) => {
+      btn.addEventListener("click", function () {
+        const vehicleId = this.getAttribute("data-vehicle-id");
+        const vehicleTitle = this.getAttribute("data-vehicle-title");
+        const vehiclePrice = this.getAttribute("data-vehicle-price");
+        const vehicleDeposit = this.getAttribute("data-vehicle-deposit");
+
+        if (document.getElementById("modal_vehicle_id")) {
+          document.getElementById("modal_vehicle_id").value = vehicleId;
+        }
+        if (document.getElementById("modal_vehicle_title")) {
+          document.getElementById("modal_vehicle_title").textContent = vehicleTitle;
+        }
+        if (document.getElementById("modal_vehicle_price")) {
+          document.getElementById("modal_vehicle_price").textContent = vehiclePrice;
+        }
+        if (document.getElementById("modal_vehicle_deposit")) {
+          document.getElementById("modal_vehicle_deposit").textContent = vehicleDeposit;
+        }
+
+        // Reset response message state
+        const statusMsg = document.getElementById("modalStatusMsg");
+        if (statusMsg) statusMsg.classList.add("hidden");
+        if (reserveForm) {
+          reserveForm.classList.remove("hidden");
+          reserveForm.reset();
+        }
+
+        reserveModal.classList.remove("hidden");
+        reserveModal.classList.add("flex");
+      });
+    });
+
+    if (closeModalBtn) {
+      closeModalBtn.addEventListener("click", function () {
+        reserveModal.classList.add("hidden");
+        reserveModal.classList.remove("flex");
+      });
+    }
+
+    reserveModal.addEventListener("click", function (e) {
+      if (e.target === reserveModal) {
+        reserveModal.classList.add("hidden");
+        reserveModal.classList.remove("flex");
+      }
+    });
+
+    // Form Submission
+    if (reserveForm) {
+      reserveForm.addEventListener("submit", async function (e) {
+        e.preventDefault();
+        const submitBtn = document.getElementById("reserveSubmitBtn");
+        const originalText = submitBtn ? submitBtn.innerHTML : "";
+        if (submitBtn) {
+          submitBtn.disabled = true;
+          submitBtn.innerHTML = "<span>جاري تأكيد الطلب... / Submitting...</span>";
+        }
+
+        const formData = new FormData(reserveForm);
+        try {
+          const res = await fetch("/api/reserve", {
+            method: "POST",
+            body: formData,
+          });
+          const data = await res.json();
+
+          if (data.success) {
+            reserveForm.classList.add("hidden");
+            const statusBox = document.getElementById("modalStatusMsg");
+            const codeSpan = document.getElementById("confirmedBookingCode");
+            const trackingLink = document.getElementById("modalTrackingLink");
+
+            if (codeSpan) codeSpan.textContent = data.booking_code;
+            if (trackingLink) trackingLink.href = data.tracking_url;
+            if (statusBox) statusBox.classList.remove("hidden");
+          } else {
+            alert(data.message || "حدث خطأ أثناء إرسال الحجز، يرجى المحاولة ثانية.");
+          }
+        } catch (err) {
+          console.error(err);
+          alert("تعذر الاتصال بالخادم، يرجى التحقق من اتصال الإنترنت.");
+        } finally {
+          if (submitBtn) {
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = originalText;
+          }
+        }
+      });
+    }
+  }
+
+  // Lightbox Media Viewer
+  const lightbox = document.getElementById("lightboxModal");
+  const lightboxImg = document.getElementById("lightboxImage");
+  const lightboxCaption = document.getElementById("lightboxCaption");
+  const lightboxClose = document.getElementById("lightboxClose");
+
+  if (lightbox) {
+    document.querySelectorAll(".open-lightbox").forEach((el) => {
+      el.addEventListener("click", function (e) {
+        e.preventDefault();
+        const imgUrl = this.getAttribute("data-full-img") || this.src || this.href;
+        const caption = this.getAttribute("data-caption") || "";
+
+        if (lightboxImg) lightboxImg.src = imgUrl;
+        if (lightboxCaption) lightboxCaption.textContent = caption;
+        lightbox.classList.add("active");
+      });
+    });
+
+    if (lightboxClose) {
+      lightboxClose.addEventListener("click", function () {
+        lightbox.classList.remove("active");
+      });
+    }
+
+    lightbox.addEventListener("click", function (e) {
+      if (e.target === lightbox) {
+        lightbox.classList.remove("active");
+      }
+    });
+  }
+
+  // Details Page Gallery Thumbnail Swapper
+  const mainGalleryImg = document.getElementById("mainGalleryImage");
+  const thumbs = document.querySelectorAll(".gallery-thumbnail");
+  if (mainGalleryImg && thumbs.length > 0) {
+    thumbs.forEach((t) => {
+      t.addEventListener("click", function () {
+        const fullSrc = this.getAttribute("data-full");
+        if (fullSrc) {
+          mainGalleryImg.src = fullSrc;
+          thumbs.forEach((x) => x.classList.remove("border-gold"));
+          this.classList.add("border-gold");
+        }
+      });
+    });
+  }
+});
+
+</script>
+  
+</body>
+</html>

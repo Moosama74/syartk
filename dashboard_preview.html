@@ -1,0 +1,2723 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>لوحة التحكم المركزية - معرض موتورا | MOTORA Admin</title>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            gold: '#C5A880',
+            'gold-light': '#E0CAAA',
+            'gold-dark': '#9A7D56',
+            charcoal: '#0F1117',
+            deep: '#07080A',
+            card: '#14161F'
+          },
+          fontFamily: {
+            sans: ['Cairo', 'Outfit', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="/static/css/style.css">
+  
+</head>
+<body class="bg-deep text-gray-100 min-h-screen flex antialiased selection:bg-gold selection:text-black">
+
+  <!-- ADMIN SIDEBAR -->
+  <aside class="w-64 bg-black/90 border-l border-white/10 flex flex-col justify-between hidden md:flex sticky top-0 h-screen z-40">
+    <div>
+      <!-- Brand Logo in Admin -->
+      <div class="p-6 border-b border-white/10 flex items-center justify-between">
+        <a href="/admin/dashboard" class="flex items-center gap-3">
+          <div class="w-9 h-9 rounded-lg bg-gold text-black flex items-center justify-center font-black font-mono shadow-md shadow-gold/20">M</div>
+          <div>
+            <span class="text-xl font-black text-white tracking-widest font-mono">MOTORA</span>
+            <span class="text-[9px] uppercase tracking-wider text-gold font-bold block -mt-1">ADMIN CONSOLE</span>
+          </div>
+        </a>
+      </div>
+
+      <!-- Navigation Links -->
+      <nav class="p-4 space-y-1.5 text-xs font-semibold">
+        <a href="/admin/dashboard" class="flex items-center gap-3 px-3 py-2.5 rounded-xl transition bg-gold text-black font-bold shadow-md shadow-gold/20">
+          <i class="fas fa-chart-line text-sm w-5"></i>
+          <span>لوحة المؤشرات العامة</span>
+        </a>
+
+        <a href="/admin/vehicles" class="flex items-center gap-3 px-3 py-2.5 rounded-xl transition text-gray-300 hover:bg-white/5 hover:text-gold">
+          <i class="fas fa-car text-sm w-5"></i>
+          <span>إدارة أسطول السيارات</span>
+        </a>
+
+        <a href="/admin/vehicles/new" class="flex items-center gap-3 px-3 py-2.5 rounded-xl transition text-gray-300 hover:bg-white/5 hover:text-gold">
+          <i class="fas fa-plus-circle text-sm w-5 text-emerald-400"></i>
+          <span>إضافة سيارة جديدة</span>
+        </a>
+
+        <a href="/admin/inventory" class="flex items-center gap-3 px-3 py-2.5 rounded-xl transition text-gray-300 hover:bg-white/5 hover:text-gold">
+          <i class="fas fa-warehouse text-sm w-5"></i>
+          <span>المخزون والكميات</span>
+        </a>
+
+        <a href="/admin/bookings" class="flex items-center gap-3 px-3 py-2.5 rounded-xl transition text-gray-300 hover:bg-white/5 hover:text-gold">
+          <i class="fas fa-calendar-check text-sm w-5"></i>
+          <span>طلبات الحجز والعملاء</span>
+        </a>
+
+        <a href="/admin/tracking" class="flex items-center gap-3 px-3 py-2.5 rounded-xl transition text-gray-300 hover:bg-white/5 hover:text-gold">
+          <i class="fas fa-shipping-fast text-sm w-5"></i>
+          <span>تتبع الشحنات والمراحل الـ 9</span>
+        </a>
+
+        <a href="/admin/settings" class="flex items-center gap-3 px-3 py-2.5 rounded-xl transition text-gray-300 hover:bg-white/5 hover:text-gold">
+          <i class="fas fa-cog text-sm w-5"></i>
+          <span>إعدادات الصالة والموقع</span>
+        </a>
+      </nav>
+    </div>
+
+    <!-- Bottom Actions -->
+    <div class="p-4 border-t border-white/10 space-y-2">
+      <a href="/" target="_blank" class="flex items-center justify-between px-3 py-2 rounded-xl bg-white/5 hover:bg-white/10 text-xs text-gray-300 transition">
+        <span class="flex items-center gap-2">
+          <i class="fas fa-external-link-alt text-gold"></i>
+          <span>مشاهدة الموقع الحي</span>
+        </span>
+        <i class="fas fa-chevron-left text-[10px] text-gray-500"></i>
+      </a>
+
+      <a href="/admin/logout" class="flex items-center gap-2 px-3 py-2 rounded-xl text-red-400 hover:bg-red-500/10 text-xs transition">
+        <i class="fas fa-sign-out-alt"></i>
+        <span>تسجيل الخروج</span>
+      </a>
+    </div>
+  </aside>
+
+  <!-- MAIN ADMIN CONTENT AREA -->
+  <div class="flex-1 flex flex-col min-w-0 overflow-y-auto">
+    
+    <!-- Top Bar -->
+    <header class="bg-black/80 backdrop-blur-md border-b border-white/10 px-6 py-3.5 flex items-center justify-between sticky top-0 z-30">
+      
+      <!-- Mobile Sidebar Toggle & Page Title -->
+      <div class="flex items-center gap-4">
+        <div class="text-xs text-gray-400">
+          <span class="text-emerald-400 font-bold flex items-center gap-1.5">
+            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+            <span>نظام الإدارة الفردي الحصري (Owner Only)</span>
+          </span>
+        </div>
+      </div>
+
+      <!-- Admin Status & Live Site Button -->
+      <div class="flex items-center gap-4">
+        <a href="/" target="_blank" class="hidden sm:inline-flex items-center gap-1.5 text-xs text-gold hover:text-white px-3 py-1.5 rounded-lg border border-gold/30 bg-gold/5 transition">
+          <i class="fas fa-eye"></i>
+          <span>معاينة الموقع للعملاء</span>
+        </a>
+
+        <div class="flex items-center gap-2 border-r border-white/10 pr-4">
+          <div class="w-8 h-8 rounded-full bg-gold/20 border border-gold text-gold flex items-center justify-center font-bold text-xs">
+            <i class="fas fa-user-shield"></i>
+          </div>
+          <div class="text-xs text-start">
+            <span class="font-bold text-white block">admin</span>
+            <span class="text-[10px] text-gray-400 block">المالك والمسؤول الوحيد</span>
+          </div>
+        </div>
+      </div>
+
+    </header>
+
+    <!-- Admin Content Injected Here -->
+    <main class="p-6 sm:p-8 flex-1">
+      
+
+<!-- TOP MASTER CONTROL HEADER -->
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
+  <div>
+    <div class="flex items-center gap-3">
+      <h1 class="text-2xl sm:text-3xl font-extrabold text-white">لوحة تحكم معرض موتورا</h1>
+      <span class="bg-gold/15 text-gold border border-gold/30 px-3 py-0.5 rounded-full text-xs font-bold font-mono">
+        إصدار المالك المستقل
+      </span>
+    </div>
+    <p class="text-xs text-gray-400 mt-1">
+      تحكم كامل ومباشر في إضافة السيارات، تعديل الأسعار، تغيير الحالات، حذف أو مضاعفة السيارات، الحجوزات، وإعدادات الواتساب دون الحاجة لأي كود برمجي.
+    </p>
+  </div>
+
+  <div class="flex flex-wrap items-center gap-3">
+    <!-- Live Showroom Preview Link -->
+    <a href="/" target="_blank" class="bg-white/10 hover:bg-white/20 text-white px-4 py-2.5 rounded-xl text-xs font-bold transition flex items-center gap-2 border border-white/10">
+      <i class="fas fa-external-link-alt text-gold"></i>
+      <span>معاينة الموقع الحي</span>
+    </a>
+
+    <!-- Primary Add Vehicle Button -->
+    <a href="/admin/vehicles/new" class="gold-btn px-5 py-2.5 rounded-xl text-xs font-black flex items-center gap-2 shadow-lg shadow-gold/20 hover:scale-105 transition transform">
+      <i class="fas fa-plus-circle text-sm"></i>
+      <span>+ إضافة سيارة جديدة للمعرض</span>
+    </a>
+  </div>
+</div>
+
+<!-- TOP KPI CARDS -->
+<div class="grid grid-cols-2 lg:grid-cols-5 gap-4 mb-8">
+  
+  <!-- Total Vehicles -->
+  <div class="glass-card p-4 rounded-2xl border border-white/10 flex items-center justify-between">
+    <div>
+      <span class="text-[11px] text-gray-400 font-semibold block mb-1">إجمالي السيارات</span>
+      <span class="text-2xl sm:text-3xl font-black text-white font-mono">22</span>
+      <span class="text-[10px] text-gray-400 block mt-1">مسجلة بالمعرض</span>
+    </div>
+    <div class="w-10 h-10 rounded-xl bg-gold/15 text-gold flex items-center justify-center text-lg">
+      <i class="fas fa-car-side"></i>
+    </div>
+  </div>
+
+  <!-- Available for Sale -->
+  <div class="glass-card p-4 rounded-2xl border border-white/10 flex items-center justify-between">
+    <div>
+      <span class="text-[11px] text-gray-400 font-semibold block mb-1">المتاحة للبيع فوراً</span>
+      <span class="text-2xl sm:text-3xl font-black text-emerald-400 font-mono">17</span>
+      <span class="text-[10px] text-emerald-500 block mt-1">🟢 معروضة بالموقع</span>
+    </div>
+    <div class="w-10 h-10 rounded-xl bg-emerald-500/15 text-emerald-400 flex items-center justify-center text-lg">
+      <i class="fas fa-check-circle"></i>
+    </div>
+  </div>
+
+  <!-- Reserved Vehicles -->
+  <div class="glass-card p-4 rounded-2xl border border-white/10 flex items-center justify-between">
+    <div>
+      <span class="text-[11px] text-gray-400 font-semibold block mb-1">السيارات المحجوزة</span>
+      <span class="text-2xl sm:text-3xl font-black text-amber-400 font-mono">1</span>
+      <span class="text-[10px] text-amber-500 block mt-1">🟡 بانتظار الشحن/الاستلام</span>
+    </div>
+    <div class="w-10 h-10 rounded-xl bg-amber-500/15 text-amber-400 flex items-center justify-center text-lg">
+      <i class="fas fa-clock"></i>
+    </div>
+  </div>
+
+  <!-- Sold Vehicles -->
+  <div class="glass-card p-4 rounded-2xl border border-white/10 flex items-center justify-between">
+    <div>
+      <span class="text-[11px] text-gray-400 font-semibold block mb-1">السيارات المباعة</span>
+      <span class="text-2xl sm:text-3xl font-black text-red-400 font-mono">0</span>
+      <span class="text-[10px] text-gray-400 block mt-1">🔴 تم تسليمها</span>
+    </div>
+    <div class="w-10 h-10 rounded-xl bg-red-500/15 text-red-400 flex items-center justify-center text-lg">
+      <i class="fas fa-handshake"></i>
+    </div>
+  </div>
+
+  <!-- Bookings & Leads -->
+  <div class="glass-card p-4 rounded-2xl border border-white/10 flex items-center justify-between col-span-2 lg:col-span-1">
+    <div>
+      <span class="text-[11px] text-gray-400 font-semibold block mb-1">طلبات الحجز والعملاء</span>
+      <span class="text-2xl sm:text-3xl font-black text-blue-400 font-mono">2</span>
+      <div class="mt-1 text-[10px]">
+        
+        <span class="text-amber-400 font-bold bg-amber-400/20 px-2 py-0.5 rounded">
+          1 بانتظار الرد
+        </span>
+        
+      </div>
+    </div>
+    <div class="w-10 h-10 rounded-xl bg-blue-500/15 text-blue-400 flex items-center justify-center text-lg">
+      <i class="fas fa-comments"></i>
+    </div>
+  </div>
+
+</div>
+
+<!-- MASTER TABS NAVIGATION BAR -->
+<div class="glass-panel p-2 rounded-2xl border border-white/15 mb-6 flex flex-wrap items-center gap-2">
+  <button type="button" class="dash-tab-btn px-4 py-2.5 rounded-xl text-xs transition flex items-center gap-2" data-tab="vehicles">
+    <i class="fas fa-car text-sm"></i>
+    <span class="font-bold">🚗 أسطول المعرض والتحكم الفوري (22)</span>
+  </button>
+
+  <button type="button" class="dash-tab-btn px-4 py-2.5 rounded-xl text-xs transition flex items-center gap-2" data-tab="bookings">
+    <i class="fas fa-calendar-check text-sm"></i>
+    <span class="font-bold">📋 طلبات الحجز والعملاء (2)</span>
+    
+    <span class="w-2 h-2 rounded-full bg-amber-400 animate-pulse"></span>
+    
+  </button>
+
+  <button type="button" class="dash-tab-btn px-4 py-2.5 rounded-xl text-xs transition flex items-center gap-2" data-tab="tracking">
+    <i class="fas fa-shipping-fast text-sm"></i>
+    <span class="font-bold">🚢 متابعة مسارات الشحن (1)</span>
+  </button>
+
+  <button type="button" class="dash-tab-btn px-4 py-2.5 rounded-xl text-xs transition flex items-center gap-2" data-tab="settings">
+    <i class="fas fa-cog text-sm"></i>
+    <span class="font-bold">⚙️ إعدادات المعرض وأرقام الواتساب</span>
+  </button>
+</div>
+
+<!-- ========================================================================= -->
+<!-- TAB PANE 1: FLEET & LIVE VEHICLE CONTROLS (THE CORE USER REQUIREMENT)     -->
+<!-- ========================================================================= -->
+<div id="tab-pane-vehicles" class="dash-tab-pane space-y-6">
+
+  <!-- Filter & Realtime Search Bar -->
+  <div class="glass-card p-4 rounded-2xl border border-white/10 flex flex-col md:flex-row items-center justify-between gap-4">
+    
+    <!-- Status Filter Pills -->
+    <div class="flex flex-wrap items-center gap-1.5 text-xs w-full md:w-auto">
+      <button type="button" class="dash-status-filter-btn px-3 py-1.5 rounded-lg bg-gold text-black font-bold transition" data-status="all">
+        الكل (All)
+      </button>
+      <button type="button" class="dash-status-filter-btn px-3 py-1.5 rounded-lg bg-white/5 text-gray-400 hover:text-white transition" data-status="available">
+        🟢 المتاحة (17)
+      </button>
+      <button type="button" class="dash-status-filter-btn px-3 py-1.5 rounded-lg bg-white/5 text-gray-400 hover:text-white transition" data-status="reserved">
+        🟡 المحجوزة (1)
+      </button>
+      <button type="button" class="dash-status-filter-btn px-3 py-1.5 rounded-lg bg-white/5 text-gray-400 hover:text-white transition" data-status="sold">
+        🔴 المباعة (0)
+      </button>
+      <button type="button" class="dash-status-filter-btn px-3 py-1.5 rounded-lg bg-white/5 text-gray-400 hover:text-white transition" data-status="hidden">
+        ⚪ المسودات المخفية
+      </button>
+    </div>
+
+    <!-- Live Search Input -->
+    <div class="relative w-full md:w-80">
+      <i class="fas fa-search absolute right-3.5 top-3 text-gray-400 text-xs"></i>
+      <input type="text" id="dashVehicleSearch" placeholder="ابحث باسم السيارة، الموديل، الشاسيه..." class="w-full bg-black/60 border border-white/15 rounded-xl pr-9 pl-4 py-2 text-xs text-white focus:border-gold outline-none">
+    </div>
+
+    <!-- Add Vehicle Quick Link -->
+    <a href="/admin/vehicles/new" class="gold-btn px-4 py-2 rounded-xl text-xs font-bold flex items-center gap-2 flex-shrink-0">
+      <i class="fas fa-plus"></i>
+      <span>إضافة سيارة جديدة</span>
+    </a>
+
+  </div>
+
+  <!-- THE MASTER VEHICLES TABLE -->
+  <div class="glass-card rounded-3xl overflow-hidden border border-white/15 shadow-2xl">
+    <div class="overflow-x-auto">
+      <table class="w-full text-right text-xs text-gray-300">
+        <thead class="bg-black/80 text-gray-400 uppercase tracking-wider text-[11px] border-b border-white/10">
+          <tr>
+            <th class="p-4">السيارة والموديل</th>
+            <th class="p-4">بلد المنشأ والشاسيه</th>
+            <th class="p-4">السعر (ج.م) - تعديل مباشر</th>
+            <th class="p-4">حالة العرض</th>
+            <th class="p-4 text-center">المخزون المتاح</th>
+            <th class="p-4 text-center">إجراءات الإدارة (حذف / تعديل / نسخ)</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-white/5" id="dashVehiclesTableBody">
+          
+          <tr class="dash-vehicle-row hover:bg-white/[0.03] transition" data-status="available" data-search="Range Rover Velar Autobiography 2025 MTR-2025-38603 UAE (Gulf Specs)">
+            
+            <!-- Vehicle Thumbnail & Name -->
+            <td class="p-4">
+              <div class="flex items-center gap-3">
+                <div class="w-16 h-12 rounded-xl overflow-hidden bg-black flex-shrink-0 border border-white/10 relative group">
+                  <img src="/static/images/car-placeholder.jpg" alt="" class="w-full h-full object-cover">
+                  
+                </div>
+                <div>
+                  <a href="/vehicle/range-rover-velar-autobiography-2025-38603" target="_blank" class="font-bold text-white hover:text-gold transition text-sm flex items-center gap-1.5">
+                    <span>Range Rover Velar Autobiography</span>
+                    <i class="fas fa-external-link-alt text-[10px] text-gray-500"></i>
+                  </a>
+                  <span class="text-[11px] text-gray-400 block mt-0.5">2025 • أعلى فئة</span>
+                </div>
+              </div>
+            </td>
+
+            <!-- Origin & VIN -->
+            <td class="p-4 font-mono">
+              <span class="text-xs text-white font-bold block">🇦🇪 الإمارات (Gulf Specs)</span>
+              <span class="text-[10px] text-gold tracking-wider block mt-0.5">MTR-2025-38603</span>
+            </td>
+
+            <!-- Real-time Price Editor -->
+            <td class="p-4">
+              <div class="flex items-center gap-1.5">
+                <input type="number" step="1000" class="quick-price-input bg-black/70 border border-white/20 rounded-lg px-2.5 py-1.5 text-xs text-white font-mono font-bold w-32 focus:border-gold outline-none transition" data-vehicle-id="22" value="6900000" title="اكتب السعر واضغط Enter للحفظ المباشر">
+                <span class="text-[11px] text-gray-400 font-bold">ج.م</span>
+              </div>
+              <span class="text-[9px] text-gray-500 block mt-0.5">احفظ بـ Enter أو الخروج من الحقل</span>
+            </td>
+
+            <!-- Real-time Status Dropdown -->
+            <td class="p-4">
+              <select class="quick-status-select bg-black/70 border border-white/20 rounded-lg px-2.5 py-1.5 text-xs text-white focus:border-gold outline-none transition" data-vehicle-id="22">
+                <option value="available" selected>🟢 متاحة للبيع (Available)</option>
+                <option value="reserved" >🟡 محجوزة (Reserved)</option>
+                <option value="sold" >🔴 مباعة (Sold)</option>
+                <option value="hidden" >⚪ مسودة مخفية (Hidden)</option>
+              </select>
+            </td>
+
+            <!-- Live Stock Adjuster (+ / - buttons) -->
+            <td class="p-4 text-center">
+              <div class="inline-flex items-center gap-2 bg-black/60 border border-white/15 rounded-xl px-2.5 py-1">
+                <button type="button" class="stock-adjust-btn w-6 h-6 rounded-lg bg-white/10 hover:bg-red-500 hover:text-white text-gray-300 font-bold text-xs flex items-center justify-center transition" data-vehicle-id="22" data-delta="-1" title="تقليل وحدة واحدة">
+                  <i class="fas fa-minus text-[10px]"></i>
+                </button>
+                <span id="stock-val-22" class="font-bold text-sm text-emerald-400 font-mono min-w-[20px] text-center">
+                  3
+                </span>
+                <button type="button" class="stock-adjust-btn w-6 h-6 rounded-lg bg-white/10 hover:bg-emerald-500 hover:text-black text-gray-300 font-bold text-xs flex items-center justify-center transition" data-vehicle-id="22" data-delta="1" title="زيادة وحدة واحدة">
+                  <i class="fas fa-plus text-[10px]"></i>
+                </button>
+              </div>
+            </td>
+
+            <!-- Management Actions (Delete, Edit, Duplicate, View) -->
+            <td class="p-4 text-center">
+              <div class="flex items-center justify-center gap-1.5">
+                
+                <!-- View Live Page -->
+                <a href="/vehicle/range-rover-velar-autobiography-2025-38603" target="_blank" class="p-2 rounded-lg bg-white/5 hover:bg-white/15 text-gray-300 hover:text-white transition" title="معاينة الصفحة للجمهور">
+                  <i class="fas fa-eye text-xs"></i>
+                </a>
+
+                <!-- Full Edit Page -->
+                <a href="/admin/vehicles/22/edit" class="p-2 rounded-lg bg-gold/15 hover:bg-gold text-gold hover:text-black transition font-bold" title="تعديل كافة التفاصيل والصور">
+                  <i class="fas fa-edit text-xs"></i>
+                </a>
+
+                <!-- Duplicate Listing Button -->
+                <form action="/admin/vehicles/22/duplicate" method="POST" class="inline" onsubmit="return confirm('هل تريد إنشاء نسخة مطابقة من هذه السيارة للتعديل السريع؟');">
+                  <button type="submit" class="p-2 rounded-lg bg-blue-500/15 hover:bg-blue-500 text-blue-400 hover:text-white transition" title="نسخ السيارة (مضاعفة)">
+                    <i class="fas fa-clone text-xs"></i>
+                  </button>
+                </form>
+
+                <!-- Delete Vehicle Button -->
+                <form action="/admin/vehicles/22/delete" method="POST" class="inline" onsubmit="return confirm('تحذير نهائي: هل أنت متأكد من حذف هذه السيارة وجميع صورها ومواصفاتها؟ لن يمكنك التراجع.');">
+                  <button type="submit" class="p-2 rounded-lg bg-red-500/15 hover:bg-red-500 text-red-400 hover:text-white transition" title="حذف السيارة نهائياً">
+                    <i class="fas fa-trash text-xs"></i>
+                  </button>
+                </form>
+
+              </div>
+            </td>
+
+          </tr>
+          
+          <tr class="dash-vehicle-row hover:bg-white/[0.03] transition" data-status="available" data-search="Mercedes-Benz G-Class AMG G63 (نسخة) 2024 WDB4632761X898561 Germany">
+            
+            <!-- Vehicle Thumbnail & Name -->
+            <td class="p-4">
+              <div class="flex items-center gap-3">
+                <div class="w-16 h-12 rounded-xl overflow-hidden bg-black flex-shrink-0 border border-white/10 relative group">
+                  <img src="https://images.unsplash.com/photo-1520031441872-265e4ff70366?auto=format&amp;fit=crop&amp;w=1200&amp;q=80" alt="" class="w-full h-full object-cover">
+                  
+                </div>
+                <div>
+                  <a href="/vehicle/mercedes-amg-g63-2024-night-edition-copy-8561" target="_blank" class="font-bold text-white hover:text-gold transition text-sm flex items-center gap-1.5">
+                    <span>Mercedes-Benz G-Class AMG G63 (نسخة)</span>
+                    <i class="fas fa-external-link-alt text-[10px] text-gray-500"></i>
+                  </a>
+                  <span class="text-[11px] text-gray-400 block mt-0.5">2024 • Night Package II Exclusive</span>
+                </div>
+              </div>
+            </td>
+
+            <!-- Origin & VIN -->
+            <td class="p-4 font-mono">
+              <span class="text-xs text-white font-bold block">🇩🇪 ألمانيا (Germany)</span>
+              <span class="text-[10px] text-gold tracking-wider block mt-0.5">WDB4632761X898561</span>
+            </td>
+
+            <!-- Real-time Price Editor -->
+            <td class="p-4">
+              <div class="flex items-center gap-1.5">
+                <input type="number" step="1000" class="quick-price-input bg-black/70 border border-white/20 rounded-lg px-2.5 py-1.5 text-xs text-white font-mono font-bold w-32 focus:border-gold outline-none transition" data-vehicle-id="21" value="12900000" title="اكتب السعر واضغط Enter للحفظ المباشر">
+                <span class="text-[11px] text-gray-400 font-bold">ج.م</span>
+              </div>
+              <span class="text-[9px] text-gray-500 block mt-0.5">احفظ بـ Enter أو الخروج من الحقل</span>
+            </td>
+
+            <!-- Real-time Status Dropdown -->
+            <td class="p-4">
+              <select class="quick-status-select bg-black/70 border border-white/20 rounded-lg px-2.5 py-1.5 text-xs text-white focus:border-gold outline-none transition" data-vehicle-id="21">
+                <option value="available" selected>🟢 متاحة للبيع (Available)</option>
+                <option value="reserved" >🟡 محجوزة (Reserved)</option>
+                <option value="sold" >🔴 مباعة (Sold)</option>
+                <option value="hidden" >⚪ مسودة مخفية (Hidden)</option>
+              </select>
+            </td>
+
+            <!-- Live Stock Adjuster (+ / - buttons) -->
+            <td class="p-4 text-center">
+              <div class="inline-flex items-center gap-2 bg-black/60 border border-white/15 rounded-xl px-2.5 py-1">
+                <button type="button" class="stock-adjust-btn w-6 h-6 rounded-lg bg-white/10 hover:bg-red-500 hover:text-white text-gray-300 font-bold text-xs flex items-center justify-center transition" data-vehicle-id="21" data-delta="-1" title="تقليل وحدة واحدة">
+                  <i class="fas fa-minus text-[10px]"></i>
+                </button>
+                <span id="stock-val-21" class="font-bold text-sm text-emerald-400 font-mono min-w-[20px] text-center">
+                  1
+                </span>
+                <button type="button" class="stock-adjust-btn w-6 h-6 rounded-lg bg-white/10 hover:bg-emerald-500 hover:text-black text-gray-300 font-bold text-xs flex items-center justify-center transition" data-vehicle-id="21" data-delta="1" title="زيادة وحدة واحدة">
+                  <i class="fas fa-plus text-[10px]"></i>
+                </button>
+              </div>
+            </td>
+
+            <!-- Management Actions (Delete, Edit, Duplicate, View) -->
+            <td class="p-4 text-center">
+              <div class="flex items-center justify-center gap-1.5">
+                
+                <!-- View Live Page -->
+                <a href="/vehicle/mercedes-amg-g63-2024-night-edition-copy-8561" target="_blank" class="p-2 rounded-lg bg-white/5 hover:bg-white/15 text-gray-300 hover:text-white transition" title="معاينة الصفحة للجمهور">
+                  <i class="fas fa-eye text-xs"></i>
+                </a>
+
+                <!-- Full Edit Page -->
+                <a href="/admin/vehicles/21/edit" class="p-2 rounded-lg bg-gold/15 hover:bg-gold text-gold hover:text-black transition font-bold" title="تعديل كافة التفاصيل والصور">
+                  <i class="fas fa-edit text-xs"></i>
+                </a>
+
+                <!-- Duplicate Listing Button -->
+                <form action="/admin/vehicles/21/duplicate" method="POST" class="inline" onsubmit="return confirm('هل تريد إنشاء نسخة مطابقة من هذه السيارة للتعديل السريع؟');">
+                  <button type="submit" class="p-2 rounded-lg bg-blue-500/15 hover:bg-blue-500 text-blue-400 hover:text-white transition" title="نسخ السيارة (مضاعفة)">
+                    <i class="fas fa-clone text-xs"></i>
+                  </button>
+                </form>
+
+                <!-- Delete Vehicle Button -->
+                <form action="/admin/vehicles/21/delete" method="POST" class="inline" onsubmit="return confirm('تحذير نهائي: هل أنت متأكد من حذف هذه السيارة وجميع صورها ومواصفاتها؟ لن يمكنك التراجع.');">
+                  <button type="submit" class="p-2 rounded-lg bg-red-500/15 hover:bg-red-500 text-red-400 hover:text-white transition" title="حذف السيارة نهائياً">
+                    <i class="fas fa-trash text-xs"></i>
+                  </button>
+                </form>
+
+              </div>
+            </td>
+
+          </tr>
+          
+          <tr class="dash-vehicle-row hover:bg-white/[0.03] transition" data-status="available" data-search="Maserati Levante Trofeo V8 2024 ZAM56RTA4P0991823-561 Germany">
+            
+            <!-- Vehicle Thumbnail & Name -->
+            <td class="p-4">
+              <div class="flex items-center gap-3">
+                <div class="w-16 h-12 rounded-xl overflow-hidden bg-black flex-shrink-0 border border-white/10 relative group">
+                  <img src="https://images.unsplash.com/photo-1549399542-7e3f8b79c341" alt="" class="w-full h-full object-cover">
+                  
+                  <span class="absolute top-1 right-1 bg-gold text-black text-[9px] px-1 font-bold rounded">مميزة</span>
+                  
+                </div>
+                <div>
+                  <a href="/vehicle/maserati-levante-trofeo-v8-2024-23-561" target="_blank" class="font-bold text-white hover:text-gold transition text-sm flex items-center gap-1.5">
+                    <span>Maserati Levante Trofeo V8</span>
+                    <i class="fas fa-external-link-alt text-[10px] text-gray-500"></i>
+                  </a>
+                  <span class="text-[11px] text-gray-400 block mt-0.5">2024 • Fuoriserie Edition</span>
+                </div>
+              </div>
+            </td>
+
+            <!-- Origin & VIN -->
+            <td class="p-4 font-mono">
+              <span class="text-xs text-white font-bold block">🇩🇪 ألمانيا (Germany)</span>
+              <span class="text-[10px] text-gold tracking-wider block mt-0.5">ZAM56RTA4P0991823-561</span>
+            </td>
+
+            <!-- Real-time Price Editor -->
+            <td class="p-4">
+              <div class="flex items-center gap-1.5">
+                <input type="number" step="1000" class="quick-price-input bg-black/70 border border-white/20 rounded-lg px-2.5 py-1.5 text-xs text-white font-mono font-bold w-32 focus:border-gold outline-none transition" data-vehicle-id="20" value="7950000" title="اكتب السعر واضغط Enter للحفظ المباشر">
+                <span class="text-[11px] text-gray-400 font-bold">ج.م</span>
+              </div>
+              <span class="text-[9px] text-gray-500 block mt-0.5">احفظ بـ Enter أو الخروج من الحقل</span>
+            </td>
+
+            <!-- Real-time Status Dropdown -->
+            <td class="p-4">
+              <select class="quick-status-select bg-black/70 border border-white/20 rounded-lg px-2.5 py-1.5 text-xs text-white focus:border-gold outline-none transition" data-vehicle-id="20">
+                <option value="available" selected>🟢 متاحة للبيع (Available)</option>
+                <option value="reserved" >🟡 محجوزة (Reserved)</option>
+                <option value="sold" >🔴 مباعة (Sold)</option>
+                <option value="hidden" >⚪ مسودة مخفية (Hidden)</option>
+              </select>
+            </td>
+
+            <!-- Live Stock Adjuster (+ / - buttons) -->
+            <td class="p-4 text-center">
+              <div class="inline-flex items-center gap-2 bg-black/60 border border-white/15 rounded-xl px-2.5 py-1">
+                <button type="button" class="stock-adjust-btn w-6 h-6 rounded-lg bg-white/10 hover:bg-red-500 hover:text-white text-gray-300 font-bold text-xs flex items-center justify-center transition" data-vehicle-id="20" data-delta="-1" title="تقليل وحدة واحدة">
+                  <i class="fas fa-minus text-[10px]"></i>
+                </button>
+                <span id="stock-val-20" class="font-bold text-sm text-emerald-400 font-mono min-w-[20px] text-center">
+                  1
+                </span>
+                <button type="button" class="stock-adjust-btn w-6 h-6 rounded-lg bg-white/10 hover:bg-emerald-500 hover:text-black text-gray-300 font-bold text-xs flex items-center justify-center transition" data-vehicle-id="20" data-delta="1" title="زيادة وحدة واحدة">
+                  <i class="fas fa-plus text-[10px]"></i>
+                </button>
+              </div>
+            </td>
+
+            <!-- Management Actions (Delete, Edit, Duplicate, View) -->
+            <td class="p-4 text-center">
+              <div class="flex items-center justify-center gap-1.5">
+                
+                <!-- View Live Page -->
+                <a href="/vehicle/maserati-levante-trofeo-v8-2024-23-561" target="_blank" class="p-2 rounded-lg bg-white/5 hover:bg-white/15 text-gray-300 hover:text-white transition" title="معاينة الصفحة للجمهور">
+                  <i class="fas fa-eye text-xs"></i>
+                </a>
+
+                <!-- Full Edit Page -->
+                <a href="/admin/vehicles/20/edit" class="p-2 rounded-lg bg-gold/15 hover:bg-gold text-gold hover:text-black transition font-bold" title="تعديل كافة التفاصيل والصور">
+                  <i class="fas fa-edit text-xs"></i>
+                </a>
+
+                <!-- Duplicate Listing Button -->
+                <form action="/admin/vehicles/20/duplicate" method="POST" class="inline" onsubmit="return confirm('هل تريد إنشاء نسخة مطابقة من هذه السيارة للتعديل السريع؟');">
+                  <button type="submit" class="p-2 rounded-lg bg-blue-500/15 hover:bg-blue-500 text-blue-400 hover:text-white transition" title="نسخ السيارة (مضاعفة)">
+                    <i class="fas fa-clone text-xs"></i>
+                  </button>
+                </form>
+
+                <!-- Delete Vehicle Button -->
+                <form action="/admin/vehicles/20/delete" method="POST" class="inline" onsubmit="return confirm('تحذير نهائي: هل أنت متأكد من حذف هذه السيارة وجميع صورها ومواصفاتها؟ لن يمكنك التراجع.');">
+                  <button type="submit" class="p-2 rounded-lg bg-red-500/15 hover:bg-red-500 text-red-400 hover:text-white transition" title="حذف السيارة نهائياً">
+                    <i class="fas fa-trash text-xs"></i>
+                  </button>
+                </form>
+
+              </div>
+            </td>
+
+          </tr>
+          
+          <tr class="dash-vehicle-row hover:bg-white/[0.03] transition" data-status="available" data-search="Mercedes-Benz G-Class AMG G63 (نسخة) 2024 WDB4632761X898500 Germany">
+            
+            <!-- Vehicle Thumbnail & Name -->
+            <td class="p-4">
+              <div class="flex items-center gap-3">
+                <div class="w-16 h-12 rounded-xl overflow-hidden bg-black flex-shrink-0 border border-white/10 relative group">
+                  <img src="https://images.unsplash.com/photo-1520031441872-265e4ff70366?auto=format&amp;fit=crop&amp;w=1200&amp;q=80" alt="" class="w-full h-full object-cover">
+                  
+                </div>
+                <div>
+                  <a href="/vehicle/mercedes-amg-g63-2024-night-edition-copy-8500" target="_blank" class="font-bold text-white hover:text-gold transition text-sm flex items-center gap-1.5">
+                    <span>Mercedes-Benz G-Class AMG G63 (نسخة)</span>
+                    <i class="fas fa-external-link-alt text-[10px] text-gray-500"></i>
+                  </a>
+                  <span class="text-[11px] text-gray-400 block mt-0.5">2024 • Night Package II Exclusive</span>
+                </div>
+              </div>
+            </td>
+
+            <!-- Origin & VIN -->
+            <td class="p-4 font-mono">
+              <span class="text-xs text-white font-bold block">🇩🇪 ألمانيا (Germany)</span>
+              <span class="text-[10px] text-gold tracking-wider block mt-0.5">WDB4632761X898500</span>
+            </td>
+
+            <!-- Real-time Price Editor -->
+            <td class="p-4">
+              <div class="flex items-center gap-1.5">
+                <input type="number" step="1000" class="quick-price-input bg-black/70 border border-white/20 rounded-lg px-2.5 py-1.5 text-xs text-white font-mono font-bold w-32 focus:border-gold outline-none transition" data-vehicle-id="19" value="12900000" title="اكتب السعر واضغط Enter للحفظ المباشر">
+                <span class="text-[11px] text-gray-400 font-bold">ج.م</span>
+              </div>
+              <span class="text-[9px] text-gray-500 block mt-0.5">احفظ بـ Enter أو الخروج من الحقل</span>
+            </td>
+
+            <!-- Real-time Status Dropdown -->
+            <td class="p-4">
+              <select class="quick-status-select bg-black/70 border border-white/20 rounded-lg px-2.5 py-1.5 text-xs text-white focus:border-gold outline-none transition" data-vehicle-id="19">
+                <option value="available" selected>🟢 متاحة للبيع (Available)</option>
+                <option value="reserved" >🟡 محجوزة (Reserved)</option>
+                <option value="sold" >🔴 مباعة (Sold)</option>
+                <option value="hidden" >⚪ مسودة مخفية (Hidden)</option>
+              </select>
+            </td>
+
+            <!-- Live Stock Adjuster (+ / - buttons) -->
+            <td class="p-4 text-center">
+              <div class="inline-flex items-center gap-2 bg-black/60 border border-white/15 rounded-xl px-2.5 py-1">
+                <button type="button" class="stock-adjust-btn w-6 h-6 rounded-lg bg-white/10 hover:bg-red-500 hover:text-white text-gray-300 font-bold text-xs flex items-center justify-center transition" data-vehicle-id="19" data-delta="-1" title="تقليل وحدة واحدة">
+                  <i class="fas fa-minus text-[10px]"></i>
+                </button>
+                <span id="stock-val-19" class="font-bold text-sm text-emerald-400 font-mono min-w-[20px] text-center">
+                  1
+                </span>
+                <button type="button" class="stock-adjust-btn w-6 h-6 rounded-lg bg-white/10 hover:bg-emerald-500 hover:text-black text-gray-300 font-bold text-xs flex items-center justify-center transition" data-vehicle-id="19" data-delta="1" title="زيادة وحدة واحدة">
+                  <i class="fas fa-plus text-[10px]"></i>
+                </button>
+              </div>
+            </td>
+
+            <!-- Management Actions (Delete, Edit, Duplicate, View) -->
+            <td class="p-4 text-center">
+              <div class="flex items-center justify-center gap-1.5">
+                
+                <!-- View Live Page -->
+                <a href="/vehicle/mercedes-amg-g63-2024-night-edition-copy-8500" target="_blank" class="p-2 rounded-lg bg-white/5 hover:bg-white/15 text-gray-300 hover:text-white transition" title="معاينة الصفحة للجمهور">
+                  <i class="fas fa-eye text-xs"></i>
+                </a>
+
+                <!-- Full Edit Page -->
+                <a href="/admin/vehicles/19/edit" class="p-2 rounded-lg bg-gold/15 hover:bg-gold text-gold hover:text-black transition font-bold" title="تعديل كافة التفاصيل والصور">
+                  <i class="fas fa-edit text-xs"></i>
+                </a>
+
+                <!-- Duplicate Listing Button -->
+                <form action="/admin/vehicles/19/duplicate" method="POST" class="inline" onsubmit="return confirm('هل تريد إنشاء نسخة مطابقة من هذه السيارة للتعديل السريع؟');">
+                  <button type="submit" class="p-2 rounded-lg bg-blue-500/15 hover:bg-blue-500 text-blue-400 hover:text-white transition" title="نسخ السيارة (مضاعفة)">
+                    <i class="fas fa-clone text-xs"></i>
+                  </button>
+                </form>
+
+                <!-- Delete Vehicle Button -->
+                <form action="/admin/vehicles/19/delete" method="POST" class="inline" onsubmit="return confirm('تحذير نهائي: هل أنت متأكد من حذف هذه السيارة وجميع صورها ومواصفاتها؟ لن يمكنك التراجع.');">
+                  <button type="submit" class="p-2 rounded-lg bg-red-500/15 hover:bg-red-500 text-red-400 hover:text-white transition" title="حذف السيارة نهائياً">
+                    <i class="fas fa-trash text-xs"></i>
+                  </button>
+                </form>
+
+              </div>
+            </td>
+
+          </tr>
+          
+          <tr class="dash-vehicle-row hover:bg-white/[0.03] transition" data-status="available" data-search="Maserati Levante Trofeo V8 2024 ZAM56RTA4P0991823-500 Germany">
+            
+            <!-- Vehicle Thumbnail & Name -->
+            <td class="p-4">
+              <div class="flex items-center gap-3">
+                <div class="w-16 h-12 rounded-xl overflow-hidden bg-black flex-shrink-0 border border-white/10 relative group">
+                  <img src="https://images.unsplash.com/photo-1549399542-7e3f8b79c341" alt="" class="w-full h-full object-cover">
+                  
+                  <span class="absolute top-1 right-1 bg-gold text-black text-[9px] px-1 font-bold rounded">مميزة</span>
+                  
+                </div>
+                <div>
+                  <a href="/vehicle/maserati-levante-trofeo-v8-2024-23-500" target="_blank" class="font-bold text-white hover:text-gold transition text-sm flex items-center gap-1.5">
+                    <span>Maserati Levante Trofeo V8</span>
+                    <i class="fas fa-external-link-alt text-[10px] text-gray-500"></i>
+                  </a>
+                  <span class="text-[11px] text-gray-400 block mt-0.5">2024 • Fuoriserie Edition</span>
+                </div>
+              </div>
+            </td>
+
+            <!-- Origin & VIN -->
+            <td class="p-4 font-mono">
+              <span class="text-xs text-white font-bold block">🇩🇪 ألمانيا (Germany)</span>
+              <span class="text-[10px] text-gold tracking-wider block mt-0.5">ZAM56RTA4P0991823-500</span>
+            </td>
+
+            <!-- Real-time Price Editor -->
+            <td class="p-4">
+              <div class="flex items-center gap-1.5">
+                <input type="number" step="1000" class="quick-price-input bg-black/70 border border-white/20 rounded-lg px-2.5 py-1.5 text-xs text-white font-mono font-bold w-32 focus:border-gold outline-none transition" data-vehicle-id="18" value="7950000" title="اكتب السعر واضغط Enter للحفظ المباشر">
+                <span class="text-[11px] text-gray-400 font-bold">ج.م</span>
+              </div>
+              <span class="text-[9px] text-gray-500 block mt-0.5">احفظ بـ Enter أو الخروج من الحقل</span>
+            </td>
+
+            <!-- Real-time Status Dropdown -->
+            <td class="p-4">
+              <select class="quick-status-select bg-black/70 border border-white/20 rounded-lg px-2.5 py-1.5 text-xs text-white focus:border-gold outline-none transition" data-vehicle-id="18">
+                <option value="available" selected>🟢 متاحة للبيع (Available)</option>
+                <option value="reserved" >🟡 محجوزة (Reserved)</option>
+                <option value="sold" >🔴 مباعة (Sold)</option>
+                <option value="hidden" >⚪ مسودة مخفية (Hidden)</option>
+              </select>
+            </td>
+
+            <!-- Live Stock Adjuster (+ / - buttons) -->
+            <td class="p-4 text-center">
+              <div class="inline-flex items-center gap-2 bg-black/60 border border-white/15 rounded-xl px-2.5 py-1">
+                <button type="button" class="stock-adjust-btn w-6 h-6 rounded-lg bg-white/10 hover:bg-red-500 hover:text-white text-gray-300 font-bold text-xs flex items-center justify-center transition" data-vehicle-id="18" data-delta="-1" title="تقليل وحدة واحدة">
+                  <i class="fas fa-minus text-[10px]"></i>
+                </button>
+                <span id="stock-val-18" class="font-bold text-sm text-emerald-400 font-mono min-w-[20px] text-center">
+                  1
+                </span>
+                <button type="button" class="stock-adjust-btn w-6 h-6 rounded-lg bg-white/10 hover:bg-emerald-500 hover:text-black text-gray-300 font-bold text-xs flex items-center justify-center transition" data-vehicle-id="18" data-delta="1" title="زيادة وحدة واحدة">
+                  <i class="fas fa-plus text-[10px]"></i>
+                </button>
+              </div>
+            </td>
+
+            <!-- Management Actions (Delete, Edit, Duplicate, View) -->
+            <td class="p-4 text-center">
+              <div class="flex items-center justify-center gap-1.5">
+                
+                <!-- View Live Page -->
+                <a href="/vehicle/maserati-levante-trofeo-v8-2024-23-500" target="_blank" class="p-2 rounded-lg bg-white/5 hover:bg-white/15 text-gray-300 hover:text-white transition" title="معاينة الصفحة للجمهور">
+                  <i class="fas fa-eye text-xs"></i>
+                </a>
+
+                <!-- Full Edit Page -->
+                <a href="/admin/vehicles/18/edit" class="p-2 rounded-lg bg-gold/15 hover:bg-gold text-gold hover:text-black transition font-bold" title="تعديل كافة التفاصيل والصور">
+                  <i class="fas fa-edit text-xs"></i>
+                </a>
+
+                <!-- Duplicate Listing Button -->
+                <form action="/admin/vehicles/18/duplicate" method="POST" class="inline" onsubmit="return confirm('هل تريد إنشاء نسخة مطابقة من هذه السيارة للتعديل السريع؟');">
+                  <button type="submit" class="p-2 rounded-lg bg-blue-500/15 hover:bg-blue-500 text-blue-400 hover:text-white transition" title="نسخ السيارة (مضاعفة)">
+                    <i class="fas fa-clone text-xs"></i>
+                  </button>
+                </form>
+
+                <!-- Delete Vehicle Button -->
+                <form action="/admin/vehicles/18/delete" method="POST" class="inline" onsubmit="return confirm('تحذير نهائي: هل أنت متأكد من حذف هذه السيارة وجميع صورها ومواصفاتها؟ لن يمكنك التراجع.');">
+                  <button type="submit" class="p-2 rounded-lg bg-red-500/15 hover:bg-red-500 text-red-400 hover:text-white transition" title="حذف السيارة نهائياً">
+                    <i class="fas fa-trash text-xs"></i>
+                  </button>
+                </form>
+
+              </div>
+            </td>
+
+          </tr>
+          
+          <tr class="dash-vehicle-row hover:bg-white/[0.03] transition" data-status="hidden" data-search="Mercedes-Benz G-Class AMG G63 (نسخة) 2024 WDB4632761X897656 Germany">
+            
+            <!-- Vehicle Thumbnail & Name -->
+            <td class="p-4">
+              <div class="flex items-center gap-3">
+                <div class="w-16 h-12 rounded-xl overflow-hidden bg-black flex-shrink-0 border border-white/10 relative group">
+                  <img src="https://images.unsplash.com/photo-1520031441872-265e4ff70366?auto=format&amp;fit=crop&amp;w=1200&amp;q=80" alt="" class="w-full h-full object-cover">
+                  
+                </div>
+                <div>
+                  <a href="/vehicle/mercedes-amg-g63-2024-night-edition-copy-7656" target="_blank" class="font-bold text-white hover:text-gold transition text-sm flex items-center gap-1.5">
+                    <span>Mercedes-Benz G-Class AMG G63 (نسخة)</span>
+                    <i class="fas fa-external-link-alt text-[10px] text-gray-500"></i>
+                  </a>
+                  <span class="text-[11px] text-gray-400 block mt-0.5">2024 • Night Package II Exclusive</span>
+                </div>
+              </div>
+            </td>
+
+            <!-- Origin & VIN -->
+            <td class="p-4 font-mono">
+              <span class="text-xs text-white font-bold block">🇩🇪 ألمانيا (Germany)</span>
+              <span class="text-[10px] text-gold tracking-wider block mt-0.5">WDB4632761X897656</span>
+            </td>
+
+            <!-- Real-time Price Editor -->
+            <td class="p-4">
+              <div class="flex items-center gap-1.5">
+                <input type="number" step="1000" class="quick-price-input bg-black/70 border border-white/20 rounded-lg px-2.5 py-1.5 text-xs text-white font-mono font-bold w-32 focus:border-gold outline-none transition" data-vehicle-id="17" value="12900000" title="اكتب السعر واضغط Enter للحفظ المباشر">
+                <span class="text-[11px] text-gray-400 font-bold">ج.م</span>
+              </div>
+              <span class="text-[9px] text-gray-500 block mt-0.5">احفظ بـ Enter أو الخروج من الحقل</span>
+            </td>
+
+            <!-- Real-time Status Dropdown -->
+            <td class="p-4">
+              <select class="quick-status-select bg-black/70 border border-white/20 rounded-lg px-2.5 py-1.5 text-xs text-white focus:border-gold outline-none transition" data-vehicle-id="17">
+                <option value="available" >🟢 متاحة للبيع (Available)</option>
+                <option value="reserved" >🟡 محجوزة (Reserved)</option>
+                <option value="sold" >🔴 مباعة (Sold)</option>
+                <option value="hidden" selected>⚪ مسودة مخفية (Hidden)</option>
+              </select>
+            </td>
+
+            <!-- Live Stock Adjuster (+ / - buttons) -->
+            <td class="p-4 text-center">
+              <div class="inline-flex items-center gap-2 bg-black/60 border border-white/15 rounded-xl px-2.5 py-1">
+                <button type="button" class="stock-adjust-btn w-6 h-6 rounded-lg bg-white/10 hover:bg-red-500 hover:text-white text-gray-300 font-bold text-xs flex items-center justify-center transition" data-vehicle-id="17" data-delta="-1" title="تقليل وحدة واحدة">
+                  <i class="fas fa-minus text-[10px]"></i>
+                </button>
+                <span id="stock-val-17" class="font-bold text-sm text-emerald-400 font-mono min-w-[20px] text-center">
+                  1
+                </span>
+                <button type="button" class="stock-adjust-btn w-6 h-6 rounded-lg bg-white/10 hover:bg-emerald-500 hover:text-black text-gray-300 font-bold text-xs flex items-center justify-center transition" data-vehicle-id="17" data-delta="1" title="زيادة وحدة واحدة">
+                  <i class="fas fa-plus text-[10px]"></i>
+                </button>
+              </div>
+            </td>
+
+            <!-- Management Actions (Delete, Edit, Duplicate, View) -->
+            <td class="p-4 text-center">
+              <div class="flex items-center justify-center gap-1.5">
+                
+                <!-- View Live Page -->
+                <a href="/vehicle/mercedes-amg-g63-2024-night-edition-copy-7656" target="_blank" class="p-2 rounded-lg bg-white/5 hover:bg-white/15 text-gray-300 hover:text-white transition" title="معاينة الصفحة للجمهور">
+                  <i class="fas fa-eye text-xs"></i>
+                </a>
+
+                <!-- Full Edit Page -->
+                <a href="/admin/vehicles/17/edit" class="p-2 rounded-lg bg-gold/15 hover:bg-gold text-gold hover:text-black transition font-bold" title="تعديل كافة التفاصيل والصور">
+                  <i class="fas fa-edit text-xs"></i>
+                </a>
+
+                <!-- Duplicate Listing Button -->
+                <form action="/admin/vehicles/17/duplicate" method="POST" class="inline" onsubmit="return confirm('هل تريد إنشاء نسخة مطابقة من هذه السيارة للتعديل السريع؟');">
+                  <button type="submit" class="p-2 rounded-lg bg-blue-500/15 hover:bg-blue-500 text-blue-400 hover:text-white transition" title="نسخ السيارة (مضاعفة)">
+                    <i class="fas fa-clone text-xs"></i>
+                  </button>
+                </form>
+
+                <!-- Delete Vehicle Button -->
+                <form action="/admin/vehicles/17/delete" method="POST" class="inline" onsubmit="return confirm('تحذير نهائي: هل أنت متأكد من حذف هذه السيارة وجميع صورها ومواصفاتها؟ لن يمكنك التراجع.');">
+                  <button type="submit" class="p-2 rounded-lg bg-red-500/15 hover:bg-red-500 text-red-400 hover:text-white transition" title="حذف السيارة نهائياً">
+                    <i class="fas fa-trash text-xs"></i>
+                  </button>
+                </form>
+
+              </div>
+            </td>
+
+          </tr>
+          
+          <tr class="dash-vehicle-row hover:bg-white/[0.03] transition" data-status="available" data-search="Maserati Levante Trofeo V8 2024 ZAM56RTA4P0991823-655 Germany">
+            
+            <!-- Vehicle Thumbnail & Name -->
+            <td class="p-4">
+              <div class="flex items-center gap-3">
+                <div class="w-16 h-12 rounded-xl overflow-hidden bg-black flex-shrink-0 border border-white/10 relative group">
+                  <img src="https://images.unsplash.com/photo-1549399542-7e3f8b79c341" alt="" class="w-full h-full object-cover">
+                  
+                  <span class="absolute top-1 right-1 bg-gold text-black text-[9px] px-1 font-bold rounded">مميزة</span>
+                  
+                </div>
+                <div>
+                  <a href="/vehicle/maserati-levante-trofeo-v8-2024-991823-7655" target="_blank" class="font-bold text-white hover:text-gold transition text-sm flex items-center gap-1.5">
+                    <span>Maserati Levante Trofeo V8</span>
+                    <i class="fas fa-external-link-alt text-[10px] text-gray-500"></i>
+                  </a>
+                  <span class="text-[11px] text-gray-400 block mt-0.5">2024 • Fuoriserie Edition</span>
+                </div>
+              </div>
+            </td>
+
+            <!-- Origin & VIN -->
+            <td class="p-4 font-mono">
+              <span class="text-xs text-white font-bold block">🇩🇪 ألمانيا (Germany)</span>
+              <span class="text-[10px] text-gold tracking-wider block mt-0.5">ZAM56RTA4P0991823-655</span>
+            </td>
+
+            <!-- Real-time Price Editor -->
+            <td class="p-4">
+              <div class="flex items-center gap-1.5">
+                <input type="number" step="1000" class="quick-price-input bg-black/70 border border-white/20 rounded-lg px-2.5 py-1.5 text-xs text-white font-mono font-bold w-32 focus:border-gold outline-none transition" data-vehicle-id="16" value="7950000" title="اكتب السعر واضغط Enter للحفظ المباشر">
+                <span class="text-[11px] text-gray-400 font-bold">ج.م</span>
+              </div>
+              <span class="text-[9px] text-gray-500 block mt-0.5">احفظ بـ Enter أو الخروج من الحقل</span>
+            </td>
+
+            <!-- Real-time Status Dropdown -->
+            <td class="p-4">
+              <select class="quick-status-select bg-black/70 border border-white/20 rounded-lg px-2.5 py-1.5 text-xs text-white focus:border-gold outline-none transition" data-vehicle-id="16">
+                <option value="available" selected>🟢 متاحة للبيع (Available)</option>
+                <option value="reserved" >🟡 محجوزة (Reserved)</option>
+                <option value="sold" >🔴 مباعة (Sold)</option>
+                <option value="hidden" >⚪ مسودة مخفية (Hidden)</option>
+              </select>
+            </td>
+
+            <!-- Live Stock Adjuster (+ / - buttons) -->
+            <td class="p-4 text-center">
+              <div class="inline-flex items-center gap-2 bg-black/60 border border-white/15 rounded-xl px-2.5 py-1">
+                <button type="button" class="stock-adjust-btn w-6 h-6 rounded-lg bg-white/10 hover:bg-red-500 hover:text-white text-gray-300 font-bold text-xs flex items-center justify-center transition" data-vehicle-id="16" data-delta="-1" title="تقليل وحدة واحدة">
+                  <i class="fas fa-minus text-[10px]"></i>
+                </button>
+                <span id="stock-val-16" class="font-bold text-sm text-emerald-400 font-mono min-w-[20px] text-center">
+                  1
+                </span>
+                <button type="button" class="stock-adjust-btn w-6 h-6 rounded-lg bg-white/10 hover:bg-emerald-500 hover:text-black text-gray-300 font-bold text-xs flex items-center justify-center transition" data-vehicle-id="16" data-delta="1" title="زيادة وحدة واحدة">
+                  <i class="fas fa-plus text-[10px]"></i>
+                </button>
+              </div>
+            </td>
+
+            <!-- Management Actions (Delete, Edit, Duplicate, View) -->
+            <td class="p-4 text-center">
+              <div class="flex items-center justify-center gap-1.5">
+                
+                <!-- View Live Page -->
+                <a href="/vehicle/maserati-levante-trofeo-v8-2024-991823-7655" target="_blank" class="p-2 rounded-lg bg-white/5 hover:bg-white/15 text-gray-300 hover:text-white transition" title="معاينة الصفحة للجمهور">
+                  <i class="fas fa-eye text-xs"></i>
+                </a>
+
+                <!-- Full Edit Page -->
+                <a href="/admin/vehicles/16/edit" class="p-2 rounded-lg bg-gold/15 hover:bg-gold text-gold hover:text-black transition font-bold" title="تعديل كافة التفاصيل والصور">
+                  <i class="fas fa-edit text-xs"></i>
+                </a>
+
+                <!-- Duplicate Listing Button -->
+                <form action="/admin/vehicles/16/duplicate" method="POST" class="inline" onsubmit="return confirm('هل تريد إنشاء نسخة مطابقة من هذه السيارة للتعديل السريع؟');">
+                  <button type="submit" class="p-2 rounded-lg bg-blue-500/15 hover:bg-blue-500 text-blue-400 hover:text-white transition" title="نسخ السيارة (مضاعفة)">
+                    <i class="fas fa-clone text-xs"></i>
+                  </button>
+                </form>
+
+                <!-- Delete Vehicle Button -->
+                <form action="/admin/vehicles/16/delete" method="POST" class="inline" onsubmit="return confirm('تحذير نهائي: هل أنت متأكد من حذف هذه السيارة وجميع صورها ومواصفاتها؟ لن يمكنك التراجع.');">
+                  <button type="submit" class="p-2 rounded-lg bg-red-500/15 hover:bg-red-500 text-red-400 hover:text-white transition" title="حذف السيارة نهائياً">
+                    <i class="fas fa-trash text-xs"></i>
+                  </button>
+                </form>
+
+              </div>
+            </td>
+
+          </tr>
+          
+          <tr class="dash-vehicle-row hover:bg-white/[0.03] transition" data-status="hidden" data-search="Mercedes-Benz G-Class AMG G63 (نسخة) 2024 WDB4632761X895290 Germany">
+            
+            <!-- Vehicle Thumbnail & Name -->
+            <td class="p-4">
+              <div class="flex items-center gap-3">
+                <div class="w-16 h-12 rounded-xl overflow-hidden bg-black flex-shrink-0 border border-white/10 relative group">
+                  <img src="https://images.unsplash.com/photo-1520031441872-265e4ff70366?auto=format&amp;fit=crop&amp;w=1200&amp;q=80" alt="" class="w-full h-full object-cover">
+                  
+                </div>
+                <div>
+                  <a href="/vehicle/mercedes-amg-g63-2024-night-edition-copy-5290" target="_blank" class="font-bold text-white hover:text-gold transition text-sm flex items-center gap-1.5">
+                    <span>Mercedes-Benz G-Class AMG G63 (نسخة)</span>
+                    <i class="fas fa-external-link-alt text-[10px] text-gray-500"></i>
+                  </a>
+                  <span class="text-[11px] text-gray-400 block mt-0.5">2024 • Night Package II Exclusive</span>
+                </div>
+              </div>
+            </td>
+
+            <!-- Origin & VIN -->
+            <td class="p-4 font-mono">
+              <span class="text-xs text-white font-bold block">🇩🇪 ألمانيا (Germany)</span>
+              <span class="text-[10px] text-gold tracking-wider block mt-0.5">WDB4632761X895290</span>
+            </td>
+
+            <!-- Real-time Price Editor -->
+            <td class="p-4">
+              <div class="flex items-center gap-1.5">
+                <input type="number" step="1000" class="quick-price-input bg-black/70 border border-white/20 rounded-lg px-2.5 py-1.5 text-xs text-white font-mono font-bold w-32 focus:border-gold outline-none transition" data-vehicle-id="15" value="12900000" title="اكتب السعر واضغط Enter للحفظ المباشر">
+                <span class="text-[11px] text-gray-400 font-bold">ج.م</span>
+              </div>
+              <span class="text-[9px] text-gray-500 block mt-0.5">احفظ بـ Enter أو الخروج من الحقل</span>
+            </td>
+
+            <!-- Real-time Status Dropdown -->
+            <td class="p-4">
+              <select class="quick-status-select bg-black/70 border border-white/20 rounded-lg px-2.5 py-1.5 text-xs text-white focus:border-gold outline-none transition" data-vehicle-id="15">
+                <option value="available" >🟢 متاحة للبيع (Available)</option>
+                <option value="reserved" >🟡 محجوزة (Reserved)</option>
+                <option value="sold" >🔴 مباعة (Sold)</option>
+                <option value="hidden" selected>⚪ مسودة مخفية (Hidden)</option>
+              </select>
+            </td>
+
+            <!-- Live Stock Adjuster (+ / - buttons) -->
+            <td class="p-4 text-center">
+              <div class="inline-flex items-center gap-2 bg-black/60 border border-white/15 rounded-xl px-2.5 py-1">
+                <button type="button" class="stock-adjust-btn w-6 h-6 rounded-lg bg-white/10 hover:bg-red-500 hover:text-white text-gray-300 font-bold text-xs flex items-center justify-center transition" data-vehicle-id="15" data-delta="-1" title="تقليل وحدة واحدة">
+                  <i class="fas fa-minus text-[10px]"></i>
+                </button>
+                <span id="stock-val-15" class="font-bold text-sm text-emerald-400 font-mono min-w-[20px] text-center">
+                  1
+                </span>
+                <button type="button" class="stock-adjust-btn w-6 h-6 rounded-lg bg-white/10 hover:bg-emerald-500 hover:text-black text-gray-300 font-bold text-xs flex items-center justify-center transition" data-vehicle-id="15" data-delta="1" title="زيادة وحدة واحدة">
+                  <i class="fas fa-plus text-[10px]"></i>
+                </button>
+              </div>
+            </td>
+
+            <!-- Management Actions (Delete, Edit, Duplicate, View) -->
+            <td class="p-4 text-center">
+              <div class="flex items-center justify-center gap-1.5">
+                
+                <!-- View Live Page -->
+                <a href="/vehicle/mercedes-amg-g63-2024-night-edition-copy-5290" target="_blank" class="p-2 rounded-lg bg-white/5 hover:bg-white/15 text-gray-300 hover:text-white transition" title="معاينة الصفحة للجمهور">
+                  <i class="fas fa-eye text-xs"></i>
+                </a>
+
+                <!-- Full Edit Page -->
+                <a href="/admin/vehicles/15/edit" class="p-2 rounded-lg bg-gold/15 hover:bg-gold text-gold hover:text-black transition font-bold" title="تعديل كافة التفاصيل والصور">
+                  <i class="fas fa-edit text-xs"></i>
+                </a>
+
+                <!-- Duplicate Listing Button -->
+                <form action="/admin/vehicles/15/duplicate" method="POST" class="inline" onsubmit="return confirm('هل تريد إنشاء نسخة مطابقة من هذه السيارة للتعديل السريع؟');">
+                  <button type="submit" class="p-2 rounded-lg bg-blue-500/15 hover:bg-blue-500 text-blue-400 hover:text-white transition" title="نسخ السيارة (مضاعفة)">
+                    <i class="fas fa-clone text-xs"></i>
+                  </button>
+                </form>
+
+                <!-- Delete Vehicle Button -->
+                <form action="/admin/vehicles/15/delete" method="POST" class="inline" onsubmit="return confirm('تحذير نهائي: هل أنت متأكد من حذف هذه السيارة وجميع صورها ومواصفاتها؟ لن يمكنك التراجع.');">
+                  <button type="submit" class="p-2 rounded-lg bg-red-500/15 hover:bg-red-500 text-red-400 hover:text-white transition" title="حذف السيارة نهائياً">
+                    <i class="fas fa-trash text-xs"></i>
+                  </button>
+                </form>
+
+              </div>
+            </td>
+
+          </tr>
+          
+          <tr class="dash-vehicle-row hover:bg-white/[0.03] transition" data-status="available" data-search="Maserati Levante Trofeo V8 2024 ZAM56RTA4P0991823-290 Germany">
+            
+            <!-- Vehicle Thumbnail & Name -->
+            <td class="p-4">
+              <div class="flex items-center gap-3">
+                <div class="w-16 h-12 rounded-xl overflow-hidden bg-black flex-shrink-0 border border-white/10 relative group">
+                  <img src="https://images.unsplash.com/photo-1549399542-7e3f8b79c341" alt="" class="w-full h-full object-cover">
+                  
+                  <span class="absolute top-1 right-1 bg-gold text-black text-[9px] px-1 font-bold rounded">مميزة</span>
+                  
+                </div>
+                <div>
+                  <a href="/vehicle/maserati-levante-trofeo-v8-2024-991823-5290" target="_blank" class="font-bold text-white hover:text-gold transition text-sm flex items-center gap-1.5">
+                    <span>Maserati Levante Trofeo V8</span>
+                    <i class="fas fa-external-link-alt text-[10px] text-gray-500"></i>
+                  </a>
+                  <span class="text-[11px] text-gray-400 block mt-0.5">2024 • Fuoriserie Edition</span>
+                </div>
+              </div>
+            </td>
+
+            <!-- Origin & VIN -->
+            <td class="p-4 font-mono">
+              <span class="text-xs text-white font-bold block">🇩🇪 ألمانيا (Germany)</span>
+              <span class="text-[10px] text-gold tracking-wider block mt-0.5">ZAM56RTA4P0991823-290</span>
+            </td>
+
+            <!-- Real-time Price Editor -->
+            <td class="p-4">
+              <div class="flex items-center gap-1.5">
+                <input type="number" step="1000" class="quick-price-input bg-black/70 border border-white/20 rounded-lg px-2.5 py-1.5 text-xs text-white font-mono font-bold w-32 focus:border-gold outline-none transition" data-vehicle-id="14" value="7950000" title="اكتب السعر واضغط Enter للحفظ المباشر">
+                <span class="text-[11px] text-gray-400 font-bold">ج.م</span>
+              </div>
+              <span class="text-[9px] text-gray-500 block mt-0.5">احفظ بـ Enter أو الخروج من الحقل</span>
+            </td>
+
+            <!-- Real-time Status Dropdown -->
+            <td class="p-4">
+              <select class="quick-status-select bg-black/70 border border-white/20 rounded-lg px-2.5 py-1.5 text-xs text-white focus:border-gold outline-none transition" data-vehicle-id="14">
+                <option value="available" selected>🟢 متاحة للبيع (Available)</option>
+                <option value="reserved" >🟡 محجوزة (Reserved)</option>
+                <option value="sold" >🔴 مباعة (Sold)</option>
+                <option value="hidden" >⚪ مسودة مخفية (Hidden)</option>
+              </select>
+            </td>
+
+            <!-- Live Stock Adjuster (+ / - buttons) -->
+            <td class="p-4 text-center">
+              <div class="inline-flex items-center gap-2 bg-black/60 border border-white/15 rounded-xl px-2.5 py-1">
+                <button type="button" class="stock-adjust-btn w-6 h-6 rounded-lg bg-white/10 hover:bg-red-500 hover:text-white text-gray-300 font-bold text-xs flex items-center justify-center transition" data-vehicle-id="14" data-delta="-1" title="تقليل وحدة واحدة">
+                  <i class="fas fa-minus text-[10px]"></i>
+                </button>
+                <span id="stock-val-14" class="font-bold text-sm text-emerald-400 font-mono min-w-[20px] text-center">
+                  1
+                </span>
+                <button type="button" class="stock-adjust-btn w-6 h-6 rounded-lg bg-white/10 hover:bg-emerald-500 hover:text-black text-gray-300 font-bold text-xs flex items-center justify-center transition" data-vehicle-id="14" data-delta="1" title="زيادة وحدة واحدة">
+                  <i class="fas fa-plus text-[10px]"></i>
+                </button>
+              </div>
+            </td>
+
+            <!-- Management Actions (Delete, Edit, Duplicate, View) -->
+            <td class="p-4 text-center">
+              <div class="flex items-center justify-center gap-1.5">
+                
+                <!-- View Live Page -->
+                <a href="/vehicle/maserati-levante-trofeo-v8-2024-991823-5290" target="_blank" class="p-2 rounded-lg bg-white/5 hover:bg-white/15 text-gray-300 hover:text-white transition" title="معاينة الصفحة للجمهور">
+                  <i class="fas fa-eye text-xs"></i>
+                </a>
+
+                <!-- Full Edit Page -->
+                <a href="/admin/vehicles/14/edit" class="p-2 rounded-lg bg-gold/15 hover:bg-gold text-gold hover:text-black transition font-bold" title="تعديل كافة التفاصيل والصور">
+                  <i class="fas fa-edit text-xs"></i>
+                </a>
+
+                <!-- Duplicate Listing Button -->
+                <form action="/admin/vehicles/14/duplicate" method="POST" class="inline" onsubmit="return confirm('هل تريد إنشاء نسخة مطابقة من هذه السيارة للتعديل السريع؟');">
+                  <button type="submit" class="p-2 rounded-lg bg-blue-500/15 hover:bg-blue-500 text-blue-400 hover:text-white transition" title="نسخ السيارة (مضاعفة)">
+                    <i class="fas fa-clone text-xs"></i>
+                  </button>
+                </form>
+
+                <!-- Delete Vehicle Button -->
+                <form action="/admin/vehicles/14/delete" method="POST" class="inline" onsubmit="return confirm('تحذير نهائي: هل أنت متأكد من حذف هذه السيارة وجميع صورها ومواصفاتها؟ لن يمكنك التراجع.');">
+                  <button type="submit" class="p-2 rounded-lg bg-red-500/15 hover:bg-red-500 text-red-400 hover:text-white transition" title="حذف السيارة نهائياً">
+                    <i class="fas fa-trash text-xs"></i>
+                  </button>
+                </form>
+
+              </div>
+            </td>
+
+          </tr>
+          
+          <tr class="dash-vehicle-row hover:bg-white/[0.03] transition" data-status="hidden" data-search="Mercedes-Benz G-Class AMG G63 (نسخة) 2024 WDB4632761X893231 Germany">
+            
+            <!-- Vehicle Thumbnail & Name -->
+            <td class="p-4">
+              <div class="flex items-center gap-3">
+                <div class="w-16 h-12 rounded-xl overflow-hidden bg-black flex-shrink-0 border border-white/10 relative group">
+                  <img src="https://images.unsplash.com/photo-1520031441872-265e4ff70366?auto=format&amp;fit=crop&amp;w=1200&amp;q=80" alt="" class="w-full h-full object-cover">
+                  
+                </div>
+                <div>
+                  <a href="/vehicle/mercedes-amg-g63-2024-night-edition-copy-3231" target="_blank" class="font-bold text-white hover:text-gold transition text-sm flex items-center gap-1.5">
+                    <span>Mercedes-Benz G-Class AMG G63 (نسخة)</span>
+                    <i class="fas fa-external-link-alt text-[10px] text-gray-500"></i>
+                  </a>
+                  <span class="text-[11px] text-gray-400 block mt-0.5">2024 • Night Package II Exclusive</span>
+                </div>
+              </div>
+            </td>
+
+            <!-- Origin & VIN -->
+            <td class="p-4 font-mono">
+              <span class="text-xs text-white font-bold block">🇩🇪 ألمانيا (Germany)</span>
+              <span class="text-[10px] text-gold tracking-wider block mt-0.5">WDB4632761X893231</span>
+            </td>
+
+            <!-- Real-time Price Editor -->
+            <td class="p-4">
+              <div class="flex items-center gap-1.5">
+                <input type="number" step="1000" class="quick-price-input bg-black/70 border border-white/20 rounded-lg px-2.5 py-1.5 text-xs text-white font-mono font-bold w-32 focus:border-gold outline-none transition" data-vehicle-id="13" value="12900000" title="اكتب السعر واضغط Enter للحفظ المباشر">
+                <span class="text-[11px] text-gray-400 font-bold">ج.م</span>
+              </div>
+              <span class="text-[9px] text-gray-500 block mt-0.5">احفظ بـ Enter أو الخروج من الحقل</span>
+            </td>
+
+            <!-- Real-time Status Dropdown -->
+            <td class="p-4">
+              <select class="quick-status-select bg-black/70 border border-white/20 rounded-lg px-2.5 py-1.5 text-xs text-white focus:border-gold outline-none transition" data-vehicle-id="13">
+                <option value="available" >🟢 متاحة للبيع (Available)</option>
+                <option value="reserved" >🟡 محجوزة (Reserved)</option>
+                <option value="sold" >🔴 مباعة (Sold)</option>
+                <option value="hidden" selected>⚪ مسودة مخفية (Hidden)</option>
+              </select>
+            </td>
+
+            <!-- Live Stock Adjuster (+ / - buttons) -->
+            <td class="p-4 text-center">
+              <div class="inline-flex items-center gap-2 bg-black/60 border border-white/15 rounded-xl px-2.5 py-1">
+                <button type="button" class="stock-adjust-btn w-6 h-6 rounded-lg bg-white/10 hover:bg-red-500 hover:text-white text-gray-300 font-bold text-xs flex items-center justify-center transition" data-vehicle-id="13" data-delta="-1" title="تقليل وحدة واحدة">
+                  <i class="fas fa-minus text-[10px]"></i>
+                </button>
+                <span id="stock-val-13" class="font-bold text-sm text-emerald-400 font-mono min-w-[20px] text-center">
+                  1
+                </span>
+                <button type="button" class="stock-adjust-btn w-6 h-6 rounded-lg bg-white/10 hover:bg-emerald-500 hover:text-black text-gray-300 font-bold text-xs flex items-center justify-center transition" data-vehicle-id="13" data-delta="1" title="زيادة وحدة واحدة">
+                  <i class="fas fa-plus text-[10px]"></i>
+                </button>
+              </div>
+            </td>
+
+            <!-- Management Actions (Delete, Edit, Duplicate, View) -->
+            <td class="p-4 text-center">
+              <div class="flex items-center justify-center gap-1.5">
+                
+                <!-- View Live Page -->
+                <a href="/vehicle/mercedes-amg-g63-2024-night-edition-copy-3231" target="_blank" class="p-2 rounded-lg bg-white/5 hover:bg-white/15 text-gray-300 hover:text-white transition" title="معاينة الصفحة للجمهور">
+                  <i class="fas fa-eye text-xs"></i>
+                </a>
+
+                <!-- Full Edit Page -->
+                <a href="/admin/vehicles/13/edit" class="p-2 rounded-lg bg-gold/15 hover:bg-gold text-gold hover:text-black transition font-bold" title="تعديل كافة التفاصيل والصور">
+                  <i class="fas fa-edit text-xs"></i>
+                </a>
+
+                <!-- Duplicate Listing Button -->
+                <form action="/admin/vehicles/13/duplicate" method="POST" class="inline" onsubmit="return confirm('هل تريد إنشاء نسخة مطابقة من هذه السيارة للتعديل السريع؟');">
+                  <button type="submit" class="p-2 rounded-lg bg-blue-500/15 hover:bg-blue-500 text-blue-400 hover:text-white transition" title="نسخ السيارة (مضاعفة)">
+                    <i class="fas fa-clone text-xs"></i>
+                  </button>
+                </form>
+
+                <!-- Delete Vehicle Button -->
+                <form action="/admin/vehicles/13/delete" method="POST" class="inline" onsubmit="return confirm('تحذير نهائي: هل أنت متأكد من حذف هذه السيارة وجميع صورها ومواصفاتها؟ لن يمكنك التراجع.');">
+                  <button type="submit" class="p-2 rounded-lg bg-red-500/15 hover:bg-red-500 text-red-400 hover:text-white transition" title="حذف السيارة نهائياً">
+                    <i class="fas fa-trash text-xs"></i>
+                  </button>
+                </form>
+
+              </div>
+            </td>
+
+          </tr>
+          
+          <tr class="dash-vehicle-row hover:bg-white/[0.03] transition" data-status="available" data-search="Maserati Levante Trofeo V8 2024 ZAM56RTA4P0991823-231 Germany">
+            
+            <!-- Vehicle Thumbnail & Name -->
+            <td class="p-4">
+              <div class="flex items-center gap-3">
+                <div class="w-16 h-12 rounded-xl overflow-hidden bg-black flex-shrink-0 border border-white/10 relative group">
+                  <img src="https://images.unsplash.com/photo-1549399542-7e3f8b79c341" alt="" class="w-full h-full object-cover">
+                  
+                  <span class="absolute top-1 right-1 bg-gold text-black text-[9px] px-1 font-bold rounded">مميزة</span>
+                  
+                </div>
+                <div>
+                  <a href="/vehicle/maserati-levante-trofeo-v8-2024-991823-3231" target="_blank" class="font-bold text-white hover:text-gold transition text-sm flex items-center gap-1.5">
+                    <span>Maserati Levante Trofeo V8</span>
+                    <i class="fas fa-external-link-alt text-[10px] text-gray-500"></i>
+                  </a>
+                  <span class="text-[11px] text-gray-400 block mt-0.5">2024 • Fuoriserie Edition</span>
+                </div>
+              </div>
+            </td>
+
+            <!-- Origin & VIN -->
+            <td class="p-4 font-mono">
+              <span class="text-xs text-white font-bold block">🇩🇪 ألمانيا (Germany)</span>
+              <span class="text-[10px] text-gold tracking-wider block mt-0.5">ZAM56RTA4P0991823-231</span>
+            </td>
+
+            <!-- Real-time Price Editor -->
+            <td class="p-4">
+              <div class="flex items-center gap-1.5">
+                <input type="number" step="1000" class="quick-price-input bg-black/70 border border-white/20 rounded-lg px-2.5 py-1.5 text-xs text-white font-mono font-bold w-32 focus:border-gold outline-none transition" data-vehicle-id="12" value="7950000" title="اكتب السعر واضغط Enter للحفظ المباشر">
+                <span class="text-[11px] text-gray-400 font-bold">ج.م</span>
+              </div>
+              <span class="text-[9px] text-gray-500 block mt-0.5">احفظ بـ Enter أو الخروج من الحقل</span>
+            </td>
+
+            <!-- Real-time Status Dropdown -->
+            <td class="p-4">
+              <select class="quick-status-select bg-black/70 border border-white/20 rounded-lg px-2.5 py-1.5 text-xs text-white focus:border-gold outline-none transition" data-vehicle-id="12">
+                <option value="available" selected>🟢 متاحة للبيع (Available)</option>
+                <option value="reserved" >🟡 محجوزة (Reserved)</option>
+                <option value="sold" >🔴 مباعة (Sold)</option>
+                <option value="hidden" >⚪ مسودة مخفية (Hidden)</option>
+              </select>
+            </td>
+
+            <!-- Live Stock Adjuster (+ / - buttons) -->
+            <td class="p-4 text-center">
+              <div class="inline-flex items-center gap-2 bg-black/60 border border-white/15 rounded-xl px-2.5 py-1">
+                <button type="button" class="stock-adjust-btn w-6 h-6 rounded-lg bg-white/10 hover:bg-red-500 hover:text-white text-gray-300 font-bold text-xs flex items-center justify-center transition" data-vehicle-id="12" data-delta="-1" title="تقليل وحدة واحدة">
+                  <i class="fas fa-minus text-[10px]"></i>
+                </button>
+                <span id="stock-val-12" class="font-bold text-sm text-emerald-400 font-mono min-w-[20px] text-center">
+                  1
+                </span>
+                <button type="button" class="stock-adjust-btn w-6 h-6 rounded-lg bg-white/10 hover:bg-emerald-500 hover:text-black text-gray-300 font-bold text-xs flex items-center justify-center transition" data-vehicle-id="12" data-delta="1" title="زيادة وحدة واحدة">
+                  <i class="fas fa-plus text-[10px]"></i>
+                </button>
+              </div>
+            </td>
+
+            <!-- Management Actions (Delete, Edit, Duplicate, View) -->
+            <td class="p-4 text-center">
+              <div class="flex items-center justify-center gap-1.5">
+                
+                <!-- View Live Page -->
+                <a href="/vehicle/maserati-levante-trofeo-v8-2024-991823-3231" target="_blank" class="p-2 rounded-lg bg-white/5 hover:bg-white/15 text-gray-300 hover:text-white transition" title="معاينة الصفحة للجمهور">
+                  <i class="fas fa-eye text-xs"></i>
+                </a>
+
+                <!-- Full Edit Page -->
+                <a href="/admin/vehicles/12/edit" class="p-2 rounded-lg bg-gold/15 hover:bg-gold text-gold hover:text-black transition font-bold" title="تعديل كافة التفاصيل والصور">
+                  <i class="fas fa-edit text-xs"></i>
+                </a>
+
+                <!-- Duplicate Listing Button -->
+                <form action="/admin/vehicles/12/duplicate" method="POST" class="inline" onsubmit="return confirm('هل تريد إنشاء نسخة مطابقة من هذه السيارة للتعديل السريع؟');">
+                  <button type="submit" class="p-2 rounded-lg bg-blue-500/15 hover:bg-blue-500 text-blue-400 hover:text-white transition" title="نسخ السيارة (مضاعفة)">
+                    <i class="fas fa-clone text-xs"></i>
+                  </button>
+                </form>
+
+                <!-- Delete Vehicle Button -->
+                <form action="/admin/vehicles/12/delete" method="POST" class="inline" onsubmit="return confirm('تحذير نهائي: هل أنت متأكد من حذف هذه السيارة وجميع صورها ومواصفاتها؟ لن يمكنك التراجع.');">
+                  <button type="submit" class="p-2 rounded-lg bg-red-500/15 hover:bg-red-500 text-red-400 hover:text-white transition" title="حذف السيارة نهائياً">
+                    <i class="fas fa-trash text-xs"></i>
+                  </button>
+                </form>
+
+              </div>
+            </td>
+
+          </tr>
+          
+          <tr class="dash-vehicle-row hover:bg-white/[0.03] transition" data-status="hidden" data-search="Mercedes-Benz G-Class AMG G63 (نسخة) 2024 WDB4632761X893117 Germany">
+            
+            <!-- Vehicle Thumbnail & Name -->
+            <td class="p-4">
+              <div class="flex items-center gap-3">
+                <div class="w-16 h-12 rounded-xl overflow-hidden bg-black flex-shrink-0 border border-white/10 relative group">
+                  <img src="https://images.unsplash.com/photo-1520031441872-265e4ff70366?auto=format&amp;fit=crop&amp;w=1200&amp;q=80" alt="" class="w-full h-full object-cover">
+                  
+                </div>
+                <div>
+                  <a href="/vehicle/mercedes-amg-g63-2024-night-edition-copy-3117" target="_blank" class="font-bold text-white hover:text-gold transition text-sm flex items-center gap-1.5">
+                    <span>Mercedes-Benz G-Class AMG G63 (نسخة)</span>
+                    <i class="fas fa-external-link-alt text-[10px] text-gray-500"></i>
+                  </a>
+                  <span class="text-[11px] text-gray-400 block mt-0.5">2024 • Night Package II Exclusive</span>
+                </div>
+              </div>
+            </td>
+
+            <!-- Origin & VIN -->
+            <td class="p-4 font-mono">
+              <span class="text-xs text-white font-bold block">🇩🇪 ألمانيا (Germany)</span>
+              <span class="text-[10px] text-gold tracking-wider block mt-0.5">WDB4632761X893117</span>
+            </td>
+
+            <!-- Real-time Price Editor -->
+            <td class="p-4">
+              <div class="flex items-center gap-1.5">
+                <input type="number" step="1000" class="quick-price-input bg-black/70 border border-white/20 rounded-lg px-2.5 py-1.5 text-xs text-white font-mono font-bold w-32 focus:border-gold outline-none transition" data-vehicle-id="11" value="12850000" title="اكتب السعر واضغط Enter للحفظ المباشر">
+                <span class="text-[11px] text-gray-400 font-bold">ج.م</span>
+              </div>
+              <span class="text-[9px] text-gray-500 block mt-0.5">احفظ بـ Enter أو الخروج من الحقل</span>
+            </td>
+
+            <!-- Real-time Status Dropdown -->
+            <td class="p-4">
+              <select class="quick-status-select bg-black/70 border border-white/20 rounded-lg px-2.5 py-1.5 text-xs text-white focus:border-gold outline-none transition" data-vehicle-id="11">
+                <option value="available" >🟢 متاحة للبيع (Available)</option>
+                <option value="reserved" >🟡 محجوزة (Reserved)</option>
+                <option value="sold" >🔴 مباعة (Sold)</option>
+                <option value="hidden" selected>⚪ مسودة مخفية (Hidden)</option>
+              </select>
+            </td>
+
+            <!-- Live Stock Adjuster (+ / - buttons) -->
+            <td class="p-4 text-center">
+              <div class="inline-flex items-center gap-2 bg-black/60 border border-white/15 rounded-xl px-2.5 py-1">
+                <button type="button" class="stock-adjust-btn w-6 h-6 rounded-lg bg-white/10 hover:bg-red-500 hover:text-white text-gray-300 font-bold text-xs flex items-center justify-center transition" data-vehicle-id="11" data-delta="-1" title="تقليل وحدة واحدة">
+                  <i class="fas fa-minus text-[10px]"></i>
+                </button>
+                <span id="stock-val-11" class="font-bold text-sm text-emerald-400 font-mono min-w-[20px] text-center">
+                  1
+                </span>
+                <button type="button" class="stock-adjust-btn w-6 h-6 rounded-lg bg-white/10 hover:bg-emerald-500 hover:text-black text-gray-300 font-bold text-xs flex items-center justify-center transition" data-vehicle-id="11" data-delta="1" title="زيادة وحدة واحدة">
+                  <i class="fas fa-plus text-[10px]"></i>
+                </button>
+              </div>
+            </td>
+
+            <!-- Management Actions (Delete, Edit, Duplicate, View) -->
+            <td class="p-4 text-center">
+              <div class="flex items-center justify-center gap-1.5">
+                
+                <!-- View Live Page -->
+                <a href="/vehicle/mercedes-amg-g63-2024-night-edition-copy-3117" target="_blank" class="p-2 rounded-lg bg-white/5 hover:bg-white/15 text-gray-300 hover:text-white transition" title="معاينة الصفحة للجمهور">
+                  <i class="fas fa-eye text-xs"></i>
+                </a>
+
+                <!-- Full Edit Page -->
+                <a href="/admin/vehicles/11/edit" class="p-2 rounded-lg bg-gold/15 hover:bg-gold text-gold hover:text-black transition font-bold" title="تعديل كافة التفاصيل والصور">
+                  <i class="fas fa-edit text-xs"></i>
+                </a>
+
+                <!-- Duplicate Listing Button -->
+                <form action="/admin/vehicles/11/duplicate" method="POST" class="inline" onsubmit="return confirm('هل تريد إنشاء نسخة مطابقة من هذه السيارة للتعديل السريع؟');">
+                  <button type="submit" class="p-2 rounded-lg bg-blue-500/15 hover:bg-blue-500 text-blue-400 hover:text-white transition" title="نسخ السيارة (مضاعفة)">
+                    <i class="fas fa-clone text-xs"></i>
+                  </button>
+                </form>
+
+                <!-- Delete Vehicle Button -->
+                <form action="/admin/vehicles/11/delete" method="POST" class="inline" onsubmit="return confirm('تحذير نهائي: هل أنت متأكد من حذف هذه السيارة وجميع صورها ومواصفاتها؟ لن يمكنك التراجع.');">
+                  <button type="submit" class="p-2 rounded-lg bg-red-500/15 hover:bg-red-500 text-red-400 hover:text-white transition" title="حذف السيارة نهائياً">
+                    <i class="fas fa-trash text-xs"></i>
+                  </button>
+                </form>
+
+              </div>
+            </td>
+
+          </tr>
+          
+          <tr class="dash-vehicle-row hover:bg-white/[0.03] transition" data-status="available" data-search="Maserati Levante Trofeo V8 2024 ZAM56RTA4P0991823-117 Germany">
+            
+            <!-- Vehicle Thumbnail & Name -->
+            <td class="p-4">
+              <div class="flex items-center gap-3">
+                <div class="w-16 h-12 rounded-xl overflow-hidden bg-black flex-shrink-0 border border-white/10 relative group">
+                  <img src="https://images.unsplash.com/photo-1549399542-7e3f8b79c341" alt="" class="w-full h-full object-cover">
+                  
+                  <span class="absolute top-1 right-1 bg-gold text-black text-[9px] px-1 font-bold rounded">مميزة</span>
+                  
+                </div>
+                <div>
+                  <a href="/vehicle/maserati-levante-trofeo-v8-2024-991823-3117" target="_blank" class="font-bold text-white hover:text-gold transition text-sm flex items-center gap-1.5">
+                    <span>Maserati Levante Trofeo V8</span>
+                    <i class="fas fa-external-link-alt text-[10px] text-gray-500"></i>
+                  </a>
+                  <span class="text-[11px] text-gray-400 block mt-0.5">2024 • Fuoriserie Edition</span>
+                </div>
+              </div>
+            </td>
+
+            <!-- Origin & VIN -->
+            <td class="p-4 font-mono">
+              <span class="text-xs text-white font-bold block">🇩🇪 ألمانيا (Germany)</span>
+              <span class="text-[10px] text-gold tracking-wider block mt-0.5">ZAM56RTA4P0991823-117</span>
+            </td>
+
+            <!-- Real-time Price Editor -->
+            <td class="p-4">
+              <div class="flex items-center gap-1.5">
+                <input type="number" step="1000" class="quick-price-input bg-black/70 border border-white/20 rounded-lg px-2.5 py-1.5 text-xs text-white font-mono font-bold w-32 focus:border-gold outline-none transition" data-vehicle-id="10" value="7950000" title="اكتب السعر واضغط Enter للحفظ المباشر">
+                <span class="text-[11px] text-gray-400 font-bold">ج.م</span>
+              </div>
+              <span class="text-[9px] text-gray-500 block mt-0.5">احفظ بـ Enter أو الخروج من الحقل</span>
+            </td>
+
+            <!-- Real-time Status Dropdown -->
+            <td class="p-4">
+              <select class="quick-status-select bg-black/70 border border-white/20 rounded-lg px-2.5 py-1.5 text-xs text-white focus:border-gold outline-none transition" data-vehicle-id="10">
+                <option value="available" selected>🟢 متاحة للبيع (Available)</option>
+                <option value="reserved" >🟡 محجوزة (Reserved)</option>
+                <option value="sold" >🔴 مباعة (Sold)</option>
+                <option value="hidden" >⚪ مسودة مخفية (Hidden)</option>
+              </select>
+            </td>
+
+            <!-- Live Stock Adjuster (+ / - buttons) -->
+            <td class="p-4 text-center">
+              <div class="inline-flex items-center gap-2 bg-black/60 border border-white/15 rounded-xl px-2.5 py-1">
+                <button type="button" class="stock-adjust-btn w-6 h-6 rounded-lg bg-white/10 hover:bg-red-500 hover:text-white text-gray-300 font-bold text-xs flex items-center justify-center transition" data-vehicle-id="10" data-delta="-1" title="تقليل وحدة واحدة">
+                  <i class="fas fa-minus text-[10px]"></i>
+                </button>
+                <span id="stock-val-10" class="font-bold text-sm text-emerald-400 font-mono min-w-[20px] text-center">
+                  1
+                </span>
+                <button type="button" class="stock-adjust-btn w-6 h-6 rounded-lg bg-white/10 hover:bg-emerald-500 hover:text-black text-gray-300 font-bold text-xs flex items-center justify-center transition" data-vehicle-id="10" data-delta="1" title="زيادة وحدة واحدة">
+                  <i class="fas fa-plus text-[10px]"></i>
+                </button>
+              </div>
+            </td>
+
+            <!-- Management Actions (Delete, Edit, Duplicate, View) -->
+            <td class="p-4 text-center">
+              <div class="flex items-center justify-center gap-1.5">
+                
+                <!-- View Live Page -->
+                <a href="/vehicle/maserati-levante-trofeo-v8-2024-991823-3117" target="_blank" class="p-2 rounded-lg bg-white/5 hover:bg-white/15 text-gray-300 hover:text-white transition" title="معاينة الصفحة للجمهور">
+                  <i class="fas fa-eye text-xs"></i>
+                </a>
+
+                <!-- Full Edit Page -->
+                <a href="/admin/vehicles/10/edit" class="p-2 rounded-lg bg-gold/15 hover:bg-gold text-gold hover:text-black transition font-bold" title="تعديل كافة التفاصيل والصور">
+                  <i class="fas fa-edit text-xs"></i>
+                </a>
+
+                <!-- Duplicate Listing Button -->
+                <form action="/admin/vehicles/10/duplicate" method="POST" class="inline" onsubmit="return confirm('هل تريد إنشاء نسخة مطابقة من هذه السيارة للتعديل السريع؟');">
+                  <button type="submit" class="p-2 rounded-lg bg-blue-500/15 hover:bg-blue-500 text-blue-400 hover:text-white transition" title="نسخ السيارة (مضاعفة)">
+                    <i class="fas fa-clone text-xs"></i>
+                  </button>
+                </form>
+
+                <!-- Delete Vehicle Button -->
+                <form action="/admin/vehicles/10/delete" method="POST" class="inline" onsubmit="return confirm('تحذير نهائي: هل أنت متأكد من حذف هذه السيارة وجميع صورها ومواصفاتها؟ لن يمكنك التراجع.');">
+                  <button type="submit" class="p-2 rounded-lg bg-red-500/15 hover:bg-red-500 text-red-400 hover:text-white transition" title="حذف السيارة نهائياً">
+                    <i class="fas fa-trash text-xs"></i>
+                  </button>
+                </form>
+
+              </div>
+            </td>
+
+          </tr>
+          
+          <tr class="dash-vehicle-row hover:bg-white/[0.03] transition" data-status="available" data-search="Maserati Levante Trofeo V8 2024 ZAM56RTA4P0991823 Germany">
+            
+            <!-- Vehicle Thumbnail & Name -->
+            <td class="p-4">
+              <div class="flex items-center gap-3">
+                <div class="w-16 h-12 rounded-xl overflow-hidden bg-black flex-shrink-0 border border-white/10 relative group">
+                  <img src="https://images.unsplash.com/photo-1549399542-7e3f8b79c341" alt="" class="w-full h-full object-cover">
+                  
+                  <span class="absolute top-1 right-1 bg-gold text-black text-[9px] px-1 font-bold rounded">مميزة</span>
+                  
+                </div>
+                <div>
+                  <a href="/vehicle/maserati-levante-trofeo-v8-2024-991823" target="_blank" class="font-bold text-white hover:text-gold transition text-sm flex items-center gap-1.5">
+                    <span>Maserati Levante Trofeo V8</span>
+                    <i class="fas fa-external-link-alt text-[10px] text-gray-500"></i>
+                  </a>
+                  <span class="text-[11px] text-gray-400 block mt-0.5">2024 • Fuoriserie Edition</span>
+                </div>
+              </div>
+            </td>
+
+            <!-- Origin & VIN -->
+            <td class="p-4 font-mono">
+              <span class="text-xs text-white font-bold block">🇩🇪 ألمانيا (Germany)</span>
+              <span class="text-[10px] text-gold tracking-wider block mt-0.5">ZAM56RTA4P0991823</span>
+            </td>
+
+            <!-- Real-time Price Editor -->
+            <td class="p-4">
+              <div class="flex items-center gap-1.5">
+                <input type="number" step="1000" class="quick-price-input bg-black/70 border border-white/20 rounded-lg px-2.5 py-1.5 text-xs text-white font-mono font-bold w-32 focus:border-gold outline-none transition" data-vehicle-id="9" value="7950000" title="اكتب السعر واضغط Enter للحفظ المباشر">
+                <span class="text-[11px] text-gray-400 font-bold">ج.م</span>
+              </div>
+              <span class="text-[9px] text-gray-500 block mt-0.5">احفظ بـ Enter أو الخروج من الحقل</span>
+            </td>
+
+            <!-- Real-time Status Dropdown -->
+            <td class="p-4">
+              <select class="quick-status-select bg-black/70 border border-white/20 rounded-lg px-2.5 py-1.5 text-xs text-white focus:border-gold outline-none transition" data-vehicle-id="9">
+                <option value="available" selected>🟢 متاحة للبيع (Available)</option>
+                <option value="reserved" >🟡 محجوزة (Reserved)</option>
+                <option value="sold" >🔴 مباعة (Sold)</option>
+                <option value="hidden" >⚪ مسودة مخفية (Hidden)</option>
+              </select>
+            </td>
+
+            <!-- Live Stock Adjuster (+ / - buttons) -->
+            <td class="p-4 text-center">
+              <div class="inline-flex items-center gap-2 bg-black/60 border border-white/15 rounded-xl px-2.5 py-1">
+                <button type="button" class="stock-adjust-btn w-6 h-6 rounded-lg bg-white/10 hover:bg-red-500 hover:text-white text-gray-300 font-bold text-xs flex items-center justify-center transition" data-vehicle-id="9" data-delta="-1" title="تقليل وحدة واحدة">
+                  <i class="fas fa-minus text-[10px]"></i>
+                </button>
+                <span id="stock-val-9" class="font-bold text-sm text-emerald-400 font-mono min-w-[20px] text-center">
+                  1
+                </span>
+                <button type="button" class="stock-adjust-btn w-6 h-6 rounded-lg bg-white/10 hover:bg-emerald-500 hover:text-black text-gray-300 font-bold text-xs flex items-center justify-center transition" data-vehicle-id="9" data-delta="1" title="زيادة وحدة واحدة">
+                  <i class="fas fa-plus text-[10px]"></i>
+                </button>
+              </div>
+            </td>
+
+            <!-- Management Actions (Delete, Edit, Duplicate, View) -->
+            <td class="p-4 text-center">
+              <div class="flex items-center justify-center gap-1.5">
+                
+                <!-- View Live Page -->
+                <a href="/vehicle/maserati-levante-trofeo-v8-2024-991823" target="_blank" class="p-2 rounded-lg bg-white/5 hover:bg-white/15 text-gray-300 hover:text-white transition" title="معاينة الصفحة للجمهور">
+                  <i class="fas fa-eye text-xs"></i>
+                </a>
+
+                <!-- Full Edit Page -->
+                <a href="/admin/vehicles/9/edit" class="p-2 rounded-lg bg-gold/15 hover:bg-gold text-gold hover:text-black transition font-bold" title="تعديل كافة التفاصيل والصور">
+                  <i class="fas fa-edit text-xs"></i>
+                </a>
+
+                <!-- Duplicate Listing Button -->
+                <form action="/admin/vehicles/9/duplicate" method="POST" class="inline" onsubmit="return confirm('هل تريد إنشاء نسخة مطابقة من هذه السيارة للتعديل السريع؟');">
+                  <button type="submit" class="p-2 rounded-lg bg-blue-500/15 hover:bg-blue-500 text-blue-400 hover:text-white transition" title="نسخ السيارة (مضاعفة)">
+                    <i class="fas fa-clone text-xs"></i>
+                  </button>
+                </form>
+
+                <!-- Delete Vehicle Button -->
+                <form action="/admin/vehicles/9/delete" method="POST" class="inline" onsubmit="return confirm('تحذير نهائي: هل أنت متأكد من حذف هذه السيارة وجميع صورها ومواصفاتها؟ لن يمكنك التراجع.');">
+                  <button type="submit" class="p-2 rounded-lg bg-red-500/15 hover:bg-red-500 text-red-400 hover:text-white transition" title="حذف السيارة نهائياً">
+                    <i class="fas fa-trash text-xs"></i>
+                  </button>
+                </form>
+
+              </div>
+            </td>
+
+          </tr>
+          
+          <tr class="dash-vehicle-row hover:bg-white/[0.03] transition" data-status="available" data-search="Audi RS Q8 2023 WAUZZZF16PD019284 Germany">
+            
+            <!-- Vehicle Thumbnail & Name -->
+            <td class="p-4">
+              <div class="flex items-center gap-3">
+                <div class="w-16 h-12 rounded-xl overflow-hidden bg-black flex-shrink-0 border border-white/10 relative group">
+                  <img src="https://images.unsplash.com/photo-1603584173870-7f23fdae1b7a?auto=format&amp;fit=crop&amp;w=1200&amp;q=80" alt="" class="w-full h-full object-cover">
+                  
+                </div>
+                <div>
+                  <a href="/vehicle/audi-rs-q8-40-tfsi-2023" target="_blank" class="font-bold text-white hover:text-gold transition text-sm flex items-center gap-1.5">
+                    <span>Audi RS Q8</span>
+                    <i class="fas fa-external-link-alt text-[10px] text-gray-500"></i>
+                  </a>
+                  <span class="text-[11px] text-gray-400 block mt-0.5">2023 • Dynamic Package Plus</span>
+                </div>
+              </div>
+            </td>
+
+            <!-- Origin & VIN -->
+            <td class="p-4 font-mono">
+              <span class="text-xs text-white font-bold block">🇩🇪 ألمانيا (Germany)</span>
+              <span class="text-[10px] text-gold tracking-wider block mt-0.5">WAUZZZF16PD019284</span>
+            </td>
+
+            <!-- Real-time Price Editor -->
+            <td class="p-4">
+              <div class="flex items-center gap-1.5">
+                <input type="number" step="1000" class="quick-price-input bg-black/70 border border-white/20 rounded-lg px-2.5 py-1.5 text-xs text-white font-mono font-bold w-32 focus:border-gold outline-none transition" data-vehicle-id="8" value="11500000" title="اكتب السعر واضغط Enter للحفظ المباشر">
+                <span class="text-[11px] text-gray-400 font-bold">ج.م</span>
+              </div>
+              <span class="text-[9px] text-gray-500 block mt-0.5">احفظ بـ Enter أو الخروج من الحقل</span>
+            </td>
+
+            <!-- Real-time Status Dropdown -->
+            <td class="p-4">
+              <select class="quick-status-select bg-black/70 border border-white/20 rounded-lg px-2.5 py-1.5 text-xs text-white focus:border-gold outline-none transition" data-vehicle-id="8">
+                <option value="available" selected>🟢 متاحة للبيع (Available)</option>
+                <option value="reserved" >🟡 محجوزة (Reserved)</option>
+                <option value="sold" >🔴 مباعة (Sold)</option>
+                <option value="hidden" >⚪ مسودة مخفية (Hidden)</option>
+              </select>
+            </td>
+
+            <!-- Live Stock Adjuster (+ / - buttons) -->
+            <td class="p-4 text-center">
+              <div class="inline-flex items-center gap-2 bg-black/60 border border-white/15 rounded-xl px-2.5 py-1">
+                <button type="button" class="stock-adjust-btn w-6 h-6 rounded-lg bg-white/10 hover:bg-red-500 hover:text-white text-gray-300 font-bold text-xs flex items-center justify-center transition" data-vehicle-id="8" data-delta="-1" title="تقليل وحدة واحدة">
+                  <i class="fas fa-minus text-[10px]"></i>
+                </button>
+                <span id="stock-val-8" class="font-bold text-sm text-emerald-400 font-mono min-w-[20px] text-center">
+                  1
+                </span>
+                <button type="button" class="stock-adjust-btn w-6 h-6 rounded-lg bg-white/10 hover:bg-emerald-500 hover:text-black text-gray-300 font-bold text-xs flex items-center justify-center transition" data-vehicle-id="8" data-delta="1" title="زيادة وحدة واحدة">
+                  <i class="fas fa-plus text-[10px]"></i>
+                </button>
+              </div>
+            </td>
+
+            <!-- Management Actions (Delete, Edit, Duplicate, View) -->
+            <td class="p-4 text-center">
+              <div class="flex items-center justify-center gap-1.5">
+                
+                <!-- View Live Page -->
+                <a href="/vehicle/audi-rs-q8-40-tfsi-2023" target="_blank" class="p-2 rounded-lg bg-white/5 hover:bg-white/15 text-gray-300 hover:text-white transition" title="معاينة الصفحة للجمهور">
+                  <i class="fas fa-eye text-xs"></i>
+                </a>
+
+                <!-- Full Edit Page -->
+                <a href="/admin/vehicles/8/edit" class="p-2 rounded-lg bg-gold/15 hover:bg-gold text-gold hover:text-black transition font-bold" title="تعديل كافة التفاصيل والصور">
+                  <i class="fas fa-edit text-xs"></i>
+                </a>
+
+                <!-- Duplicate Listing Button -->
+                <form action="/admin/vehicles/8/duplicate" method="POST" class="inline" onsubmit="return confirm('هل تريد إنشاء نسخة مطابقة من هذه السيارة للتعديل السريع؟');">
+                  <button type="submit" class="p-2 rounded-lg bg-blue-500/15 hover:bg-blue-500 text-blue-400 hover:text-white transition" title="نسخ السيارة (مضاعفة)">
+                    <i class="fas fa-clone text-xs"></i>
+                  </button>
+                </form>
+
+                <!-- Delete Vehicle Button -->
+                <form action="/admin/vehicles/8/delete" method="POST" class="inline" onsubmit="return confirm('تحذير نهائي: هل أنت متأكد من حذف هذه السيارة وجميع صورها ومواصفاتها؟ لن يمكنك التراجع.');">
+                  <button type="submit" class="p-2 rounded-lg bg-red-500/15 hover:bg-red-500 text-red-400 hover:text-white transition" title="حذف السيارة نهائياً">
+                    <i class="fas fa-trash text-xs"></i>
+                  </button>
+                </form>
+
+              </div>
+            </td>
+
+          </tr>
+          
+          <tr class="dash-vehicle-row hover:bg-white/[0.03] transition" data-status="available" data-search="Genesis GV80 3.5T AWD 2024 KMUGD81B8RU094182 South Korea">
+            
+            <!-- Vehicle Thumbnail & Name -->
+            <td class="p-4">
+              <div class="flex items-center gap-3">
+                <div class="w-16 h-12 rounded-xl overflow-hidden bg-black flex-shrink-0 border border-white/10 relative group">
+                  <img src="https://images.unsplash.com/photo-1502877338535-766e1452684a?auto=format&amp;fit=crop&amp;w=1200&amp;q=80" alt="" class="w-full h-full object-cover">
+                  
+                </div>
+                <div>
+                  <a href="/vehicle/genesis-gv80-35t-prestige-2024" target="_blank" class="font-bold text-white hover:text-gold transition text-sm flex items-center gap-1.5">
+                    <span>Genesis GV80 3.5T AWD</span>
+                    <i class="fas fa-external-link-alt text-[10px] text-gray-500"></i>
+                  </a>
+                  <span class="text-[11px] text-gray-400 block mt-0.5">2024 • Prestige Signature (Facelift)</span>
+                </div>
+              </div>
+            </td>
+
+            <!-- Origin & VIN -->
+            <td class="p-4 font-mono">
+              <span class="text-xs text-white font-bold block">🇰🇷 كوريا الجنوبية (South Korea)</span>
+              <span class="text-[10px] text-gold tracking-wider block mt-0.5">KMUGD81B8RU094182</span>
+            </td>
+
+            <!-- Real-time Price Editor -->
+            <td class="p-4">
+              <div class="flex items-center gap-1.5">
+                <input type="number" step="1000" class="quick-price-input bg-black/70 border border-white/20 rounded-lg px-2.5 py-1.5 text-xs text-white font-mono font-bold w-32 focus:border-gold outline-none transition" data-vehicle-id="7" value="4600000" title="اكتب السعر واضغط Enter للحفظ المباشر">
+                <span class="text-[11px] text-gray-400 font-bold">ج.م</span>
+              </div>
+              <span class="text-[9px] text-gray-500 block mt-0.5">احفظ بـ Enter أو الخروج من الحقل</span>
+            </td>
+
+            <!-- Real-time Status Dropdown -->
+            <td class="p-4">
+              <select class="quick-status-select bg-black/70 border border-white/20 rounded-lg px-2.5 py-1.5 text-xs text-white focus:border-gold outline-none transition" data-vehicle-id="7">
+                <option value="available" selected>🟢 متاحة للبيع (Available)</option>
+                <option value="reserved" >🟡 محجوزة (Reserved)</option>
+                <option value="sold" >🔴 مباعة (Sold)</option>
+                <option value="hidden" >⚪ مسودة مخفية (Hidden)</option>
+              </select>
+            </td>
+
+            <!-- Live Stock Adjuster (+ / - buttons) -->
+            <td class="p-4 text-center">
+              <div class="inline-flex items-center gap-2 bg-black/60 border border-white/15 rounded-xl px-2.5 py-1">
+                <button type="button" class="stock-adjust-btn w-6 h-6 rounded-lg bg-white/10 hover:bg-red-500 hover:text-white text-gray-300 font-bold text-xs flex items-center justify-center transition" data-vehicle-id="7" data-delta="-1" title="تقليل وحدة واحدة">
+                  <i class="fas fa-minus text-[10px]"></i>
+                </button>
+                <span id="stock-val-7" class="font-bold text-sm text-emerald-400 font-mono min-w-[20px] text-center">
+                  1
+                </span>
+                <button type="button" class="stock-adjust-btn w-6 h-6 rounded-lg bg-white/10 hover:bg-emerald-500 hover:text-black text-gray-300 font-bold text-xs flex items-center justify-center transition" data-vehicle-id="7" data-delta="1" title="زيادة وحدة واحدة">
+                  <i class="fas fa-plus text-[10px]"></i>
+                </button>
+              </div>
+            </td>
+
+            <!-- Management Actions (Delete, Edit, Duplicate, View) -->
+            <td class="p-4 text-center">
+              <div class="flex items-center justify-center gap-1.5">
+                
+                <!-- View Live Page -->
+                <a href="/vehicle/genesis-gv80-35t-prestige-2024" target="_blank" class="p-2 rounded-lg bg-white/5 hover:bg-white/15 text-gray-300 hover:text-white transition" title="معاينة الصفحة للجمهور">
+                  <i class="fas fa-eye text-xs"></i>
+                </a>
+
+                <!-- Full Edit Page -->
+                <a href="/admin/vehicles/7/edit" class="p-2 rounded-lg bg-gold/15 hover:bg-gold text-gold hover:text-black transition font-bold" title="تعديل كافة التفاصيل والصور">
+                  <i class="fas fa-edit text-xs"></i>
+                </a>
+
+                <!-- Duplicate Listing Button -->
+                <form action="/admin/vehicles/7/duplicate" method="POST" class="inline" onsubmit="return confirm('هل تريد إنشاء نسخة مطابقة من هذه السيارة للتعديل السريع؟');">
+                  <button type="submit" class="p-2 rounded-lg bg-blue-500/15 hover:bg-blue-500 text-blue-400 hover:text-white transition" title="نسخ السيارة (مضاعفة)">
+                    <i class="fas fa-clone text-xs"></i>
+                  </button>
+                </form>
+
+                <!-- Delete Vehicle Button -->
+                <form action="/admin/vehicles/7/delete" method="POST" class="inline" onsubmit="return confirm('تحذير نهائي: هل أنت متأكد من حذف هذه السيارة وجميع صورها ومواصفاتها؟ لن يمكنك التراجع.');">
+                  <button type="submit" class="p-2 rounded-lg bg-red-500/15 hover:bg-red-500 text-red-400 hover:text-white transition" title="حذف السيارة نهائياً">
+                    <i class="fas fa-trash text-xs"></i>
+                  </button>
+                </form>
+
+              </div>
+            </td>
+
+          </tr>
+          
+          <tr class="dash-vehicle-row hover:bg-white/[0.03] transition" data-status="available" data-search="Land Rover Range Rover Sport 2024 SALWR2V48RA918231 UAE (Gulf Specs)">
+            
+            <!-- Vehicle Thumbnail & Name -->
+            <td class="p-4">
+              <div class="flex items-center gap-3">
+                <div class="w-16 h-12 rounded-xl overflow-hidden bg-black flex-shrink-0 border border-white/10 relative group">
+                  <img src="https://images.unsplash.com/photo-1542282088-72c9c27ed0cd?auto=format&amp;fit=crop&amp;w=1200&amp;q=80" alt="" class="w-full h-full object-cover">
+                  
+                  <span class="absolute top-1 right-1 bg-gold text-black text-[9px] px-1 font-bold rounded">مميزة</span>
+                  
+                </div>
+                <div>
+                  <a href="/vehicle/range-rover-sport-dynamic-se-2024" target="_blank" class="font-bold text-white hover:text-gold transition text-sm flex items-center gap-1.5">
+                    <span>Land Rover Range Rover Sport</span>
+                    <i class="fas fa-external-link-alt text-[10px] text-gray-500"></i>
+                  </a>
+                  <span class="text-[11px] text-gray-400 block mt-0.5">2024 • Dynamic SE (Gulf Specs)</span>
+                </div>
+              </div>
+            </td>
+
+            <!-- Origin & VIN -->
+            <td class="p-4 font-mono">
+              <span class="text-xs text-white font-bold block">🇦🇪 الإمارات (Gulf Specs)</span>
+              <span class="text-[10px] text-gold tracking-wider block mt-0.5">SALWR2V48RA918231</span>
+            </td>
+
+            <!-- Real-time Price Editor -->
+            <td class="p-4">
+              <div class="flex items-center gap-1.5">
+                <input type="number" step="1000" class="quick-price-input bg-black/70 border border-white/20 rounded-lg px-2.5 py-1.5 text-xs text-white font-mono font-bold w-32 focus:border-gold outline-none transition" data-vehicle-id="6" value="10200000" title="اكتب السعر واضغط Enter للحفظ المباشر">
+                <span class="text-[11px] text-gray-400 font-bold">ج.م</span>
+              </div>
+              <span class="text-[9px] text-gray-500 block mt-0.5">احفظ بـ Enter أو الخروج من الحقل</span>
+            </td>
+
+            <!-- Real-time Status Dropdown -->
+            <td class="p-4">
+              <select class="quick-status-select bg-black/70 border border-white/20 rounded-lg px-2.5 py-1.5 text-xs text-white focus:border-gold outline-none transition" data-vehicle-id="6">
+                <option value="available" selected>🟢 متاحة للبيع (Available)</option>
+                <option value="reserved" >🟡 محجوزة (Reserved)</option>
+                <option value="sold" >🔴 مباعة (Sold)</option>
+                <option value="hidden" >⚪ مسودة مخفية (Hidden)</option>
+              </select>
+            </td>
+
+            <!-- Live Stock Adjuster (+ / - buttons) -->
+            <td class="p-4 text-center">
+              <div class="inline-flex items-center gap-2 bg-black/60 border border-white/15 rounded-xl px-2.5 py-1">
+                <button type="button" class="stock-adjust-btn w-6 h-6 rounded-lg bg-white/10 hover:bg-red-500 hover:text-white text-gray-300 font-bold text-xs flex items-center justify-center transition" data-vehicle-id="6" data-delta="-1" title="تقليل وحدة واحدة">
+                  <i class="fas fa-minus text-[10px]"></i>
+                </button>
+                <span id="stock-val-6" class="font-bold text-sm text-emerald-400 font-mono min-w-[20px] text-center">
+                  1
+                </span>
+                <button type="button" class="stock-adjust-btn w-6 h-6 rounded-lg bg-white/10 hover:bg-emerald-500 hover:text-black text-gray-300 font-bold text-xs flex items-center justify-center transition" data-vehicle-id="6" data-delta="1" title="زيادة وحدة واحدة">
+                  <i class="fas fa-plus text-[10px]"></i>
+                </button>
+              </div>
+            </td>
+
+            <!-- Management Actions (Delete, Edit, Duplicate, View) -->
+            <td class="p-4 text-center">
+              <div class="flex items-center justify-center gap-1.5">
+                
+                <!-- View Live Page -->
+                <a href="/vehicle/range-rover-sport-dynamic-se-2024" target="_blank" class="p-2 rounded-lg bg-white/5 hover:bg-white/15 text-gray-300 hover:text-white transition" title="معاينة الصفحة للجمهور">
+                  <i class="fas fa-eye text-xs"></i>
+                </a>
+
+                <!-- Full Edit Page -->
+                <a href="/admin/vehicles/6/edit" class="p-2 rounded-lg bg-gold/15 hover:bg-gold text-gold hover:text-black transition font-bold" title="تعديل كافة التفاصيل والصور">
+                  <i class="fas fa-edit text-xs"></i>
+                </a>
+
+                <!-- Duplicate Listing Button -->
+                <form action="/admin/vehicles/6/duplicate" method="POST" class="inline" onsubmit="return confirm('هل تريد إنشاء نسخة مطابقة من هذه السيارة للتعديل السريع؟');">
+                  <button type="submit" class="p-2 rounded-lg bg-blue-500/15 hover:bg-blue-500 text-blue-400 hover:text-white transition" title="نسخ السيارة (مضاعفة)">
+                    <i class="fas fa-clone text-xs"></i>
+                  </button>
+                </form>
+
+                <!-- Delete Vehicle Button -->
+                <form action="/admin/vehicles/6/delete" method="POST" class="inline" onsubmit="return confirm('تحذير نهائي: هل أنت متأكد من حذف هذه السيارة وجميع صورها ومواصفاتها؟ لن يمكنك التراجع.');">
+                  <button type="submit" class="p-2 rounded-lg bg-red-500/15 hover:bg-red-500 text-red-400 hover:text-white transition" title="حذف السيارة نهائياً">
+                    <i class="fas fa-trash text-xs"></i>
+                  </button>
+                </form>
+
+              </div>
+            </td>
+
+          </tr>
+          
+          <tr class="dash-vehicle-row hover:bg-white/[0.03] transition" data-status="available" data-search="Kia Sorento 1.6T HEV 2024 KNAND81C3R5819022 South Korea">
+            
+            <!-- Vehicle Thumbnail & Name -->
+            <td class="p-4">
+              <div class="flex items-center gap-3">
+                <div class="w-16 h-12 rounded-xl overflow-hidden bg-black flex-shrink-0 border border-white/10 relative group">
+                  <img src="https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&amp;fit=crop&amp;w=1200&amp;q=80" alt="" class="w-full h-full object-cover">
+                  
+                </div>
+                <div>
+                  <a href="/vehicle/kia-sorento-16t-hybrid-2024" target="_blank" class="font-bold text-white hover:text-gold transition text-sm flex items-center gap-1.5">
+                    <span>Kia Sorento 1.6T HEV</span>
+                    <i class="fas fa-external-link-alt text-[10px] text-gray-500"></i>
+                  </a>
+                  <span class="text-[11px] text-gray-400 block mt-0.5">2024 • Signature Gravity (6-Seater VIP)</span>
+                </div>
+              </div>
+            </td>
+
+            <!-- Origin & VIN -->
+            <td class="p-4 font-mono">
+              <span class="text-xs text-white font-bold block">🇰🇷 كوريا الجنوبية (South Korea)</span>
+              <span class="text-[10px] text-gold tracking-wider block mt-0.5">KNAND81C3R5819022</span>
+            </td>
+
+            <!-- Real-time Price Editor -->
+            <td class="p-4">
+              <div class="flex items-center gap-1.5">
+                <input type="number" step="1000" class="quick-price-input bg-black/70 border border-white/20 rounded-lg px-2.5 py-1.5 text-xs text-white font-mono font-bold w-32 focus:border-gold outline-none transition" data-vehicle-id="5" value="2750000" title="اكتب السعر واضغط Enter للحفظ المباشر">
+                <span class="text-[11px] text-gray-400 font-bold">ج.م</span>
+              </div>
+              <span class="text-[9px] text-gray-500 block mt-0.5">احفظ بـ Enter أو الخروج من الحقل</span>
+            </td>
+
+            <!-- Real-time Status Dropdown -->
+            <td class="p-4">
+              <select class="quick-status-select bg-black/70 border border-white/20 rounded-lg px-2.5 py-1.5 text-xs text-white focus:border-gold outline-none transition" data-vehicle-id="5">
+                <option value="available" selected>🟢 متاحة للبيع (Available)</option>
+                <option value="reserved" >🟡 محجوزة (Reserved)</option>
+                <option value="sold" >🔴 مباعة (Sold)</option>
+                <option value="hidden" >⚪ مسودة مخفية (Hidden)</option>
+              </select>
+            </td>
+
+            <!-- Live Stock Adjuster (+ / - buttons) -->
+            <td class="p-4 text-center">
+              <div class="inline-flex items-center gap-2 bg-black/60 border border-white/15 rounded-xl px-2.5 py-1">
+                <button type="button" class="stock-adjust-btn w-6 h-6 rounded-lg bg-white/10 hover:bg-red-500 hover:text-white text-gray-300 font-bold text-xs flex items-center justify-center transition" data-vehicle-id="5" data-delta="-1" title="تقليل وحدة واحدة">
+                  <i class="fas fa-minus text-[10px]"></i>
+                </button>
+                <span id="stock-val-5" class="font-bold text-sm text-emerald-400 font-mono min-w-[20px] text-center">
+                  1
+                </span>
+                <button type="button" class="stock-adjust-btn w-6 h-6 rounded-lg bg-white/10 hover:bg-emerald-500 hover:text-black text-gray-300 font-bold text-xs flex items-center justify-center transition" data-vehicle-id="5" data-delta="1" title="زيادة وحدة واحدة">
+                  <i class="fas fa-plus text-[10px]"></i>
+                </button>
+              </div>
+            </td>
+
+            <!-- Management Actions (Delete, Edit, Duplicate, View) -->
+            <td class="p-4 text-center">
+              <div class="flex items-center justify-center gap-1.5">
+                
+                <!-- View Live Page -->
+                <a href="/vehicle/kia-sorento-16t-hybrid-2024" target="_blank" class="p-2 rounded-lg bg-white/5 hover:bg-white/15 text-gray-300 hover:text-white transition" title="معاينة الصفحة للجمهور">
+                  <i class="fas fa-eye text-xs"></i>
+                </a>
+
+                <!-- Full Edit Page -->
+                <a href="/admin/vehicles/5/edit" class="p-2 rounded-lg bg-gold/15 hover:bg-gold text-gold hover:text-black transition font-bold" title="تعديل كافة التفاصيل والصور">
+                  <i class="fas fa-edit text-xs"></i>
+                </a>
+
+                <!-- Duplicate Listing Button -->
+                <form action="/admin/vehicles/5/duplicate" method="POST" class="inline" onsubmit="return confirm('هل تريد إنشاء نسخة مطابقة من هذه السيارة للتعديل السريع؟');">
+                  <button type="submit" class="p-2 rounded-lg bg-blue-500/15 hover:bg-blue-500 text-blue-400 hover:text-white transition" title="نسخ السيارة (مضاعفة)">
+                    <i class="fas fa-clone text-xs"></i>
+                  </button>
+                </form>
+
+                <!-- Delete Vehicle Button -->
+                <form action="/admin/vehicles/5/delete" method="POST" class="inline" onsubmit="return confirm('تحذير نهائي: هل أنت متأكد من حذف هذه السيارة وجميع صورها ومواصفاتها؟ لن يمكنك التراجع.');">
+                  <button type="submit" class="p-2 rounded-lg bg-red-500/15 hover:bg-red-500 text-red-400 hover:text-white transition" title="حذف السيارة نهائياً">
+                    <i class="fas fa-trash text-xs"></i>
+                  </button>
+                </form>
+
+              </div>
+            </td>
+
+          </tr>
+          
+          <tr class="dash-vehicle-row hover:bg-white/[0.03] transition" data-status="available" data-search="Hyundai Tucson 1.6T 2024 KM8JN81B6RU109281 South Korea">
+            
+            <!-- Vehicle Thumbnail & Name -->
+            <td class="p-4">
+              <div class="flex items-center gap-3">
+                <div class="w-16 h-12 rounded-xl overflow-hidden bg-black flex-shrink-0 border border-white/10 relative group">
+                  <img src="https://images.unsplash.com/photo-1541899481282-d53bffe3c35d?auto=format&amp;fit=crop&amp;w=1200&amp;q=80" alt="" class="w-full h-full object-cover">
+                  
+                  <span class="absolute top-1 right-1 bg-gold text-black text-[9px] px-1 font-bold rounded">مميزة</span>
+                  
+                </div>
+                <div>
+                  <a href="/vehicle/hyundai-tucson-16t-nline-2024" target="_blank" class="font-bold text-white hover:text-gold transition text-sm flex items-center gap-1.5">
+                    <span>Hyundai Tucson 1.6T</span>
+                    <i class="fas fa-external-link-alt text-[10px] text-gray-500"></i>
+                  </a>
+                  <span class="text-[11px] text-gray-400 block mt-0.5">2024 • N-Line Edition (Full Spec)</span>
+                </div>
+              </div>
+            </td>
+
+            <!-- Origin & VIN -->
+            <td class="p-4 font-mono">
+              <span class="text-xs text-white font-bold block">🇰🇷 كوريا الجنوبية (South Korea)</span>
+              <span class="text-[10px] text-gold tracking-wider block mt-0.5">KM8JN81B6RU109281</span>
+            </td>
+
+            <!-- Real-time Price Editor -->
+            <td class="p-4">
+              <div class="flex items-center gap-1.5">
+                <input type="number" step="1000" class="quick-price-input bg-black/70 border border-white/20 rounded-lg px-2.5 py-1.5 text-xs text-white font-mono font-bold w-32 focus:border-gold outline-none transition" data-vehicle-id="4" value="2150000" title="اكتب السعر واضغط Enter للحفظ المباشر">
+                <span class="text-[11px] text-gray-400 font-bold">ج.م</span>
+              </div>
+              <span class="text-[9px] text-gray-500 block mt-0.5">احفظ بـ Enter أو الخروج من الحقل</span>
+            </td>
+
+            <!-- Real-time Status Dropdown -->
+            <td class="p-4">
+              <select class="quick-status-select bg-black/70 border border-white/20 rounded-lg px-2.5 py-1.5 text-xs text-white focus:border-gold outline-none transition" data-vehicle-id="4">
+                <option value="available" selected>🟢 متاحة للبيع (Available)</option>
+                <option value="reserved" >🟡 محجوزة (Reserved)</option>
+                <option value="sold" >🔴 مباعة (Sold)</option>
+                <option value="hidden" >⚪ مسودة مخفية (Hidden)</option>
+              </select>
+            </td>
+
+            <!-- Live Stock Adjuster (+ / - buttons) -->
+            <td class="p-4 text-center">
+              <div class="inline-flex items-center gap-2 bg-black/60 border border-white/15 rounded-xl px-2.5 py-1">
+                <button type="button" class="stock-adjust-btn w-6 h-6 rounded-lg bg-white/10 hover:bg-red-500 hover:text-white text-gray-300 font-bold text-xs flex items-center justify-center transition" data-vehicle-id="4" data-delta="-1" title="تقليل وحدة واحدة">
+                  <i class="fas fa-minus text-[10px]"></i>
+                </button>
+                <span id="stock-val-4" class="font-bold text-sm text-emerald-400 font-mono min-w-[20px] text-center">
+                  2
+                </span>
+                <button type="button" class="stock-adjust-btn w-6 h-6 rounded-lg bg-white/10 hover:bg-emerald-500 hover:text-black text-gray-300 font-bold text-xs flex items-center justify-center transition" data-vehicle-id="4" data-delta="1" title="زيادة وحدة واحدة">
+                  <i class="fas fa-plus text-[10px]"></i>
+                </button>
+              </div>
+            </td>
+
+            <!-- Management Actions (Delete, Edit, Duplicate, View) -->
+            <td class="p-4 text-center">
+              <div class="flex items-center justify-center gap-1.5">
+                
+                <!-- View Live Page -->
+                <a href="/vehicle/hyundai-tucson-16t-nline-2024" target="_blank" class="p-2 rounded-lg bg-white/5 hover:bg-white/15 text-gray-300 hover:text-white transition" title="معاينة الصفحة للجمهور">
+                  <i class="fas fa-eye text-xs"></i>
+                </a>
+
+                <!-- Full Edit Page -->
+                <a href="/admin/vehicles/4/edit" class="p-2 rounded-lg bg-gold/15 hover:bg-gold text-gold hover:text-black transition font-bold" title="تعديل كافة التفاصيل والصور">
+                  <i class="fas fa-edit text-xs"></i>
+                </a>
+
+                <!-- Duplicate Listing Button -->
+                <form action="/admin/vehicles/4/duplicate" method="POST" class="inline" onsubmit="return confirm('هل تريد إنشاء نسخة مطابقة من هذه السيارة للتعديل السريع؟');">
+                  <button type="submit" class="p-2 rounded-lg bg-blue-500/15 hover:bg-blue-500 text-blue-400 hover:text-white transition" title="نسخ السيارة (مضاعفة)">
+                    <i class="fas fa-clone text-xs"></i>
+                  </button>
+                </form>
+
+                <!-- Delete Vehicle Button -->
+                <form action="/admin/vehicles/4/delete" method="POST" class="inline" onsubmit="return confirm('تحذير نهائي: هل أنت متأكد من حذف هذه السيارة وجميع صورها ومواصفاتها؟ لن يمكنك التراجع.');">
+                  <button type="submit" class="p-2 rounded-lg bg-red-500/15 hover:bg-red-500 text-red-400 hover:text-white transition" title="حذف السيارة نهائياً">
+                    <i class="fas fa-trash text-xs"></i>
+                  </button>
+                </form>
+
+              </div>
+            </td>
+
+          </tr>
+          
+          <tr class="dash-vehicle-row hover:bg-white/[0.03] transition" data-status="available" data-search="BMW X7 M60i xDrive 2024 5UXCW8C03R9P71024 Germany">
+            
+            <!-- Vehicle Thumbnail & Name -->
+            <td class="p-4">
+              <div class="flex items-center gap-3">
+                <div class="w-16 h-12 rounded-xl overflow-hidden bg-black flex-shrink-0 border border-white/10 relative group">
+                  <img src="https://images.unsplash.com/photo-1555215695-3004980ad54e?auto=format&amp;fit=crop&amp;w=1200&amp;q=80" alt="" class="w-full h-full object-cover">
+                  
+                  <span class="absolute top-1 right-1 bg-gold text-black text-[9px] px-1 font-bold rounded">مميزة</span>
+                  
+                </div>
+                <div>
+                  <a href="/vehicle/bmw-x7-m60i-xdrive-2024" target="_blank" class="font-bold text-white hover:text-gold transition text-sm flex items-center gap-1.5">
+                    <span>BMW X7 M60i xDrive</span>
+                    <i class="fas fa-external-link-alt text-[10px] text-gray-500"></i>
+                  </a>
+                  <span class="text-[11px] text-gray-400 block mt-0.5">2024 • M Sport Pro Package</span>
+                </div>
+              </div>
+            </td>
+
+            <!-- Origin & VIN -->
+            <td class="p-4 font-mono">
+              <span class="text-xs text-white font-bold block">🇩🇪 ألمانيا (Germany)</span>
+              <span class="text-[10px] text-gold tracking-wider block mt-0.5">5UXCW8C03R9P71024</span>
+            </td>
+
+            <!-- Real-time Price Editor -->
+            <td class="p-4">
+              <div class="flex items-center gap-1.5">
+                <input type="number" step="1000" class="quick-price-input bg-black/70 border border-white/20 rounded-lg px-2.5 py-1.5 text-xs text-white font-mono font-bold w-32 focus:border-gold outline-none transition" data-vehicle-id="3" value="8900000" title="اكتب السعر واضغط Enter للحفظ المباشر">
+                <span class="text-[11px] text-gray-400 font-bold">ج.م</span>
+              </div>
+              <span class="text-[9px] text-gray-500 block mt-0.5">احفظ بـ Enter أو الخروج من الحقل</span>
+            </td>
+
+            <!-- Real-time Status Dropdown -->
+            <td class="p-4">
+              <select class="quick-status-select bg-black/70 border border-white/20 rounded-lg px-2.5 py-1.5 text-xs text-white focus:border-gold outline-none transition" data-vehicle-id="3">
+                <option value="available" selected>🟢 متاحة للبيع (Available)</option>
+                <option value="reserved" >🟡 محجوزة (Reserved)</option>
+                <option value="sold" >🔴 مباعة (Sold)</option>
+                <option value="hidden" >⚪ مسودة مخفية (Hidden)</option>
+              </select>
+            </td>
+
+            <!-- Live Stock Adjuster (+ / - buttons) -->
+            <td class="p-4 text-center">
+              <div class="inline-flex items-center gap-2 bg-black/60 border border-white/15 rounded-xl px-2.5 py-1">
+                <button type="button" class="stock-adjust-btn w-6 h-6 rounded-lg bg-white/10 hover:bg-red-500 hover:text-white text-gray-300 font-bold text-xs flex items-center justify-center transition" data-vehicle-id="3" data-delta="-1" title="تقليل وحدة واحدة">
+                  <i class="fas fa-minus text-[10px]"></i>
+                </button>
+                <span id="stock-val-3" class="font-bold text-sm text-emerald-400 font-mono min-w-[20px] text-center">
+                  1
+                </span>
+                <button type="button" class="stock-adjust-btn w-6 h-6 rounded-lg bg-white/10 hover:bg-emerald-500 hover:text-black text-gray-300 font-bold text-xs flex items-center justify-center transition" data-vehicle-id="3" data-delta="1" title="زيادة وحدة واحدة">
+                  <i class="fas fa-plus text-[10px]"></i>
+                </button>
+              </div>
+            </td>
+
+            <!-- Management Actions (Delete, Edit, Duplicate, View) -->
+            <td class="p-4 text-center">
+              <div class="flex items-center justify-center gap-1.5">
+                
+                <!-- View Live Page -->
+                <a href="/vehicle/bmw-x7-m60i-xdrive-2024" target="_blank" class="p-2 rounded-lg bg-white/5 hover:bg-white/15 text-gray-300 hover:text-white transition" title="معاينة الصفحة للجمهور">
+                  <i class="fas fa-eye text-xs"></i>
+                </a>
+
+                <!-- Full Edit Page -->
+                <a href="/admin/vehicles/3/edit" class="p-2 rounded-lg bg-gold/15 hover:bg-gold text-gold hover:text-black transition font-bold" title="تعديل كافة التفاصيل والصور">
+                  <i class="fas fa-edit text-xs"></i>
+                </a>
+
+                <!-- Duplicate Listing Button -->
+                <form action="/admin/vehicles/3/duplicate" method="POST" class="inline" onsubmit="return confirm('هل تريد إنشاء نسخة مطابقة من هذه السيارة للتعديل السريع؟');">
+                  <button type="submit" class="p-2 rounded-lg bg-blue-500/15 hover:bg-blue-500 text-blue-400 hover:text-white transition" title="نسخ السيارة (مضاعفة)">
+                    <i class="fas fa-clone text-xs"></i>
+                  </button>
+                </form>
+
+                <!-- Delete Vehicle Button -->
+                <form action="/admin/vehicles/3/delete" method="POST" class="inline" onsubmit="return confirm('تحذير نهائي: هل أنت متأكد من حذف هذه السيارة وجميع صورها ومواصفاتها؟ لن يمكنك التراجع.');">
+                  <button type="submit" class="p-2 rounded-lg bg-red-500/15 hover:bg-red-500 text-red-400 hover:text-white transition" title="حذف السيارة نهائياً">
+                    <i class="fas fa-trash text-xs"></i>
+                  </button>
+                </form>
+
+              </div>
+            </td>
+
+          </tr>
+          
+          <tr class="dash-vehicle-row hover:bg-white/[0.03] transition" data-status="available" data-search="Porsche 911 Carrera 4S (992) 2023 WP0AB2A97PS248911 Germany">
+            
+            <!-- Vehicle Thumbnail & Name -->
+            <td class="p-4">
+              <div class="flex items-center gap-3">
+                <div class="w-16 h-12 rounded-xl overflow-hidden bg-black flex-shrink-0 border border-white/10 relative group">
+                  <img src="https://images.unsplash.com/photo-1614162692292-7ac56d7f7f1e?auto=format&amp;fit=crop&amp;w=1200&amp;q=80" alt="" class="w-full h-full object-cover">
+                  
+                  <span class="absolute top-1 right-1 bg-gold text-black text-[9px] px-1 font-bold rounded">مميزة</span>
+                  
+                </div>
+                <div>
+                  <a href="/vehicle/porsche-911-carrera-4s-992-2023" target="_blank" class="font-bold text-white hover:text-gold transition text-sm flex items-center gap-1.5">
+                    <span>Porsche 911 Carrera 4S (992)</span>
+                    <i class="fas fa-external-link-alt text-[10px] text-gray-500"></i>
+                  </a>
+                  <span class="text-[11px] text-gray-400 block mt-0.5">2023 • Sport Chrono Package</span>
+                </div>
+              </div>
+            </td>
+
+            <!-- Origin & VIN -->
+            <td class="p-4 font-mono">
+              <span class="text-xs text-white font-bold block">🇩🇪 ألمانيا (Germany)</span>
+              <span class="text-[10px] text-gold tracking-wider block mt-0.5">WP0AB2A97PS248911</span>
+            </td>
+
+            <!-- Real-time Price Editor -->
+            <td class="p-4">
+              <div class="flex items-center gap-1.5">
+                <input type="number" step="1000" class="quick-price-input bg-black/70 border border-white/20 rounded-lg px-2.5 py-1.5 text-xs text-white font-mono font-bold w-32 focus:border-gold outline-none transition" data-vehicle-id="2" value="9450000" title="اكتب السعر واضغط Enter للحفظ المباشر">
+                <span class="text-[11px] text-gray-400 font-bold">ج.م</span>
+              </div>
+              <span class="text-[9px] text-gray-500 block mt-0.5">احفظ بـ Enter أو الخروج من الحقل</span>
+            </td>
+
+            <!-- Real-time Status Dropdown -->
+            <td class="p-4">
+              <select class="quick-status-select bg-black/70 border border-white/20 rounded-lg px-2.5 py-1.5 text-xs text-white focus:border-gold outline-none transition" data-vehicle-id="2">
+                <option value="available" selected>🟢 متاحة للبيع (Available)</option>
+                <option value="reserved" >🟡 محجوزة (Reserved)</option>
+                <option value="sold" >🔴 مباعة (Sold)</option>
+                <option value="hidden" >⚪ مسودة مخفية (Hidden)</option>
+              </select>
+            </td>
+
+            <!-- Live Stock Adjuster (+ / - buttons) -->
+            <td class="p-4 text-center">
+              <div class="inline-flex items-center gap-2 bg-black/60 border border-white/15 rounded-xl px-2.5 py-1">
+                <button type="button" class="stock-adjust-btn w-6 h-6 rounded-lg bg-white/10 hover:bg-red-500 hover:text-white text-gray-300 font-bold text-xs flex items-center justify-center transition" data-vehicle-id="2" data-delta="-1" title="تقليل وحدة واحدة">
+                  <i class="fas fa-minus text-[10px]"></i>
+                </button>
+                <span id="stock-val-2" class="font-bold text-sm text-emerald-400 font-mono min-w-[20px] text-center">
+                  1
+                </span>
+                <button type="button" class="stock-adjust-btn w-6 h-6 rounded-lg bg-white/10 hover:bg-emerald-500 hover:text-black text-gray-300 font-bold text-xs flex items-center justify-center transition" data-vehicle-id="2" data-delta="1" title="زيادة وحدة واحدة">
+                  <i class="fas fa-plus text-[10px]"></i>
+                </button>
+              </div>
+            </td>
+
+            <!-- Management Actions (Delete, Edit, Duplicate, View) -->
+            <td class="p-4 text-center">
+              <div class="flex items-center justify-center gap-1.5">
+                
+                <!-- View Live Page -->
+                <a href="/vehicle/porsche-911-carrera-4s-992-2023" target="_blank" class="p-2 rounded-lg bg-white/5 hover:bg-white/15 text-gray-300 hover:text-white transition" title="معاينة الصفحة للجمهور">
+                  <i class="fas fa-eye text-xs"></i>
+                </a>
+
+                <!-- Full Edit Page -->
+                <a href="/admin/vehicles/2/edit" class="p-2 rounded-lg bg-gold/15 hover:bg-gold text-gold hover:text-black transition font-bold" title="تعديل كافة التفاصيل والصور">
+                  <i class="fas fa-edit text-xs"></i>
+                </a>
+
+                <!-- Duplicate Listing Button -->
+                <form action="/admin/vehicles/2/duplicate" method="POST" class="inline" onsubmit="return confirm('هل تريد إنشاء نسخة مطابقة من هذه السيارة للتعديل السريع؟');">
+                  <button type="submit" class="p-2 rounded-lg bg-blue-500/15 hover:bg-blue-500 text-blue-400 hover:text-white transition" title="نسخ السيارة (مضاعفة)">
+                    <i class="fas fa-clone text-xs"></i>
+                  </button>
+                </form>
+
+                <!-- Delete Vehicle Button -->
+                <form action="/admin/vehicles/2/delete" method="POST" class="inline" onsubmit="return confirm('تحذير نهائي: هل أنت متأكد من حذف هذه السيارة وجميع صورها ومواصفاتها؟ لن يمكنك التراجع.');">
+                  <button type="submit" class="p-2 rounded-lg bg-red-500/15 hover:bg-red-500 text-red-400 hover:text-white transition" title="حذف السيارة نهائياً">
+                    <i class="fas fa-trash text-xs"></i>
+                  </button>
+                </form>
+
+              </div>
+            </td>
+
+          </tr>
+          
+          <tr class="dash-vehicle-row hover:bg-white/[0.03] transition" data-status="reserved" data-search="Mercedes-Benz G-Class AMG G63 2024 WDB4632761X894120 Germany">
+            
+            <!-- Vehicle Thumbnail & Name -->
+            <td class="p-4">
+              <div class="flex items-center gap-3">
+                <div class="w-16 h-12 rounded-xl overflow-hidden bg-black flex-shrink-0 border border-white/10 relative group">
+                  <img src="https://images.unsplash.com/photo-1520031441872-265e4ff70366?auto=format&amp;fit=crop&amp;w=1200&amp;q=80" alt="" class="w-full h-full object-cover">
+                  
+                  <span class="absolute top-1 right-1 bg-gold text-black text-[9px] px-1 font-bold rounded">مميزة</span>
+                  
+                </div>
+                <div>
+                  <a href="/vehicle/mercedes-amg-g63-2024-night-edition" target="_blank" class="font-bold text-white hover:text-gold transition text-sm flex items-center gap-1.5">
+                    <span>Mercedes-Benz G-Class AMG G63</span>
+                    <i class="fas fa-external-link-alt text-[10px] text-gray-500"></i>
+                  </a>
+                  <span class="text-[11px] text-gray-400 block mt-0.5">2024 • Night Package II Exclusive</span>
+                </div>
+              </div>
+            </td>
+
+            <!-- Origin & VIN -->
+            <td class="p-4 font-mono">
+              <span class="text-xs text-white font-bold block">🇩🇪 ألمانيا (Germany)</span>
+              <span class="text-[10px] text-gold tracking-wider block mt-0.5">WDB4632761X894120</span>
+            </td>
+
+            <!-- Real-time Price Editor -->
+            <td class="p-4">
+              <div class="flex items-center gap-1.5">
+                <input type="number" step="1000" class="quick-price-input bg-black/70 border border-white/20 rounded-lg px-2.5 py-1.5 text-xs text-white font-mono font-bold w-32 focus:border-gold outline-none transition" data-vehicle-id="1" value="12900000" title="اكتب السعر واضغط Enter للحفظ المباشر">
+                <span class="text-[11px] text-gray-400 font-bold">ج.م</span>
+              </div>
+              <span class="text-[9px] text-gray-500 block mt-0.5">احفظ بـ Enter أو الخروج من الحقل</span>
+            </td>
+
+            <!-- Real-time Status Dropdown -->
+            <td class="p-4">
+              <select class="quick-status-select bg-black/70 border border-white/20 rounded-lg px-2.5 py-1.5 text-xs text-white focus:border-gold outline-none transition" data-vehicle-id="1">
+                <option value="available" >🟢 متاحة للبيع (Available)</option>
+                <option value="reserved" selected>🟡 محجوزة (Reserved)</option>
+                <option value="sold" >🔴 مباعة (Sold)</option>
+                <option value="hidden" >⚪ مسودة مخفية (Hidden)</option>
+              </select>
+            </td>
+
+            <!-- Live Stock Adjuster (+ / - buttons) -->
+            <td class="p-4 text-center">
+              <div class="inline-flex items-center gap-2 bg-black/60 border border-white/15 rounded-xl px-2.5 py-1">
+                <button type="button" class="stock-adjust-btn w-6 h-6 rounded-lg bg-white/10 hover:bg-red-500 hover:text-white text-gray-300 font-bold text-xs flex items-center justify-center transition" data-vehicle-id="1" data-delta="-1" title="تقليل وحدة واحدة">
+                  <i class="fas fa-minus text-[10px]"></i>
+                </button>
+                <span id="stock-val-1" class="font-bold text-sm text-emerald-400 font-mono min-w-[20px] text-center">
+                  2
+                </span>
+                <button type="button" class="stock-adjust-btn w-6 h-6 rounded-lg bg-white/10 hover:bg-emerald-500 hover:text-black text-gray-300 font-bold text-xs flex items-center justify-center transition" data-vehicle-id="1" data-delta="1" title="زيادة وحدة واحدة">
+                  <i class="fas fa-plus text-[10px]"></i>
+                </button>
+              </div>
+            </td>
+
+            <!-- Management Actions (Delete, Edit, Duplicate, View) -->
+            <td class="p-4 text-center">
+              <div class="flex items-center justify-center gap-1.5">
+                
+                <!-- View Live Page -->
+                <a href="/vehicle/mercedes-amg-g63-2024-night-edition" target="_blank" class="p-2 rounded-lg bg-white/5 hover:bg-white/15 text-gray-300 hover:text-white transition" title="معاينة الصفحة للجمهور">
+                  <i class="fas fa-eye text-xs"></i>
+                </a>
+
+                <!-- Full Edit Page -->
+                <a href="/admin/vehicles/1/edit" class="p-2 rounded-lg bg-gold/15 hover:bg-gold text-gold hover:text-black transition font-bold" title="تعديل كافة التفاصيل والصور">
+                  <i class="fas fa-edit text-xs"></i>
+                </a>
+
+                <!-- Duplicate Listing Button -->
+                <form action="/admin/vehicles/1/duplicate" method="POST" class="inline" onsubmit="return confirm('هل تريد إنشاء نسخة مطابقة من هذه السيارة للتعديل السريع؟');">
+                  <button type="submit" class="p-2 rounded-lg bg-blue-500/15 hover:bg-blue-500 text-blue-400 hover:text-white transition" title="نسخ السيارة (مضاعفة)">
+                    <i class="fas fa-clone text-xs"></i>
+                  </button>
+                </form>
+
+                <!-- Delete Vehicle Button -->
+                <form action="/admin/vehicles/1/delete" method="POST" class="inline" onsubmit="return confirm('تحذير نهائي: هل أنت متأكد من حذف هذه السيارة وجميع صورها ومواصفاتها؟ لن يمكنك التراجع.');">
+                  <button type="submit" class="p-2 rounded-lg bg-red-500/15 hover:bg-red-500 text-red-400 hover:text-white transition" title="حذف السيارة نهائياً">
+                    <i class="fas fa-trash text-xs"></i>
+                  </button>
+                </form>
+
+              </div>
+            </td>
+
+          </tr>
+          
+        </tbody>
+      </table>
+    </div>
+
+    
+
+  </div>
+
+</div>
+
+<!-- ========================================================================= -->
+<!-- TAB PANE 2: CUSTOMER BOOKINGS & DIRECT WHATSAPP CONVERSATIONS            -->
+<!-- ========================================================================= -->
+<div id="tab-pane-bookings" class="dash-tab-pane hidden space-y-6">
+  
+  <div class="glass-card p-6 rounded-3xl border border-white/15">
+    <div class="flex items-center justify-between mb-6 pb-4 border-b border-white/10">
+      <div>
+        <h3 class="text-lg font-bold text-white flex items-center gap-2">
+          <i class="fas fa-calendar-check text-gold"></i>
+          <span>سجل طلبات الحجز والاستفسارات المباشرة</span>
+        </h3>
+        <p class="text-xs text-gray-400 mt-1">
+          يمكنك التواصل الفوري مع العميل عبر الواتساب بنقرة واحدة، أو اعتماد الحجز لتخصيص السيارة وبدء مراحل التتبع.
+        </p>
+      </div>
+    </div>
+
+    
+    <div class="space-y-4">
+      
+      <div class="p-5 bg-black/40 rounded-2xl border border-white/10 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-5 hover:border-gold/30 transition">
+        
+        <!-- Left: Car & Client details -->
+        <div class="flex items-start sm:items-center gap-4">
+          <div class="w-16 h-16 rounded-2xl overflow-hidden bg-black flex-shrink-0 border border-white/10">
+            <img src="https://images.unsplash.com/photo-1614162692292-7ac56d7f7f1e?auto=format&amp;fit=crop&amp;w=1200&amp;q=80" alt="" class="w-full h-full object-cover">
+          </div>
+          <div>
+            <div class="flex items-center gap-2 mb-1">
+              <span class="text-xs font-mono font-bold text-gold bg-gold/10 px-2 py-0.5 rounded">MTR-2026-9947</span>
+              <span class="text-[10px] px-2 py-0.5 rounded font-bold bg-amber-500/20 text-amber-300">
+                بانتظار المراجعة
+              </span>
+              <span class="text-[10px] text-gray-500 font-mono">2026-11-07 02:51:32</span>
+            </div>
+            
+            <h4 class="text-base font-bold text-white">Porsche 911 Carrera 4S (992) (2023)</h4>
+            
+            <div class="text-xs text-gray-300 flex flex-wrap items-center gap-4 mt-1.5">
+              <span class="font-semibold"><i class="fas fa-user text-gold mr-1"></i> م. شريف المنياوي</span>
+              <span class="font-mono text-gold"><i class="fas fa-phone text-gold mr-1"></i> 01099887766</span>
+              <span class="text-gray-400 font-mono">9,450,000 ج.م</span>
+            </div>
+
+            
+          </div>
+        </div>
+
+        <!-- Right: Action Buttons -->
+        <div class="flex flex-wrap items-center gap-2.5 self-end lg:self-auto w-full lg:w-auto justify-end">
+          
+          <!-- Direct WhatsApp Chat Button -->
+          <a href="https://wa.me/01099887766?text=مرحباً أستاذ م. شريف المنياوي، نتواصل معك بخصوص طلب حجز سيارة Porsche 911 Carrera 4S (992) على موقع MOTORA، كود الحجز: MTR-2026-9947." target="_blank" class="bg-emerald-600 hover:bg-emerald-500 text-white px-4 py-2 rounded-xl text-xs font-bold transition flex items-center gap-1.5 shadow-md">
+            <i class="fab fa-whatsapp text-sm"></i>
+            <span>محادثة واتساب</span>
+          </a>
+
+          <!-- Approve & Start Tracking -->
+          
+          <form action="/admin/bookings/2/status" method="POST" class="inline">
+            <input type="hidden" name="new_status" value="approved">
+            <input type="hidden" name="deposit_paid" value="1">
+            <button type="submit" class="gold-btn px-4 py-2 rounded-xl text-xs font-bold flex items-center gap-1.5">
+              <i class="fas fa-check-circle"></i>
+              <span>اعتماد وبدء التتبع</span>
+            </button>
+          </form>
+          
+
+          <!-- Delete Booking -->
+          <form action="/admin/bookings/2/delete" method="POST" class="inline" onsubmit="return confirm('هل تريد حذف هذا الحجز نهائياً؟');">
+            <button type="submit" class="p-2 rounded-xl bg-red-500/10 hover:bg-red-500 text-red-400 hover:text-white transition" title="حذف الحجز">
+              <i class="fas fa-trash text-xs"></i>
+            </button>
+          </form>
+
+        </div>
+
+      </div>
+      
+      <div class="p-5 bg-black/40 rounded-2xl border border-white/10 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-5 hover:border-gold/30 transition">
+        
+        <!-- Left: Car & Client details -->
+        <div class="flex items-start sm:items-center gap-4">
+          <div class="w-16 h-16 rounded-2xl overflow-hidden bg-black flex-shrink-0 border border-white/10">
+            <img src="https://images.unsplash.com/photo-1520031441872-265e4ff70366?auto=format&amp;fit=crop&amp;w=1200&amp;q=80" alt="" class="w-full h-full object-cover">
+          </div>
+          <div>
+            <div class="flex items-center gap-2 mb-1">
+              <span class="text-xs font-mono font-bold text-gold bg-gold/10 px-2 py-0.5 rounded">MTR-2026-7842</span>
+              <span class="text-[10px] px-2 py-0.5 rounded font-bold bg-emerald-500/20 text-emerald-400">
+                قيد الشحن والتتبع
+              </span>
+              <span class="text-[10px] text-gray-500 font-mono">2026-10-18 11:30:00</span>
+            </div>
+            
+            <h4 class="text-base font-bold text-white">Mercedes-Benz G-Class AMG G63 (2024)</h4>
+            
+            <div class="text-xs text-gray-300 flex flex-wrap items-center gap-4 mt-1.5">
+              <span class="font-semibold"><i class="fas fa-user text-gold mr-1"></i> المستشار حسام نور الدين</span>
+              <span class="font-mono text-gold"><i class="fas fa-phone text-gold mr-1"></i> +20 101 234 5678</span>
+              <span class="text-gray-400 font-mono">12,900,000 ج.م</span>
+            </div>
+
+            
+          </div>
+        </div>
+
+        <!-- Right: Action Buttons -->
+        <div class="flex flex-wrap items-center gap-2.5 self-end lg:self-auto w-full lg:w-auto justify-end">
+          
+          <!-- Direct WhatsApp Chat Button -->
+          <a href="https://wa.me/201012345678?text=مرحباً أستاذ المستشار حسام نور الدين، نتواصل معك بخصوص طلب حجز سيارة Mercedes-Benz G-Class AMG G63 على موقع MOTORA، كود الحجز: MTR-2026-7842." target="_blank" class="bg-emerald-600 hover:bg-emerald-500 text-white px-4 py-2 rounded-xl text-xs font-bold transition flex items-center gap-1.5 shadow-md">
+            <i class="fab fa-whatsapp text-sm"></i>
+            <span>محادثة واتساب</span>
+          </a>
+
+          <!-- Approve & Start Tracking -->
+          
+          <a href="/admin/tracking/1" class="bg-white/10 hover:bg-white/20 text-white px-4 py-2 rounded-xl text-xs font-bold flex items-center gap-1.5 transition">
+            <i class="fas fa-map-marked-alt text-gold"></i>
+            <span>إدارة الشحنة</span>
+          </a>
+          
+
+          <!-- Delete Booking -->
+          <form action="/admin/bookings/1/delete" method="POST" class="inline" onsubmit="return confirm('هل تريد حذف هذا الحجز نهائياً؟');">
+            <button type="submit" class="p-2 rounded-xl bg-red-500/10 hover:bg-red-500 text-red-400 hover:text-white transition" title="حذف الحجز">
+              <i class="fas fa-trash text-xs"></i>
+            </button>
+          </form>
+
+        </div>
+
+      </div>
+      
+    </div>
+    
+
+  </div>
+
+</div>
+
+<!-- ========================================================================= -->
+<!-- TAB PANE 3: TRACKING SHIPMENTS & EVIDENCE PHOTOS                         -->
+<!-- ========================================================================= -->
+<div id="tab-pane-tracking" class="dash-tab-pane hidden space-y-6">
+  
+  <div class="glass-card p-6 rounded-3xl border border-white/15">
+    <div class="flex items-center justify-between mb-6 pb-4 border-b border-white/10">
+      <div>
+        <h3 class="text-lg font-bold text-white flex items-center gap-2">
+          <i class="fas fa-shipping-fast text-gold"></i>
+          <span>متابعة الشحنات والمراحل التسع للاستيراد</span>
+        </h3>
+        <p class="text-xs text-gray-400 mt-1">
+          لكل عميل صفحة تتبع خاصة برمز الحجز، يمكنك تحديث المراحل ورفع صور وفيديوهات الفحص والموانئ الجمركية.
+        </p>
+      </div>
+    </div>
+
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+      
+      <div class="p-5 bg-black/40 rounded-2xl border border-white/10 flex flex-col justify-between gap-4 hover:border-gold/30 transition">
+        
+        <div>
+          <div class="flex items-center justify-between gap-2 mb-3">
+            <span class="text-xs font-mono font-bold text-gold">MTR-2026-7842</span>
+            <span class="text-[11px] text-emerald-400 font-bold bg-emerald-500/10 px-2 py-0.5 rounded">
+              7 من 9 مراحل مكتملة
+            </span>
+          </div>
+
+          <div class="flex items-center gap-3 mb-3">
+            <img src="https://images.unsplash.com/photo-1520031441872-265e4ff70366?auto=format&amp;fit=crop&amp;w=1200&amp;q=80" alt="" class="w-12 h-12 rounded-xl object-cover bg-black">
+            <div>
+              <h4 class="text-sm font-bold text-white">Mercedes-Benz G-Class AMG G63</h4>
+              <span class="text-xs text-gray-400">المستشار حسام نور الدين • +20 101 234 5678</span>
+            </div>
+          </div>
+
+          <div class="p-2.5 bg-white/5 rounded-xl border border-white/5 text-xs text-gray-300">
+            <span class="text-gold font-bold block mb-0.5">المرحلة الجارية حالياً:</span>
+            <span>المرحلة قيد الإنجاز</span>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-3 pt-3 border-t border-white/10">
+          <a href="/admin/tracking/1" class="flex-1 text-center gold-btn py-2 rounded-xl text-xs font-bold">
+            إدارة مراحل الشحن والصور
+          </a>
+          <a href="/tracking?code=MTR-2026-7842" target="_blank" class="px-3 py-2 rounded-xl bg-white/10 hover:bg-white/20 text-white text-xs font-bold transition" title="معاينة شاشة العميل">
+            <i class="fas fa-external-link-alt"></i>
+          </a>
+        </div>
+
+      </div>
+      
+    </div>
+    
+
+  </div>
+
+</div>
+
+<!-- ========================================================================= -->
+<!-- TAB PANE 4: SHOWROOM SETTINGS & WHATSAPP NUMBER                           -->
+<!-- ========================================================================= -->
+<div id="tab-pane-settings" class="dash-tab-pane hidden space-y-6">
+  
+  <div class="glass-card p-6 sm:p-8 rounded-3xl border border-white/15">
+    <div class="mb-6 pb-4 border-b border-white/10">
+      <h3 class="text-lg font-bold text-white flex items-center gap-2">
+        <i class="fas fa-cog text-gold"></i>
+        <span>بيانات المعرض وأرقام التواصل والواتساب</span>
+      </h3>
+      <p class="text-xs text-gray-400 mt-1">
+        هذه البيانات تتحكم مباشرة في زر الواتساب العائم بكامل الموقع، أرقام الاتصال، عنوان المعرض بالقاهرة، وكلمة سر الأدمن.
+      </p>
+    </div>
+
+    <form action="/admin/settings" method="POST" class="space-y-6">
+      
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        
+        <!-- WhatsApp Number -->
+        <div>
+          <label class="block text-xs font-bold text-emerald-400 mb-1">
+            <i class="fab fa-whatsapp mr-1"></i> رقم الواتساب الرسمي (مع كود الدولة) *
+          </label>
+          <input type="text" name="whatsapp_number" value="201008894521" required class="w-full bg-deep border border-emerald-500/40 focus:border-emerald-500 rounded-xl px-4 py-2.5 text-xs text-white font-mono outline-none">
+          <span class="text-[10px] text-gray-500 mt-1 block">يستقبل كافة الاستفسارات وحجوزات السيارات في الموقع</span>
+        </div>
+
+        <!-- Primary Phone -->
+        <div>
+          <label class="block text-xs font-bold text-gray-300 mb-1">
+            <i class="fas fa-phone mr-1"></i> الخط الساخن / الهاتف الأساسي *
+          </label>
+          <input type="text" name="phone_primary" value="+20 100 889 4521" required class="w-full bg-deep border border-white/15 focus:border-gold rounded-xl px-4 py-2.5 text-xs text-white font-mono outline-none">
+        </div>
+
+        <!-- Secondary Phone -->
+        <div>
+          <label class="block text-xs font-bold text-gray-300 mb-1">هاتف إضافي للمبيعات</label>
+          <input type="text" name="phone_secondary" value="+20 112 554 9900" class="w-full bg-deep border border-white/15 focus:border-gold rounded-xl px-4 py-2.5 text-xs text-white font-mono outline-none">
+        </div>
+
+        <!-- Email Contact -->
+        <div>
+          <label class="block text-xs font-bold text-gray-300 mb-1">البريد الإلكتروني الرسمي *</label>
+          <input type="email" name="email_contact" value="concierge@motora.eg" required class="w-full bg-deep border border-white/15 focus:border-gold rounded-xl px-4 py-2.5 text-xs text-white outline-none">
+        </div>
+
+        <!-- Working Hours AR -->
+        <div>
+          <label class="block text-xs font-bold text-gray-300 mb-1">مواعيد العمل (بالعربية) *</label>
+          <input type="text" name="working_hours_ar" value="السبت إلى الخميس: 10:00 ص - 10:00 م | الجمعة: 2:00 م - 10:00 م" required class="w-full bg-deep border border-white/15 focus:border-gold rounded-xl px-4 py-2.5 text-xs text-white outline-none">
+        </div>
+
+        <!-- Working Hours EN -->
+        <div>
+          <label class="block text-xs font-bold text-gray-300 mb-1">Working Hours (English) *</label>
+          <input type="text" name="working_hours_en" value="Saturday to Thursday: 10:00 AM - 10:00 PM | Friday: 2:00 PM - 10:00 PM" required class="w-full bg-deep border border-white/15 focus:border-gold rounded-xl px-4 py-2.5 text-xs text-white outline-none" dir="ltr">
+        </div>
+
+      </div>
+
+      <!-- Showroom Address -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+        <div>
+          <label class="block text-xs font-bold text-gray-300 mb-1">عنوان المعرض بالقاهرة (بالعربية) *</label>
+          <input type="text" name="cairo_showroom_address_ar" value="القاهرة الجديدة - التجمع الخامس - قطاع الصالات الفاخرة، شارع التسعين الشمالي، مبنى موتورا" required class="w-full bg-deep border border-white/15 focus:border-gold rounded-xl px-4 py-2.5 text-xs text-white outline-none">
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-gray-300 mb-1">Cairo Showroom Address (English) *</label>
+          <input type="text" name="cairo_showroom_address_en" value="New Cairo - 5th Settlement - Luxury Auto District, North 90th Street, MOTORA Building" required class="w-full bg-deep border border-white/15 focus:border-gold rounded-xl px-4 py-2.5 text-xs text-white outline-none" dir="ltr">
+        </div>
+      </div>
+
+      <!-- Deposit Policy -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+        <div>
+          <label class="block text-xs font-bold text-gray-300 mb-1">سياسة الحجز والجدية (بالعربية) *</label>
+          <textarea name="deposit_policy_ar" rows="3" required class="w-full bg-deep border border-white/15 focus:border-gold rounded-xl p-3 text-xs text-white outline-none">يتم دفع عربون تأكيد الجدية في الحساب البنكي الرسمي لموتورا أو عبر إنستاباي، ويخصم بالكامل من سعر السيارة عند التعاقد.</textarea>
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-gray-300 mb-1">Reservation Policy (English) *</label>
+          <textarea name="deposit_policy_en" rows="3" required class="w-full bg-deep border border-white/15 focus:border-gold rounded-xl p-3 text-xs text-white outline-none" dir="ltr">Booking deposit is processed via official bank transfer or InstaPay, 100% credited toward vehicle total upon contract.</textarea>
+        </div>
+      </div>
+
+      <!-- Admin Password Change -->
+      <div class="p-4 bg-white/5 rounded-2xl border border-white/10">
+        <label class="block text-xs font-bold text-amber-400 mb-1">
+          <i class="fas fa-key mr-1"></i> تغيير كلمة سر مدير المعرض (اختياري)
+        </label>
+        <div class="flex items-center gap-4">
+          <input type="password" name="admin_new_password" placeholder="اتركه فارغاً إذا كنت لا ترغب بتغيير كلمة المرور" class="flex-1 bg-deep border border-white/15 focus:border-gold rounded-xl px-4 py-2 text-xs text-white outline-none">
+          <span class="text-[11px] text-gray-500">6 أحرف على الأقل</span>
+        </div>
+      </div>
+
+      <!-- Save Button -->
+      <div class="pt-4 border-t border-white/10 flex justify-end">
+        <button type="submit" class="gold-btn px-8 py-3 rounded-xl text-xs font-black flex items-center gap-2 shadow-xl">
+          <i class="fas fa-save"></i>
+          <span>حفظ كافة الإعدادات والبيانات</span>
+        </button>
+      </div>
+
+    </form>
+
+  </div>
+
+</div>
+
+
+    </main>
+
+    <!-- Admin Footer -->
+    <footer class="p-4 border-t border-white/5 text-center text-xs text-gray-500">
+      منصة موتورا لاستيراد السيارات الفاخرة © 2026 - لوحة تحكم المالك الحصري
+    </footer>
+
+  </div>
+
+  <script src="/static/js/admin.js"></script>
+  
+</body>
+</html>
